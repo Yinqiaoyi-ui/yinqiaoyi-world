@@ -1509,7 +1509,7 @@ function renderMyBodyCharts(){
     const minV = Math.floor(Math.min(...vals) - 2);
     const maxV = Math.ceil(Math.max(...vals) + 2);
     const range = maxV - minV || 1;
-    const pad = {top:20,right:20,bottom:30,left:50};
+    const pad = {t:20,r:20,b:30,l:50};
     const pw = w - pad.l - pad.r;
     const ph = 200 - pad.t - pad.b;
 
@@ -1520,21 +1520,22 @@ function renderMyBodyCharts(){
     ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
     for(let i=0;i<=4;i++){ const val = maxV - range*i/4; ctx.fillText(val.toFixed(1)+unit, pad.l-6, pad.t+ph*i/4+4); }
     ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.lineJoin = 'round'; ctx.beginPath();
+    const total = valid.length;
     valid.forEach((r,i)=>{
-      const x = pad.l + (i/(valid.length-1||1))*pw;
+      const x = total===1 ? pad.l + pw/2 : pad.l + (i/(total-1))*pw;
       const y = pad.t + ((maxV - r[field])/range)*ph;
       if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
     });
     ctx.stroke();
     valid.forEach((r,i)=>{
-      const x = pad.l + (i/(valid.length-1||1))*pw;
+      const x = total===1 ? pad.l + pw/2 : pad.l + (i/(total-1))*pw;
       const y = pad.t + ((maxV - r[field])/range)*ph;
       ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2); ctx.fill();
       ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.fill();
     });
     ctx.fillStyle = '#999'; ctx.textAlign = 'center'; ctx.font = '9px sans-serif';
-    const step = Math.max(1, Math.floor(valid.length/6));
-    valid.forEach((r,i)=>{ if(i%step===0||i===valid.length-1){ ctx.fillText(r.date.slice(5), pad.l+(i/(valid.length-1||1))*pw, 200-6); } });
+    const step = Math.max(1, Math.floor(total/6));
+    valid.forEach((r,i)=>{ if(i%step===0||i===total-1){ const x2 = total===1 ? pad.l + pw/2 : pad.l + (i/(total-1))*pw; ctx.fillText(r.date.slice(5), x2, 200-6); } });
   }
 
   drawOne('myWeightChart', 'weight', 'kg', '#ff85a2');
@@ -1610,21 +1611,22 @@ function renderBabyCharts(){
     ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
     for(let i=0;i<=4;i++){ const val = maxV - range*i/4; ctx.fillText(val.toFixed(1)+unit, pad.l-6, pad.t+ph*i/4+4); }
     ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.lineJoin = 'round'; ctx.beginPath();
+    const total = valid.length;
     valid.forEach((r,i)=>{
-      const x = pad.l + (i/(valid.length-1||1))*pw;
+      const x = total===1 ? pad.l + pw/2 : pad.l + (i/(total-1))*pw;
       const y = pad.t + ((maxV - r[field])/range)*ph;
       if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
     });
     ctx.stroke();
     valid.forEach((r,i)=>{
-      const x = pad.l + (i/(valid.length-1||1))*pw;
+      const x = total===1 ? pad.l + pw/2 : pad.l + (i/(total-1))*pw;
       const y = pad.t + ((maxV - r[field])/range)*ph;
       ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2); ctx.fill();
       ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.fill();
     });
     ctx.fillStyle = '#999'; ctx.textAlign = 'center'; ctx.font = '9px sans-serif';
-    const step = Math.max(1, Math.floor(valid.length/6));
-    valid.forEach((r,i)=>{ if(i%step===0||i===valid.length-1){ ctx.fillText(r.date.slice(5), pad.l+(i/(valid.length-1||1))*pw, 200-6); } });
+    const step = Math.max(1, Math.floor(total/6));
+    valid.forEach((r,i)=>{ if(i%step===0||i===total-1){ const x2 = total===1 ? pad.l + pw/2 : pad.l + (i/(total-1))*pw; ctx.fillText(r.date.slice(5), x2, 200-6); } });
   }
 
   drawChart('babyHeightChart', 'height', 'cm', '#5dbd95');
