@@ -12,26 +12,38 @@
 <title>音乔伊的小世界 · 成长工作台</title>
 <style>
   :root{
-    --bg:#f8e8e0;
+    --bg:#fff5ee;
     --card:#ffffff;
-    --ink:#2c211d;
-    --ink-soft:#3a2f2a;
-    --line:#ead4c8;
-    --pink:#f4a9bd;
-    --pink-deep:#e07a96;
-    --teal:#8fc9c4;
-    --teal-deep:#4f9b95;
-    --gold:#e8b86d;
-    --purple:#b6a4dd;
-    --green:#9cc39a;
-    --peach:#f6c6a8;
-    --shadow:0 6px 22px rgba(180,140,120,.12);
-    --radius:18px;
+    --ink:#4a3728;
+    --ink-soft:#7a6655;
+    --line:#f0dcc8;
+    --pink:#ffb8c6;
+    --pink-deep:#ff85a2;
+    --pink-light:#fff0f3;
+    --yellow:#ffe09c;
+    --yellow-deep:#f5c542;
+    --yellow-light:#fff9e6;
+    --mint:#b8e4d0;
+    --mint-deep:#5dbd95;
+    --mint-light:#edfaf3;
+    --lavender:#d4c5f0;
+    --lavender-deep:#9b7fd4;
+    --lavender-light:#f6f2fd;
+    --sky:#b8ddf0;
+    --sky-deep:#6bb5d9;
+    --sky-light:#eef8fc;
+    --peach:#ffd4b8;
+    --peach-deep:#f09860;
+    --peach-light:#fff4eb;
+    --shadow:0 8px 28px rgba(180,140,120,.10);
+    --shadow-lg:0 12px 40px rgba(180,140,120,.14);
+    --radius:22px;
+    --radius-sm:16px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-    background:linear-gradient(160deg,#f8e8e0 0%,#fbeef0 100%);
+    background:linear-gradient(160deg,#fff5ee 0%,#fff0f3 40%,#fef9f0 100%);
     color:var(--ink);
     line-height:1.7;
     min-height:100vh;
@@ -40,25 +52,29 @@
 
   /* ---------- Header ---------- */
   header{
-    background:linear-gradient(135deg,#d35d7d,#c25c79 55%,#b84e6c);
+    background:linear-gradient(135deg,#ffb3c6,#ff85a2 55%,#ff9eb5);
     border-radius:var(--radius);
-    padding:26px 28px;
+    padding:22px 22px;
     color:#fff;
     box-shadow:var(--shadow);
     position:relative;
     overflow:hidden;
   }
-  header::after{
-    content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;
-    background:radial-gradient(circle,rgba(255,255,255,.35),transparent 70%);border-radius:50%;
+  header::before{
+    content:"🌸✨🌿💕🧸";position:absolute;right:12px;top:8px;font-size:18px;
+    opacity:.6;letter-spacing:2px;
   }
-  header h1{font-size:25px;letter-spacing:1px;margin-bottom:6px}
-  header .sub{font-size:14px;opacity:.95}
-  .birth-row{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:14px}
-  .birth-row label{background:rgba(255,255,255,.22);padding:7px 14px;border-radius:30px;display:flex;align-items:center;gap:8px}
-  .birth-row input{background:#fff;color:var(--ink);border:none;border-radius:8px;padding:5px 9px;font-size:13px;font-family:inherit}
-  .birth-row .badge{background:rgba(255,255,255,.9);color:var(--pink-deep);padding:7px 14px;border-radius:30px;font-weight:700}
-  .encourage{margin-top:14px;font-size:14px;background:rgba(255,255,255,.32);padding:10px 16px;border-radius:12px;display:inline-block}
+  header::after{
+    content:"";position:absolute;left:-30px;bottom:-50px;width:160px;height:160px;
+    background:radial-gradient(circle,rgba(255,255,255,.28),transparent 70%);border-radius:50%;
+  }
+  header h1{font-size:24px;letter-spacing:2px;margin-bottom:2px;position:relative;z-index:1}
+  header .sub{font-size:13px;opacity:.9;position:relative;z-index:1}
+  .birth-row{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px;position:relative;z-index:1}
+  .birth-row label{background:rgba(255,255,255,.28);padding:6px 12px;border-radius:30px;display:flex;align-items:center;gap:6px;font-weight:600}
+  .birth-row input{background:#fff;color:var(--ink);border:none;border-radius:10px;padding:4px 8px;font-size:12px;font-family:inherit}
+  .birth-row .badge{background:rgba(255,255,255,.92);color:var(--pink-deep);padding:6px 12px;border-radius:30px;font-weight:700;font-size:12px}
+  .encourage{margin-top:12px;font-size:13px;background:rgba(255,255,255,.35);padding:8px 14px;border-radius:14px;display:inline-block;position:relative;z-index:1}
 
   /* ---------- Nav ---------- */
   nav{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
@@ -76,84 +92,102 @@
   .module.active{display:block;animation:fade .35s ease}
   @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-  .card{background:var(--card);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow);margin-bottom:20px;border:1px solid var(--line)}
+  .card{background:var(--card);border-radius:var(--radius-sm);padding:20px 18px;box-shadow:var(--shadow);margin-bottom:16px;border:2px solid var(--line)}
   .card h2{font-size:20px;margin-bottom:4px;display:flex;align-items:center;gap:10px}
   .card h2 .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
   .card .lead{color:var(--ink-soft);font-size:14px;margin-bottom:16px}
-  .card h3{font-size:16px;margin:20px 0 10px;color:var(--ink);padding-left:11px;border-left:4px solid var(--pink)}
+  .card h3{font-size:15px;margin:18px 0 8px;color:var(--ink);padding-left:14px;border-left:4px solid var(--pink-deep);border-radius:2px}
   .card h4{font-size:14px;margin:14px 0 6px;color:var(--pink-deep)}
 
   /* ---------- Phase blocks ---------- */
   .phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-  .phase{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff8f4}
+  .phase{border:2px solid var(--line);border-radius:var(--radius-sm);padding:16px;background:#fffaf5}
   .phase .ph-title{font-weight:700;font-size:15px;margin-bottom:6px}
-  .phase .ph-tag{display:inline-block;font-size:12px;color:#fff;background:var(--teal-deep);padding:2px 10px;border-radius:20px;margin-bottom:8px}
+  .phase .ph-tag{display:inline-block;font-size:11px;color:#fff;background:var(--mint-deep);padding:3px 10px;border-radius:20px;margin-bottom:8px;font-weight:700}
   .phase ul{margin-left:18px;font-size:13.5px;color:var(--ink-soft)}
   .phase ul li{margin:3px 0}
 
   /* ---------- Lists ---------- */
   .plain{margin-left:18px;font-size:14px}
   .plain li{margin:5px 0}
-  .note{background:#fff6e9;border-left:4px solid var(--gold);padding:12px 16px;border-radius:10px;font-size:13.5px;color:#8a6d3b;margin:14px 0}
-  .warn{background:#fdeaea;border-left:4px solid #e07979;padding:12px 16px;border-radius:10px;font-size:13.5px;color:#9b4a4a;margin:14px 0}
+  .note{background:var(--yellow-light);border-left:5px solid var(--yellow-deep);padding:12px 16px;border-radius:12px;font-size:13px;color:#8a6d3b;margin:14px 0}
+  .warn{background:#fff0f0;border-left:5px solid #f09090;padding:12px 16px;border-radius:12px;font-size:13px;color:#9b4a4a;margin:14px 0}
 
   /* ---------- Weekly grid ---------- */
   .week{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
-  .day{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff8f4}
-  .day b{color:var(--pink-deep);font-size:14px}
+  .day{border:2px solid var(--line);border-radius:14px;padding:12px;background:#fffaf5}
+  .day b{color:var(--pink-deep);font-size:13px;display:flex;align-items:center;gap:4px}
   .day p{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
 
   /* ---------- Books / resources ---------- */
   .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-  .book{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff8f4}
+  .book{border:2px solid var(--line);border-radius:14px;padding:14px;background:#fffaf5}
   .book .nm{font-weight:700;font-size:14px}
   .book .au{font-size:12px;color:var(--ink-soft);margin:3px 0}
   .book .why{font-size:12.5px;color:var(--teal-deep)}
 
   /* ---------- Checklist ---------- */
-  .check-item{display:flex;align-items:flex-start;gap:11px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:9px;background:#fff;cursor:pointer;transition:.15s}
-  .check-item:hover{background:#fff7f4;border-color:var(--pink)}
-  .check-item .box{width:20px;height:20px;border-radius:6px;border:2px solid var(--pink);flex:0 0 auto;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;transition:.15s}
-  .check-item.done .box{background:var(--pink);border-color:var(--pink)}
+  .check-item{display:flex;align-items:flex-start;gap:11px;padding:11px 14px;border:2px solid var(--line);border-radius:14px;margin-bottom:8px;background:#fff;cursor:pointer;transition:.2s}
+  .check-item:hover{background:var(--pink-light);border-color:var(--pink-deep)}
+  .check-item .box{width:22px;height:22px;border-radius:50%;border:2px solid var(--pink-deep);flex:0 0 auto;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;transition:.2s}
+  .check-item.done .box{background:var(--pink-deep);border-color:var(--pink-deep)}
   .check-item.done .txt{text-decoration:line-through;color:#bbb}
   .check-item .txt{font-size:14px}
   .check-item .txt small{display:block;color:var(--ink-soft);font-size:12px;margin-top:2px}
 
   /* ---------- Today overview ---------- */
-  .today-hero{background:linear-gradient(135deg,#c25c79,#a84362);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow);color:#fff}
-  .today-hero h2{color:#fff;font-size:22px;margin-bottom:6px}
-  .today-hero .meta{font-size:14px;color:rgba(255,255,255,.9)}
-  .progress-bar{height:10px;background:rgba(255,255,255,.55);border-radius:30px;overflow:hidden;margin:14px 0 6px}
+  .today-hero{background:linear-gradient(135deg,#ffb3c6,#ff85a2,#ff9eb5);border-radius:var(--radius-sm);padding:20px 18px;margin-bottom:16px;box-shadow:var(--shadow);color:#fff}
+  .today-hero h2{color:#fff;font-size:20px;margin-bottom:4px}
+  .today-hero .meta{font-size:13px;color:rgba(255,255,255,.9)}
+  .progress-bar{height:14px;background:rgba(255,255,255,.55);border-radius:30px;overflow:hidden;margin:14px 0 6px}
   .progress-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--pink-deep));width:0;transition:width .4s}
-  /* ---------- 三概览卡 ---------- */
-  .overview-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
-  .ov-card{background:var(--card);border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow);border:1px solid var(--line);text-align:center;cursor:pointer;transition:.2s}
-  .ov-card:hover{transform:translateY(-2px)}
-  .ov-card .ov-icon{font-size:28px;margin-bottom:6px}
-  .ov-card .ov-title{font-weight:700;font-size:15px;color:var(--ink)}
-  .ov-card .ov-sub{font-size:12px;color:var(--ink-soft);margin-top:3px}
-  .ov-card .ov-badge{display:inline-block;font-size:11px;padding:2px 10px;border-radius:20px;margin-top:6px}
-  .ov-card.today{border-top:3px solid var(--pink-deep)}
-  .ov-card.week{border-top:3px solid var(--teal-deep)}
-  .ov-card.month{border-top:3px solid var(--gold)}
+  /* ---------- 三概览卡（卡通泡泡） ---------- */
+  .overview-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+  .ov-card{background:var(--card);border-radius:var(--radius-sm);padding:16px 10px;box-shadow:var(--shadow);border:2px solid transparent;text-align:center;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
+  .ov-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;border-radius:4px 4px 0 0}
+  .ov-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .ov-card .ov-icon{font-size:30px;margin-bottom:4px;display:block}
+  .ov-card .ov-title{font-weight:800;font-size:14px;color:var(--ink)}
+  .ov-card .ov-sub{font-size:11px;color:var(--ink-soft);margin-top:2px}
+  .ov-card .ov-badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;margin-top:6px;font-weight:700}
+  .ov-card.today::before{background:var(--pink-deep)}
+  .ov-card.today .ov-badge{background:var(--pink-light);color:var(--pink-deep)}
+  .ov-card.week::before{background:var(--mint-deep)}
+  .ov-card.week .ov-badge{background:var(--mint-light);color:var(--mint-deep)}
+  .ov-card.month::before{background:var(--yellow-deep)}
+  .ov-card.month .ov-badge{background:var(--yellow-light);color:#b8933a}
 
-  /* ---------- 六模块网格 ---------- */
-  .mod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:20px 0}
-  .mod-card{background:var(--card);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);border:1px solid var(--line);cursor:pointer;transition:.2s}
-  .mod-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(180,140,120,.18)}
-  .mod-card .mod-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-  .mod-card .mod-icon{font-size:24px}
-  .mod-card .mod-title{font-weight:700;font-size:16px;color:var(--ink)}
-  .mod-card .mod-goal{font-size:13px;color:var(--pink-deep);margin-bottom:10px;padding:6px 10px;background:#fff5f7;border-radius:8px}
-  .mod-card .mod-tease{font-size:13px;color:var(--ink-soft);line-height:1.6}
-  .mod-card .mod-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-  .mod-card .mod-tag{font-size:11px;padding:3px 10px;border-radius:20px;background:#fbeef0;color:var(--pink-deep)}
+  /* ---------- 六模块网格（2列卡通卡片） ---------- */
+  .mod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:18px 0}
+  .mod-card{background:var(--card);border-radius:var(--radius-sm);padding:16px 14px;box-shadow:var(--shadow);border:2px solid transparent;cursor:pointer;transition:.25s;position:relative}
+  .mod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .mod-card:nth-child(1):hover{border-color:var(--pink-deep)}
+  .mod-card:nth-child(2):hover{border-color:var(--mint-deep)}
+  .mod-card:nth-child(3):hover{border-color:var(--lavender-deep)}
+  .mod-card:nth-child(4):hover{border-color:var(--yellow-deep)}
+  .mod-card:nth-child(5):hover{border-color:var(--sky-deep)}
+  .mod-card:nth-child(6):hover{border-color:var(--peach-deep)}
+  .mod-card .mod-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .mod-card .mod-icon{font-size:26px;background:#fdf6f0;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .mod-card .mod-title{font-weight:800;font-size:14px;color:var(--ink)}
+  .mod-card .mod-goal{font-size:12px;color:var(--pink-deep);margin-bottom:8px;padding:6px 10px;background:var(--pink-light);border-radius:10px;line-height:1.5}
+  .mod-card .mod-tease{font-size:12px;color:var(--ink-soft);line-height:1.5;margin-bottom:6px}
+  .mod-card .mod-tags{display:flex;flex-wrap:wrap;gap:5px}
+  .mod-card .mod-tag{font-size:10px;padding:2px 8px;border-radius:20px;background:#fef5e7;color:#b8933a;font-weight:600}
+  .mod-card .mod-today-task{font-size:11px;color:var(--ink-soft);margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}
   @media(max-width:640px){
-    .overview-row{grid-template-columns:repeat(3,1fr);gap:8px}
-    .ov-card{padding:14px 8px}
-    .ov-card .ov-icon{font-size:22px}
-    .ov-card .ov-title{font-size:13px}
-    .mod-grid{grid-template-columns:1fr}
+    .overview-row{grid-template-columns:repeat(3,1fr);gap:6px}
+    .ov-card{padding:12px 6px}
+    .ov-card .ov-icon{font-size:24px}
+    .ov-card .ov-title{font-size:12px}
+    .ov-card .ov-sub{font-size:10px}
+    .mod-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+    .mod-card{padding:12px 10px}
+    .mod-card .mod-icon{font-size:22px;width:34px;height:34px}
+    .mod-card .mod-title{font-size:13px}
+    .mod-card .mod-goal{font-size:11px}
+    header h1{font-size:20px}
+    header .sub{font-size:12px}
   }
 
   footer{text-align:center;color:var(--ink-soft);font-size:12.5px;margin-top:30px;line-height:1.9}
@@ -216,41 +250,47 @@
 
   <!-- ============ 六模块卡片 ============ -->
   <div class="mod-grid">
-    <div class="mod-card" data-mod="money">
+    <div class="mod-card" data-mod="money" style="border-top:4px solid var(--pink-deep)">
       <div class="mod-head"><span class="mod-icon">💰</span><span class="mod-title">财商成长</span></div>
       <div class="mod-goal">🎯 总目标：用一年时间，从理财小白成长为能自主打理家庭资产、建立被动收入体系的独立女性。</div>
       <div class="mod-tease">启蒙→基础→进阶，由简单到难，先和钱做朋友。</div>
       <div class="mod-tags"><span class="mod-tag">《小狗钱钱》</span><span class="mod-tag">记账</span><span class="mod-tag">三账户</span><span class="mod-tag">定投</span></div>
+      <div class="mod-today-task">📌 今天：记账1分钟 + 看1条财商内容</div>
     </div>
-    <div class="mod-card" data-mod="health">
+    <div class="mod-card" data-mod="health" style="border-top:4px solid var(--mint-deep)">
       <div class="mod-head"><span class="mod-icon">💪</span><span class="mod-title">健康恢复</span></div>
       <div class="mod-goal">🎯 总目标：产后一年内盆底肌恢复健康、腹直肌闭合、颈椎改善、鼻炎可控、重建运动习惯，身心恢复到比孕前更好的状态。</div>
       <div class="mod-tease">剖腹产产后2月，温和康复，遵医嘱不急进。</div>
       <div class="mod-tags"><span class="mod-tag">盆底肌</span><span class="mod-tag">腹直肌</span><span class="mod-tag">颈椎</span><span class="mod-tag">鼻炎</span></div>
+      <div class="mod-today-task">📌 今天：腹式呼吸 + 补钙铁多维 + 盆底放松</div>
     </div>
-    <div class="mod-card" data-mod="mind">
+    <div class="mod-card" data-mod="mind" style="border-top:4px solid var(--lavender-deep)">
       <div class="mod-head"><span class="mod-icon">🧘</span><span class="mod-title">心理疗愈</span></div>
       <div class="mod-goal">🎯 总目标：用一年时间，把内耗频率降低70%以上，建立"允许不完美"的核心信念，成为一个更松弛、乐观、有边界感的人。</div>
       <div class="mod-tease">高敏感不是弱点，每天小练习告别内耗。</div>
       <div class="mod-tags"><span class="mod-tag">三件好事</span><span class="mod-tag">正念</span><span class="mod-tag">课题分离</span></div>
+      <div class="mod-today-task">📌 今天：三件好事 + 5分钟正念呼吸</div>
     </div>
-    <div class="mod-card" data-mod="invest">
+    <div class="mod-card" data-mod="invest" style="border-top:4px solid var(--yellow-deep)">
       <div class="mod-head"><span class="mod-icon">📈</span><span class="mod-title">理财投资</span></div>
       <div class="mod-goal">🎯 总目标：一年内建立自己的定投体系，用闲置资金持续投入优质指数基金，形成"低估多投、高估少投"的纪律，实现年化收益跑赢通胀。</div>
       <div class="mod-tease">先学习、后用小钱、纪律大于择时。</div>
       <div class="mod-tags"><span class="mod-tag">定投</span><span class="mod-tag">估值</span><span class="mod-tag">指数基金</span></div>
+      <div class="mod-today-task">📌 今天：扫一眼市场温度（不操作）</div>
     </div>
-    <div class="mod-card" data-mod="baby">
+    <div class="mod-card" data-mod="baby" style="border-top:4px solid var(--sky-deep)">
       <div class="mod-head"><span class="mod-icon">👶</span><span class="mod-title">小可乐育儿</span></div>
       <div class="mod-goal">🎯 总目标：陪伴小可乐健康快乐度过第一年，按月度科学喂养、大运动跟上、疫苗不遗漏，同时自己也成为从容自信的妈妈。</div>
       <div class="mod-tease">按月推送大运动、疫苗、喂养与注意事项。</div>
       <div class="mod-tags"><span class="mod-tag" id="modBabyMonth">2个月</span><span class="mod-tag">俯卧抬头</span><span class="mod-tag">疫苗</span></div>
+      <div class="mod-today-task">📌 今天：tummy time + 记录喂养睡眠</div>
     </div>
-    <div class="mod-card" data-mod="ai">
+    <div class="mod-card" data-mod="ai" style="border-top:4px solid var(--peach-deep)">
       <div class="mod-head"><span class="mod-icon">🤖</span><span class="mod-title">AI轻资产创业</span></div>
       <div class="mod-goal">🎯 总目标：一年内掌握AI创作工具链，选定1个轻资产副业方向并实现首笔收入，为未来"带娃+赚钱两不误"打下基础。</div>
       <div class="mod-tease">由玩到赚，宝妈碎片时间也能轻资产创业。</div>
       <div class="mod-tags"><span class="mod-tag">自媒体</span><span class="mod-tag">AI绘画</span><span class="mod-tag">数字产品</span></div>
+      <div class="mod-today-task">📌 今天：玩1个AI功能 + 记1条变现灵感</div>
     </div>
   </div>
 
@@ -673,9 +713,9 @@
   </div>
 
   <footer>
-    为你量身定制 · 音乔伊的小世界<br>
-    健康与理财内容仅为科普/思路参考，<b>健康请遵医嘱，投资需谨慎</b>。<br>
-    数据仅保存在你本地浏览器，放心使用。愿你在养育宝宝的同时，也好好养育自己。
+    🌸 为你量身定制 · 音乔伊的小世界 🌸<br>
+    <span style="font-size:11px">健康请遵医嘱 · 投资需谨慎 · 数据仅存本地</span><br>
+    <span style="font-size:12px">愿你在养育小可乐的同时，也好好养育自己 💕</span>
   </footer>
 </div>
 
