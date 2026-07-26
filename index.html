@@ -229,13 +229,6 @@
     <button class="menu-btn" id="menuBtn">☰</button>
     <h1>音乔伊的小世界</h1>
     <div class="sub">财商 · 健康 · 心理 · 理财 · 育儿 · AI轻资产创业 —— 温柔而坚定地，成为更好的自己</div>
-    <div class="birth-row">
-      <label>小可乐生日
-        <input type="date" id="babyBirth" max="2030-12-31">
-      </label>
-      <span class="badge" id="ageBadge">请填写宝宝生日</span>
-      <span id="phaseBadge" class="badge" style="background:rgba(255,255,255,.9);color:var(--teal-deep)"></span>
-    </div>
     <div class="encourage" id="encourageText">今天也要好好爱自己，你已经在变得更好了。</div>
   </header>
 
@@ -780,6 +773,13 @@
     <section class="module" id="mod-baby">
       <div class="card">
         <h2><span class="dot" style="background:var(--sky-deep)"></span>育儿月历 · 按月推送</h2>
+        <div class="birth-row" style="margin-bottom:16px">
+          <label>小可乐生日
+            <input type="date" id="babyBirth" max="2030-12-31">
+          </label>
+          <span class="badge" id="ageBadge">请填写宝宝生日</span>
+          <span id="phaseBadge" class="badge" style="background:rgba(255,255,255,.9);color:var(--teal-deep)"></span>
+        </div>
         <div class="lead">宝宝当前 <b id="babyMonthText">2</b> 个月。下面按月给你该阶段的大运动、疫苗、喂养与注意事项。本卡会随你填写的宝宝生日自动提示当前月龄。</div>
 
         <!-- ===== 给小可乐的妈妈 ===== -->
