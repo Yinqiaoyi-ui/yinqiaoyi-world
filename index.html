@@ -309,18 +309,14 @@
       <!-- ========== 身体数据记录 ========== -->
       <div class="card" style="margin-top:16px">
         <h3>📊 我的身体数据记录</h3>
-        <div class="lead">记录你的身高体重变化，观察产后恢复曲线</div>
+        <div class="lead">记录你的体重变化，观察产后恢复曲线</div>
         <div class="body-form">
           <label>日期 <input type="date" id="myRecordDate" value=""></label>
-          <label>身高(cm) <input type="number" id="myHeight" step="0.1" placeholder="如 160" style="width:80px"></label>
           <label>体重(kg) <input type="number" id="myWeight" step="0.1" placeholder="如 55.0" style="width:80px"></label>
           <button class="btn-save" id="saveMyBody">💾 保存</button>
         </div>
         <div style="margin-top:14px">
           <canvas id="myWeightChart" height="200" style="max-width:100%"></canvas>
-        </div>
-        <div style="margin-top:8px">
-          <canvas id="myHeightChart" height="200" style="max-width:100%"></canvas>
         </div>
         <div id="myWeightList" class="record-list"></div>
       </div>
@@ -1539,7 +1535,6 @@ function renderMyBodyCharts(){
   }
 
   drawOne('myWeightChart', 'weight', 'kg', '#ff85a2');
-  drawOne('myHeightChart', 'height', 'cm', '#9b7fd4');
 }
 
 function renderMyBodyList(){
@@ -1563,13 +1558,11 @@ function renderMyBodyList(){
 
 document.getElementById('saveMyBody')?.addEventListener('click', ()=>{
   const date = document.getElementById('myRecordDate').value;
-  const height = parseFloat(document.getElementById('myHeight').value) || null;
   const weight = parseFloat(document.getElementById('myWeight').value) || null;
-  if(!date || (!height && !weight)) return alert('请填写日期和至少一项数据');
+  if(!date || !weight) return alert('请填写日期和体重');
   const records = loadMyBody();
-  records.push({date, height, weight});
+  records.push({date, weight});
   saveMyBody(records);
-  document.getElementById('myHeight').value = '';
   document.getElementById('myWeight').value = '';
   renderMyBodyCharts();
   renderMyBodyList();
