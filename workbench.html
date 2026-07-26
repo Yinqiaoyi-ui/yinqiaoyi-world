@@ -125,8 +125,36 @@
   .today-hero .meta{font-size:14px;color:rgba(255,255,255,.9)}
   .progress-bar{height:10px;background:rgba(255,255,255,.55);border-radius:30px;overflow:hidden;margin:14px 0 6px}
   .progress-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--pink-deep));width:0;transition:width .4s}
-  .sect-label{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin:18px 0 10px;color:var(--ink)}
-  .sect-label .sq{width:9px;height:9px;border-radius:3px;display:inline-block}
+  /* ---------- 三概览卡 ---------- */
+  .overview-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+  .ov-card{background:var(--card);border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow);border:1px solid var(--line);text-align:center;cursor:pointer;transition:.2s}
+  .ov-card:hover{transform:translateY(-2px)}
+  .ov-card .ov-icon{font-size:28px;margin-bottom:6px}
+  .ov-card .ov-title{font-weight:700;font-size:15px;color:var(--ink)}
+  .ov-card .ov-sub{font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .ov-card .ov-badge{display:inline-block;font-size:11px;padding:2px 10px;border-radius:20px;margin-top:6px}
+  .ov-card.today{border-top:3px solid var(--pink-deep)}
+  .ov-card.week{border-top:3px solid var(--teal-deep)}
+  .ov-card.month{border-top:3px solid var(--gold)}
+
+  /* ---------- 六模块网格 ---------- */
+  .mod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:20px 0}
+  .mod-card{background:var(--card);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);border:1px solid var(--line);cursor:pointer;transition:.2s}
+  .mod-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(180,140,120,.18)}
+  .mod-card .mod-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .mod-card .mod-icon{font-size:24px}
+  .mod-card .mod-title{font-weight:700;font-size:16px;color:var(--ink)}
+  .mod-card .mod-goal{font-size:13px;color:var(--pink-deep);margin-bottom:10px;padding:6px 10px;background:#fff5f7;border-radius:8px}
+  .mod-card .mod-tease{font-size:13px;color:var(--ink-soft);line-height:1.6}
+  .mod-card .mod-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .mod-card .mod-tag{font-size:11px;padding:3px 10px;border-radius:20px;background:#fbeef0;color:var(--pink-deep)}
+  @media(max-width:640px){
+    .overview-row{grid-template-columns:repeat(3,1fr);gap:8px}
+    .ov-card{padding:14px 8px}
+    .ov-card .ov-icon{font-size:22px}
+    .ov-card .ov-title{font-size:13px}
+    .mod-grid{grid-template-columns:1fr}
+  }
 
   footer{text-align:center;color:var(--ink-soft);font-size:12.5px;margin-top:30px;line-height:1.9}
   .tagpill{display:inline-block;background:#fbeef0;color:var(--pink-deep);font-size:12px;padding:3px 11px;border-radius:20px;margin:2px 3px}
@@ -155,7 +183,7 @@
     <h1>音乔伊的小世界</h1>
     <div class="sub">财商 · 健康 · 心理 · 理财 · 育儿 · AI轻资产创业 —— 温柔而坚定地，成为更好的自己</div>
     <div class="birth-row">
-      <label>宝宝生日
+      <label>小可乐生日
         <input type="date" id="babyBirth" max="2030-12-31">
       </label>
       <span class="badge" id="ageBadge">请填写宝宝生日</span>
@@ -164,21 +192,71 @@
     <div class="encourage" id="encourageText">今天也要好好爱自己，你已经在变得更好了。</div>
   </header>
 
-  <!-- ============ NAV ============ -->
-  <nav id="nav">
-    <button class="nav-btn active" data-mod="today">今日概览</button>
-    <button class="nav-btn" data-mod="money">财商成长</button>
-    <button class="nav-btn" data-mod="health">健康恢复</button>
-    <button class="nav-btn" data-mod="mind">心理疗愈</button>
-    <button class="nav-btn" data-mod="invest">理财投资</button>
-    <button class="nav-btn" data-mod="baby">育儿月历</button>
-    <button class="nav-btn" data-mod="ai">AI创业</button>
-  </nav>
+  <!-- ============ 三概览卡 ============ -->
+  <div class="overview-row">
+    <div class="ov-card today" id="ovToday">
+      <div class="ov-icon">📋</div>
+      <div class="ov-title">今日概览</div>
+      <div class="ov-sub" id="ovTodaySub">今日行动清单</div>
+      <span class="ov-badge" style="background:#fde8ed;color:var(--pink-deep)" id="ovTodayBadge">0/18</span>
+    </div>
+    <div class="ov-card week" id="ovWeek">
+      <div class="ov-icon">📅</div>
+      <div class="ov-title">本周概览</div>
+      <div class="ov-sub" id="ovWeekSub">本周重点与节奏</div>
+      <span class="ov-badge" style="background:#e5f5f3;color:var(--teal-deep)">查看</span>
+    </div>
+    <div class="ov-card month" id="ovMonth">
+      <div class="ov-icon">🗓️</div>
+      <div class="ov-title">本月概览</div>
+      <div class="ov-sub" id="ovMonthSub">本月里程碑</div>
+      <span class="ov-badge" style="background:#fef6e9;color:#b8933a">查看</span>
+    </div>
+  </div>
 
-  <div class="grid">
+  <!-- ============ 六模块卡片 ============ -->
+  <div class="mod-grid">
+    <div class="mod-card" data-mod="money">
+      <div class="mod-head"><span class="mod-icon">💰</span><span class="mod-title">财商成长</span></div>
+      <div class="mod-goal">🎯 总目标：用一年时间，从理财小白成长为能自主打理家庭资产、建立被动收入体系的独立女性。</div>
+      <div class="mod-tease">启蒙→基础→进阶，由简单到难，先和钱做朋友。</div>
+      <div class="mod-tags"><span class="mod-tag">《小狗钱钱》</span><span class="mod-tag">记账</span><span class="mod-tag">三账户</span><span class="mod-tag">定投</span></div>
+    </div>
+    <div class="mod-card" data-mod="health">
+      <div class="mod-head"><span class="mod-icon">💪</span><span class="mod-title">健康恢复</span></div>
+      <div class="mod-goal">🎯 总目标：产后一年内盆底肌恢复健康、腹直肌闭合、颈椎改善、鼻炎可控、重建运动习惯，身心恢复到比孕前更好的状态。</div>
+      <div class="mod-tease">剖腹产产后2月，温和康复，遵医嘱不急进。</div>
+      <div class="mod-tags"><span class="mod-tag">盆底肌</span><span class="mod-tag">腹直肌</span><span class="mod-tag">颈椎</span><span class="mod-tag">鼻炎</span></div>
+    </div>
+    <div class="mod-card" data-mod="mind">
+      <div class="mod-head"><span class="mod-icon">🧘</span><span class="mod-title">心理疗愈</span></div>
+      <div class="mod-goal">🎯 总目标：用一年时间，把内耗频率降低70%以上，建立"允许不完美"的核心信念，成为一个更松弛、乐观、有边界感的人。</div>
+      <div class="mod-tease">高敏感不是弱点，每天小练习告别内耗。</div>
+      <div class="mod-tags"><span class="mod-tag">三件好事</span><span class="mod-tag">正念</span><span class="mod-tag">课题分离</span></div>
+    </div>
+    <div class="mod-card" data-mod="invest">
+      <div class="mod-head"><span class="mod-icon">📈</span><span class="mod-title">理财投资</span></div>
+      <div class="mod-goal">🎯 总目标：一年内建立自己的定投体系，用闲置资金持续投入优质指数基金，形成"低估多投、高估少投"的纪律，实现年化收益跑赢通胀。</div>
+      <div class="mod-tease">先学习、后用小钱、纪律大于择时。</div>
+      <div class="mod-tags"><span class="mod-tag">定投</span><span class="mod-tag">估值</span><span class="mod-tag">指数基金</span></div>
+    </div>
+    <div class="mod-card" data-mod="baby">
+      <div class="mod-head"><span class="mod-icon">👶</span><span class="mod-title">小可乐育儿</span></div>
+      <div class="mod-goal">🎯 总目标：陪伴小可乐健康快乐度过第一年，按月度科学喂养、大运动跟上、疫苗不遗漏，同时自己也成为从容自信的妈妈。</div>
+      <div class="mod-tease">按月推送大运动、疫苗、喂养与注意事项。</div>
+      <div class="mod-tags"><span class="mod-tag" id="modBabyMonth">2个月</span><span class="mod-tag">俯卧抬头</span><span class="mod-tag">疫苗</span></div>
+    </div>
+    <div class="mod-card" data-mod="ai">
+      <div class="mod-head"><span class="mod-icon">🤖</span><span class="mod-title">AI轻资产创业</span></div>
+      <div class="mod-goal">🎯 总目标：一年内掌握AI创作工具链，选定1个轻资产副业方向并实现首笔收入，为未来"带娃+赚钱两不误"打下基础。</div>
+      <div class="mod-tease">由玩到赚，宝妈碎片时间也能轻资产创业。</div>
+      <div class="mod-tags"><span class="mod-tag">自媒体</span><span class="mod-tag">AI绘画</span><span class="mod-tag">数字产品</span></div>
+    </div>
+  </div>
 
-    <!-- ============ TODAY ============ -->
-    <section class="module active" id="mod-today">
+  <!-- ============ 详情区域（点击模块卡片展开） ============ -->
+  <div class="grid" id="detailArea">
+    <section class="module active" id="mod-today" style="display:block">
       <div class="today-hero">
         <h2 id="todayTitle">今日行动清单</h2>
         <div class="meta" id="todayMeta"></div>
@@ -586,6 +664,12 @@
       </div>
     </section>
 
+    <!-- ============ WEEK OVERVIEW ============ -->
+    <section class="module" id="mod-week"></section>
+
+    <!-- ============ MONTH OVERVIEW ============ -->
+    <section class="module" id="mod-month"></section>
+
   </div>
 
   <footer>
@@ -625,6 +709,12 @@ function renderAge(){
   phaseBadge.textContent = ph;
   babyMonthText.textContent = Math.max(1,months);
   renderCurMonth(Math.max(1,months));
+  // 同步育儿卡片月龄
+  const modBabyMonth = document.getElementById('modBabyMonth');
+  if(modBabyMonth) modBabyMonth.textContent = Math.max(1,months)+'个月';
+  // 刷新本周/本月概览
+  renderWeekOverview();
+  renderMonthOverview();
 }
 
 function renderCurMonth(m){
@@ -647,18 +737,106 @@ birthInput.addEventListener('change', ()=>{
 });
 if(localStorage.getItem(STORE_BIRTH)){ birthInput.value = localStorage.getItem(STORE_BIRTH); }
 
-/* ====================== 模块切换 ====================== */
-const navBtns = document.querySelectorAll('.nav-btn');
-const modules = document.querySelectorAll('.module');
-navBtns.forEach(b=>{
-  b.addEventListener('click', ()=>{
-    navBtns.forEach(x=>x.classList.remove('active'));
-    modules.forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    document.getElementById('mod-'+b.dataset.mod).classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
+/* ====================== 模块切换（卡片点击展开详情） ====================== */
+let activeMod = 'today';
+function showMod(mod){
+  if(activeMod === mod) return; // 同一个不重复切
+  activeMod = mod;
+  const detailArea = document.getElementById('detailArea');
+  const allSecs = detailArea.querySelectorAll('section.module');
+  allSecs.forEach(s=>{ s.style.display = 'none'; s.classList.remove('active'); });
+  const target = document.getElementById('mod-'+mod);
+  if(target){ target.style.display = 'block'; target.classList.add('active'); }
+  // 高亮对应卡片
+  document.querySelectorAll('.mod-card').forEach(c=>c.style.borderColor='var(--line)');
+  const card = document.querySelector('.mod-card[data-mod="'+mod+'"]');
+  if(card) card.style.borderColor = 'var(--pink-deep)';
+  // 概览卡取消高亮
+  document.querySelectorAll('.ov-card').forEach(c=>c.style.borderColor='var(--line)');
+  detailArea.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// 六个模块卡片点击
+document.querySelectorAll('.mod-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    showMod(card.dataset.mod);
   });
 });
+
+// 三个概览卡点击
+document.getElementById('ovToday').addEventListener('click', ()=>{
+  showMod('today');
+  document.getElementById('ovToday').style.borderColor = 'var(--pink-deep)';
+});
+document.getElementById('ovWeek').addEventListener('click', ()=>{
+  showMod('week');
+  document.getElementById('ovWeek').style.borderColor = 'var(--teal-deep)';
+});
+document.getElementById('ovMonth').addEventListener('click', ()=>{
+  showMod('month');
+  document.getElementById('ovMonth').style.borderColor = 'var(--gold)';
+});
+
+/* ====================== 本周概览渲染 ====================== */
+function renderWeekOverview(){
+  const el = document.getElementById('mod-week');
+  if(!el) return;
+  const now = new Date();
+  const dayOfWeek = now.getDay(); // 0=周日
+  const monday = new Date(now); monday.setDate(now.getDate() - (dayOfWeek===0?6:dayOfWeek-1));
+  const sunday = new Date(monday); sunday.setDate(monday.getDate()+6);
+  const fmt = d=>d.toISOString().slice(0,10);
+  const birthVal = birthInput.value;
+  let babyWeeks = '--';
+  if(birthVal){
+    const birth = new Date(birthVal+'T00:00:00');
+    babyWeeks = Math.floor(diffDays(birth, now)/7);
+  }
+  el.innerHTML = `<div class="card">
+    <h2>📅 本周概览（${fmt(monday)} ~ ${fmt(sunday)}）</h2>
+    <div class="lead">小可乐：产后第 ${babyWeeks} 周</div>
+    <div class="week">
+      <div class="day"><b>周一</b><p>💪 盆底放松<br>💰 读财商书</p></div>
+      <div class="day"><b>周二</b><p>💪 腹横肌激活<br>📈 看市场温度</p></div>
+      <div class="day"><b>周三</b><p>💪 颈椎养护<br>🧘 内耗觉察</p></div>
+      <div class="day"><b>周四</b><p>💰 财经新闻<br>🤖 玩AI功能</p></div>
+      <div class="day"><b>周五</b><p>💪 盆底放松<br>💰 开源点子</p></div>
+      <div class="day"><b>周六</b><p>💪 腱鞘炎养护<br>👶 tummy time</p></div>
+      <div class="day"><b>周日</b><p>🧘 不安排休息<br>📈 周复盘</p></div>
+    </div>
+    <div class="note" style="margin-top:14px">本周重点：坚持每日腹式呼吸 + 盆底放松，这是产康黄金期的核心。财商读完《小狗钱钱》前3章。</div>
+  </div>`;
+}
+
+/* ====================== 本月概览渲染 ====================== */
+function renderMonthOverview(){
+  const el = document.getElementById('mod-month');
+  if(!el) return;
+  const now = new Date();
+  const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  const curM = monthNames[now.getMonth()];
+  const birthVal = birthInput.value;
+  let babyMonths = '--', recoveryPhase = '';
+  if(birthVal){
+    const birth = new Date(birthVal+'T00:00:00');
+    babyMonths = Math.floor(diffDays(birth, now)/30.44);
+    recoveryPhase = babyMonths<3 ? '产康黄金期 · 温和为主' : babyMonths<6 ? '恢复进阶期 · 可加运动' : '巩固期 · 建立习惯';
+  }
+  el.innerHTML = `<div class="card">
+    <h2>🗓️ 本月概览（${curM}）</h2>
+    <div class="lead">小可乐：${babyMonths} 个月 · ${recoveryPhase}</div>
+    <h3>本月六大模块里程碑</h3>
+    <div class="res">
+      <div class="book"><div class="nm">💰 财商</div><div class="why">读《小狗钱钱》+ 开记账本，建立金钱感觉。</div></div>
+      <div class="book"><div class="nm">💪 健康</div><div class="why">腹式呼吸+盆底放松为核心，补钙铁多维，产康复查。</div></div>
+      <div class="book"><div class="nm">🧘 心理</div><div class="why">每天"三件好事"，开始觉察内耗模式。</div></div>
+      <div class="book"><div class="nm">📈 理财</div><div class="why">观察市场、学看估值温度计，开好账户不投或极小额定投。</div></div>
+      <div class="book"><div class="nm">👶 育儿</div><div class="why">俯卧抬头、追视互动、关注肠胀气、按计划接种疫苗。</div></div>
+      <div class="book"><div class="nm">🤖 AI</div><div class="why">用熟1个AI对话工具，学基础提示词。</div></div>
+    </div>
+    <div class="note" style="margin-top:14px">本月关键词：<b>温和开始</b>。不追求完美，每天做一点点就很好。月底来复盘一次，看看离总目标近了没有。</div>
+  </div>`;
+}
 
 /* ====================== 今日打卡 ====================== */
 const CHECKS = {
@@ -728,11 +906,16 @@ function renderChecklist(){
   encourageText.textContent = titles[new Date().getDay()%titles.length];
   document.getElementById('todayMeta').textContent = '日期 '+todayStr()+' · 清单每天0点自动刷新，进度只保存在本机';
   document.getElementById('todayTitle').textContent = '今日行动清单 · '+todayStr();
+  // 同步到今日概览卡
+  document.getElementById('ovTodaySub').textContent = '已完成 '+finished+'/'+total+' 项';
+  document.getElementById('ovTodayBadge').textContent = finished+'/'+total;
 }
 
 /* ====================== 初始化 ====================== */
 renderAge();
 renderChecklist();
+renderWeekOverview();
+renderMonthOverview();
 
 /* ====================== 安装到主屏幕引导 ====================== */
 (function(){
