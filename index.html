@@ -305,6 +305,44 @@
         <div id="chk-ai"></div>
         <div class="note" style="margin-top:18px">小提示：清单是为你量身设计的"最小可行行动"，全部完成约 40–60 分钟，可拆分到碎片时间。完不成也没关系，明天继续就好。</div>
       </div>
+
+      <!-- ========== 身体数据记录 ========== -->
+      <div class="card" style="margin-top:16px">
+        <h3>📊 我的身体数据记录</h3>
+        <div class="lead">记录你的身高体重变化，观察产后恢复曲线</div>
+        <div class="body-form">
+          <label>日期 <input type="date" id="myRecordDate" value=""></label>
+          <label>身高(cm) <input type="number" id="myHeight" step="0.1" placeholder="如 160" style="width:80px"></label>
+          <label>体重(kg) <input type="number" id="myWeight" step="0.1" placeholder="如 55.0" style="width:80px"></label>
+          <button class="btn-save" id="saveMyBody">💾 保存</button>
+        </div>
+        <div style="margin-top:14px">
+          <canvas id="myWeightChart" height="200" style="max-width:100%"></canvas>
+        </div>
+        <div style="margin-top:8px">
+          <canvas id="myHeightChart" height="200" style="max-width:100%"></canvas>
+        </div>
+        <div id="myWeightList" class="record-list"></div>
+      </div>
+
+      <!-- ========== 小可乐成长数据 ========== -->
+      <div class="card" style="margin-top:16px">
+        <h3>📈 小可乐成长曲线</h3>
+        <div class="lead">记录小可乐的身高体重，和WHO生长标准对比</div>
+        <div class="body-form">
+          <label>日期 <input type="date" id="babyRecordDate" value=""></label>
+          <label>身高(cm) <input type="number" id="babyHeight" step="0.1" placeholder="如 58.0" style="width:80px"></label>
+          <label>体重(kg) <input type="number" id="babyWeight" step="0.1" placeholder="如 5.2" style="width:80px"></label>
+          <button class="btn-save" id="saveBabyData">💾 保存</button>
+        </div>
+        <div style="margin-top:14px">
+          <canvas id="babyHeightChart" height="200" style="max-width:100%"></canvas>
+        </div>
+        <div style="margin-top:14px">
+          <canvas id="babyWeightChart" height="200" style="max-width:100%"></canvas>
+        </div>
+        <div id="babyDataList" class="record-list"></div>
+      </div>
     </section>
 
     <!-- ============ MONEY ============ -->
@@ -468,25 +506,6 @@
         <div class="note">💡 <b>关于盆底肌高张的重要提醒：</b>很多人以为脱垂或漏尿就要拼命做凯格尔运动，但高张型恰恰相反——肌肉已经太紧了，再收缩只会更糟。你需要先"学会放松"，再"学会正确收缩"。请在产康师评估后，拿到属于你的"放松→再训练"个性化方案。腹直肌分离2指期间，<b>严禁卷腹、仰卧起坐、平板支撑、俄罗斯转体</b>。打喷嚏或咳嗽时，用手轻轻托住肚子减轻腹压。</div>
 
         <div class="note" style="background:var(--mint-light);border-left:5px solid var(--mint-deep);color:#3a6b52">🌸 <b>给你的悄悄话：</b>康复这条路，最难的不是动作，是心态。你可能会在某一天觉得"怎么还没好"，也可能会在看到别人"产后三个月就恢复马甲线"的时候怀疑自己。请记住——每个人恢复的节奏不一样，剖腹产和顺产不一样，有没有高张不一样，有没有人帮忙带娃更不一样。你不需要和别人比，你只需要比昨天的自己好一点点。哪怕今天只做了一次腹式呼吸，也比什么都没做强。你已经在康复了，只是它需要时间。而时间，是你给自己的最好的礼物。</div>
-      </div>
-
-      <!-- ========== 身高体重记录 ========== -->
-      <div class="card" style="margin-top:16px">
-        <h3>📊 我的身体数据记录</h3>
-        <div class="lead">记录你的身高体重变化，观察产后恢复曲线</div>
-        <div class="body-form">
-          <label>日期 <input type="date" id="myRecordDate" value=""></label>
-          <label>身高(cm) <input type="number" id="myHeight" step="0.1" placeholder="如 160" style="width:80px"></label>
-          <label>体重(kg) <input type="number" id="myWeight" step="0.1" placeholder="如 55.0" style="width:80px"></label>
-          <button class="btn-save" id="saveMyBody">💾 保存</button>
-        </div>
-        <div style="margin-top:14px">
-          <canvas id="myWeightChart" height="200" style="max-width:100%"></canvas>
-        </div>
-        <div style="margin-top:8px">
-          <canvas id="myHeightChart" height="200" style="max-width:100%"></canvas>
-        </div>
-        <div id="myWeightList" class="record-list"></div>
       </div>
     </section>
 
@@ -934,25 +953,6 @@
           <p style="margin-bottom:10px"><b>当你崩溃的时候：</b>承认"我今天真的很累""我真的撑不住了""我需要帮助"。告诉你的伴侣、你的家人、你的朋友——你不是一个人。产后抑郁不是矫情，如果你持续感到情绪低落、对任何事都提不起兴趣、甚至有伤害自己或宝宝的想法——请立刻寻求专业帮助。</p>
           <p style="margin-bottom:0"><b>记住：</b>你不是在"牺牲"自己来养孩子。你是在"带着"孩子一起成长。他长大的同时，你也在变成更好的自己——更耐心、更坚韧、更懂得爱。这份成长，是你送给小可乐最好的礼物，也是你送给自己最好的礼物。</p>
         </div>
-      </div>
-
-      <!-- ========== 小可乐成长数据 ========== -->
-      <div class="card" style="margin-top:16px">
-        <h3>📈 小可乐成长曲线</h3>
-        <div class="lead">记录小可乐的身高体重，和WHO生长标准对比</div>
-        <div class="body-form">
-          <label>日期 <input type="date" id="babyRecordDate" value=""></label>
-          <label>身高(cm) <input type="number" id="babyHeight" step="0.1" placeholder="如 58.0" style="width:80px"></label>
-          <label>体重(kg) <input type="number" id="babyWeight" step="0.1" placeholder="如 5.2" style="width:80px"></label>
-          <button class="btn-save" id="saveBabyData">💾 保存</button>
-        </div>
-        <div style="margin-top:14px">
-          <canvas id="babyHeightChart" height="200" style="max-width:100%"></canvas>
-        </div>
-        <div style="margin-top:14px">
-          <canvas id="babyWeightChart" height="200" style="max-width:100%"></canvas>
-        </div>
-        <div id="babyDataList" class="record-list"></div>
       </div>
     </section>
 
