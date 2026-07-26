@@ -158,25 +158,15 @@
   .ov-card.month::before{background:var(--yellow-deep)}
   .ov-card.month .ov-badge{background:var(--yellow-light);color:#b8933a}
 
-  /* ---------- 六模块网格（紧凑入口卡片） ---------- */
-  .mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
-  .mod-card{background:var(--card);border-radius:14px;padding:14px 10px;box-shadow:var(--shadow);border:2px solid transparent;cursor:pointer;transition:.25s;text-align:center}
-  .mod-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-  .mod-card:nth-child(1){border-color:var(--pink-light)}.mod-card:nth-child(1):hover{border-color:var(--pink-deep)}
-  .mod-card:nth-child(2){border-color:var(--mint-light)}.mod-card:nth-child(2):hover{border-color:var(--mint-deep)}
-  .mod-card:nth-child(3){border-color:var(--lavender-light)}.mod-card:nth-child(3):hover{border-color:var(--lavender-deep)}
-  .mod-card:nth-child(4){border-color:var(--yellow-light)}.mod-card:nth-child(4):hover{border-color:var(--yellow-deep)}
-  .mod-card:nth-child(5){border-color:var(--sky-light)}.mod-card:nth-child(5):hover{border-color:var(--sky-deep)}
-  .mod-card:nth-child(6){border-color:var(--peach-light)}.mod-card:nth-child(6):hover{border-color:var(--peach-deep)}
-  .mod-card .mod-head{display:flex;align-items:center;justify-content:center;gap:6px}
-  .mod-card .mod-icon{font-size:22px}
-  .mod-card .mod-title{font-weight:800;font-size:13px;color:var(--ink)}
-  .mod-card .mod-arrow{font-size:12px;color:var(--ink-soft);opacity:.5}
+  /* ---------- 六模块横向滑动chip ---------- */
+  .mod-scroll-wrap{margin:14px 0}
+  .mod-scroll{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:4px 2px 8px;scrollbar-width:none}
+  .mod-scroll::-webkit-scrollbar{display:none}
+  .mod-chip{flex:0 0 auto;scroll-snap-align:start;background:var(--card);border:2px solid var(--line);border-radius:24px;padding:10px 16px;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer;transition:.2s;white-space:nowrap;box-shadow:0 2px 8px rgba(180,140,120,.06)}
+  .mod-chip:active{transform:scale(.96)}
+  .mod-chip.active{background:var(--pink-deep);color:#fff;border-color:var(--pink-deep)}
   @media(max-width:640px){
-    .mod-grid{grid-template-columns:repeat(3,1fr);gap:8px}
-    .mod-card{padding:12px 6px}
-    .mod-card .mod-icon{font-size:20px}
-    .mod-card .mod-title{font-size:12px}
+    .mod-chip{padding:9px 13px;font-size:13px}
   }
   @media(max-width:640px){
     .overview-row{grid-template-columns:repeat(3,1fr);gap:6px}
@@ -201,6 +191,17 @@
     .card{padding:18px 16px}
     .birth-row label{padding:6px 10px}
   }
+
+  /* ---------- 身高体重记录 ---------- */
+  .body-form{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-top:10px}
+  .body-form label{font-size:13px;color:var(--ink-soft);display:flex;flex-direction:column;gap:4px}
+  .body-form input{background:var(--card);border:2px solid var(--line);border-radius:10px;padding:7px 10px;font-size:14px;font-family:inherit;color:var(--ink);width:130px}
+  .btn-save{background:var(--pink-deep);color:#fff;border:none;border-radius:24px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+  .btn-save:hover{background:#e06a88}
+  .record-list{margin-top:12px}
+  .record-row{display:flex;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-soft)}
+  .record-row .del{color:#e07979;cursor:pointer;font-size:16px;margin-left:auto}
+
   /* ---------- 移动端 APP 化 ---------- */
   body{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 12px)}
   .install-tip{position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 30px rgba(180,140,120,.28);padding:13px 15px;z-index:99;display:none;align-items:flex-start;gap:10px}
@@ -251,49 +252,16 @@
     </div>
   </div>
 
-  <!-- ============ 六模块卡片 ============ -->
-  <div class="mod-grid">
-    <div class="mod-card" data-mod="money" style="border-top:4px solid var(--pink-deep)">
-      <div class="mod-head"><span class="mod-icon">💰</span><span class="mod-title">财商成长</span></div>
-      <div class="mod-goal">🎯 总目标：用一年时间，从理财小白成长为能自主打理家庭资产、建立被动收入体系的独立女性。</div>
-      <div class="mod-tease">启蒙→基础→进阶，由简单到难，先和钱做朋友。</div>
-      <div class="mod-tags"><span class="mod-tag">《小狗钱钱》</span><span class="mod-tag">记账</span><span class="mod-tag">三账户</span><span class="mod-tag">定投</span></div>
-      <div class="mod-today-task">📌 今天：记账1分钟 + 看1条财商内容</div>
-    </div>
-    <div class="mod-card" data-mod="health" style="border-top:4px solid var(--mint-deep)">
-      <div class="mod-head"><span class="mod-icon">💪</span><span class="mod-title">健康恢复</span></div>
-      <div class="mod-goal">🎯 总目标：产后一年内盆底肌恢复健康、腹直肌闭合、颈椎改善、鼻炎可控、重建运动习惯，身心恢复到比孕前更好的状态。</div>
-      <div class="mod-tease">剖腹产产后2月，温和康复，遵医嘱不急进。</div>
-      <div class="mod-tags"><span class="mod-tag">盆底肌</span><span class="mod-tag">腹直肌</span><span class="mod-tag">颈椎</span><span class="mod-tag">鼻炎</span></div>
-      <div class="mod-today-task">📌 今天：腹式呼吸 + 补钙铁多维 + 盆底放松</div>
-    </div>
-    <div class="mod-card" data-mod="mind" style="border-top:4px solid var(--lavender-deep)">
-      <div class="mod-head"><span class="mod-icon">🧘</span><span class="mod-title">心理疗愈</span></div>
-      <div class="mod-goal">🎯 总目标：用一年时间，把内耗频率降低70%以上，建立"允许不完美"的核心信念，成为一个更松弛、乐观、有边界感的人。</div>
-      <div class="mod-tease">高敏感不是弱点，每天小练习告别内耗。</div>
-      <div class="mod-tags"><span class="mod-tag">三件好事</span><span class="mod-tag">正念</span><span class="mod-tag">课题分离</span></div>
-      <div class="mod-today-task">📌 今天：三件好事 + 5分钟正念呼吸</div>
-    </div>
-    <div class="mod-card" data-mod="invest" style="border-top:4px solid var(--yellow-deep)">
-      <div class="mod-head"><span class="mod-icon">📈</span><span class="mod-title">理财投资</span></div>
-      <div class="mod-goal">🎯 总目标：一年内建立自己的定投体系，用闲置资金持续投入优质指数基金，形成"低估多投、高估少投"的纪律，实现年化收益跑赢通胀。</div>
-      <div class="mod-tease">先学习、后用小钱、纪律大于择时。</div>
-      <div class="mod-tags"><span class="mod-tag">定投</span><span class="mod-tag">估值</span><span class="mod-tag">指数基金</span></div>
-      <div class="mod-today-task">📌 今天：扫一眼市场温度（不操作）</div>
-    </div>
-    <div class="mod-card" data-mod="baby" style="border-top:4px solid var(--sky-deep)">
-      <div class="mod-head"><span class="mod-icon">👶</span><span class="mod-title">小可乐育儿</span></div>
-      <div class="mod-goal">🎯 总目标：陪伴小可乐健康快乐度过第一年，按月度科学喂养、大运动跟上、疫苗不遗漏，同时自己也成为从容自信的妈妈。</div>
-      <div class="mod-tease">按月推送大运动、疫苗、喂养与注意事项。</div>
-      <div class="mod-tags"><span class="mod-tag" id="modBabyMonth">2个月</span><span class="mod-tag">俯卧抬头</span><span class="mod-tag">疫苗</span></div>
-      <div class="mod-today-task">📌 今天：tummy time + 记录喂养睡眠</div>
-    </div>
-    <div class="mod-card" data-mod="ai" style="border-top:4px solid var(--peach-deep)">
-      <div class="mod-head"><span class="mod-icon">🤖</span><span class="mod-title">AI轻资产创业</span></div>
-      <div class="mod-goal">🎯 总目标：一年内掌握AI创作工具链，选定1个轻资产副业方向并实现首笔收入，为未来"带娃+赚钱两不误"打下基础。</div>
-      <div class="mod-tease">由玩到赚，宝妈碎片时间也能轻资产创业。</div>
-      <div class="mod-tags"><span class="mod-tag">自媒体</span><span class="mod-tag">AI绘画</span><span class="mod-tag">数字产品</span></div>
-      <div class="mod-today-task">📌 今天：玩1个AI功能 + 记1条变现灵感</div>
+  <!-- ============ 六模块横向滑动 ============ -->
+  <div class="mod-scroll-wrap">
+    <div class="mod-scroll" id="modScroll">
+      <div class="mod-chip active" data-mod="today">📋 今日</div>
+      <div class="mod-chip" data-mod="money">💰 财商</div>
+      <div class="mod-chip" data-mod="health">💪 健康</div>
+      <div class="mod-chip" data-mod="mind">🧘 心理</div>
+      <div class="mod-chip" data-mod="invest">📈 理财</div>
+      <div class="mod-chip" data-mod="baby">👶 育儿</div>
+      <div class="mod-chip" data-mod="ai">🤖 AI</div>
     </div>
   </div>
 
@@ -485,6 +453,22 @@
         <div class="note">💡 <b>关于盆底肌高张的重要提醒：</b>很多人以为脱垂或漏尿就要拼命做凯格尔运动，但高张型恰恰相反——肌肉已经太紧了，再收缩只会更糟。你需要先"学会放松"，再"学会正确收缩"。请在产康师评估后，拿到属于你的"放松→再训练"个性化方案。腹直肌分离2指期间，<b>严禁卷腹、仰卧起坐、平板支撑、俄罗斯转体</b>。打喷嚏或咳嗽时，用手轻轻托住肚子减轻腹压。</div>
 
         <div class="note" style="background:var(--mint-light);border-left:5px solid var(--mint-deep);color:#3a6b52">🌸 <b>给你的悄悄话：</b>康复这条路，最难的不是动作，是心态。你可能会在某一天觉得"怎么还没好"，也可能会在看到别人"产后三个月就恢复马甲线"的时候怀疑自己。请记住——每个人恢复的节奏不一样，剖腹产和顺产不一样，有没有高张不一样，有没有人帮忙带娃更不一样。你不需要和别人比，你只需要比昨天的自己好一点点。哪怕今天只做了一次腹式呼吸，也比什么都没做强。你已经在康复了，只是它需要时间。而时间，是你给自己的最好的礼物。</div>
+      </div>
+    </section>
+
+      <!-- ========== 身高体重记录 ========== -->
+      <div class="card" style="margin-top:16px">
+        <h3>📊 我的身体数据记录</h3>
+        <div class="lead">记录你的身高体重变化，观察产后恢复曲线</div>
+        <div class="body-form">
+          <label>日期 <input type="date" id="myRecordDate" value=""></label>
+          <label>体重(kg) <input type="number" id="myWeight" step="0.1" placeholder="如 55.0" style="width:80px"></label>
+          <button class="btn-save" id="saveMyBody">💾 保存</button>
+        </div>
+        <div style="margin-top:14px">
+          <canvas id="myWeightChart" height="200" style="max-width:100%"></canvas>
+        </div>
+        <div id="myWeightList" class="record-list"></div>
       </div>
     </section>
 
@@ -935,6 +919,26 @@
       </div>
     </section>
 
+      <!-- ========== 小可乐成长数据 ========== -->
+      <div class="card" style="margin-top:16px">
+        <h3>📈 小可乐成长曲线</h3>
+        <div class="lead">记录小可乐的身高体重，和WHO生长标准对比</div>
+        <div class="body-form">
+          <label>日期 <input type="date" id="babyRecordDate" value=""></label>
+          <label>身高(cm) <input type="number" id="babyHeight" step="0.1" placeholder="如 58.0" style="width:80px"></label>
+          <label>体重(kg) <input type="number" id="babyWeight" step="0.1" placeholder="如 5.2" style="width:80px"></label>
+          <button class="btn-save" id="saveBabyData">💾 保存</button>
+        </div>
+        <div style="margin-top:14px">
+          <canvas id="babyHeightChart" height="200" style="max-width:100%"></canvas>
+        </div>
+        <div style="margin-top:14px">
+          <canvas id="babyWeightChart" height="200" style="max-width:100%"></canvas>
+        </div>
+        <div id="babyDataList" class="record-list"></div>
+      </div>
+    </section>
+
     <!-- ============ AI ============ -->
     <section class="module" id="mod-ai">
       <div class="card">
@@ -1262,6 +1266,16 @@ function loadBabyMonthChecks(){
 birthInput.addEventListener('change', ()=>{
   localStorage.setItem(STORE_BIRTH, birthInput.value);
   renderAge();
+
+// 自动填今天日期
+(function(){
+  const t = new Date().toISOString().slice(0,10);
+  const myD = document.getElementById('myRecordDate');
+  const babyD = document.getElementById('babyRecordDate');
+  if(myD) myD.value = t;
+  if(babyD) babyD.value = t;
+})();
+
 });
 if(localStorage.getItem(STORE_BIRTH)){ birthInput.value = localStorage.getItem(STORE_BIRTH); }
 
@@ -1275,21 +1289,34 @@ function showMod(mod){
   allSecs.forEach(s=>{ s.style.display = 'none'; s.classList.remove('active'); });
   const target = document.getElementById('mod-'+mod);
   if(target){ target.style.display = 'block'; target.classList.add('active'); }
-  // 高亮对应卡片
-  document.querySelectorAll('.mod-card').forEach(c=>c.style.borderColor='var(--line)');
-  const card = document.querySelector('.mod-card[data-mod="'+mod+'"]');
-  if(card) card.style.borderColor = 'var(--pink-deep)';
+  // 高亮对应chip
+  document.querySelectorAll('.mod-chip').forEach(c=>c.classList.remove('active'));
+  const chip = document.querySelector('.mod-chip[data-mod="'+mod+'"]');
+  if(chip) chip.classList.add('active');
   // 概览卡取消高亮
   document.querySelectorAll('.ov-card').forEach(c=>c.style.borderColor='var(--line)');
   detailArea.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// 六个模块卡片点击
-document.querySelectorAll('.mod-card').forEach(card=>{
-  card.addEventListener('click', ()=>{
-    showMod(card.dataset.mod);
+// 横向滑动chip点击
+document.querySelectorAll('.mod-chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('.mod-chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    showMod(chip.dataset.mod);
   });
 });
+// 滑动chip时同步高亮（滚动监听）
+(function(){
+  const scrollEl = document.getElementById('modScroll');
+  if(!scrollEl) return;
+  // 点击chip时滚动到可见位置
+  document.querySelectorAll('.mod-chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      chip.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+    });
+  });
+})();
 
 // 三个概览卡点击
 document.getElementById('ovToday').addEventListener('click', ()=>{
@@ -1439,8 +1466,210 @@ function renderChecklist(){
   document.getElementById('ovTodayBadge').textContent = finished+'/'+total;
 }
 
+
+/* ====================== 身高体重记录 ====================== */
+// --- 妈妈身体数据 ---
+const MY_BODY_KEY = 'mama_body_records';
+function loadMyBody(){ try{ return JSON.parse(localStorage.getItem(MY_BODY_KEY))||[]; }catch(e){ return []; } }
+function saveMyBody(arr){ localStorage.setItem(MY_BODY_KEY, JSON.stringify(arr)); }
+
+function renderMyBodyChart(){
+  const records = loadMyBody();
+  records.sort((a,b)=>a.date.localeCompare(b.date));
+  const canvas = document.getElementById('myWeightChart');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.parentElement.clientWidth;
+  canvas.width = w * dpr; canvas.height = 200 * dpr;
+  canvas.style.width = w+'px'; canvas.style.height = '200px';
+  ctx.scale(dpr,dpr);
+  if(records.length === 0){ ctx.fillStyle='#ccc'; ctx.font='14px sans-serif'; ctx.textAlign='center'; ctx.fillText('暂无数据，添加第一条记录吧~', w/2, 100); return; }
+
+  const padding = {top:20,right:20,bottom:30,left:50};
+  const pw = w - padding.left - padding.right;
+  const ph = 200 - padding.top - padding.bottom;
+  const weights = records.map(r=>r.weight);
+  const minW = Math.floor(Math.min(...weights) - 2);
+  const maxW = Math.ceil(Math.max(...weights) + 2);
+  const range = maxW - minW || 1;
+
+  // bg grid
+  ctx.strokeStyle = '#f0e3db'; ctx.lineWidth = 0.5;
+  for(let i=0;i<=4;i++){ const y=padding.top+ph*i/4; ctx.beginPath(); ctx.moveTo(padding.left,y); ctx.lineTo(w-padding.right,y); ctx.stroke(); }
+
+  // axes
+  ctx.strokeStyle = '#ccc'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(padding.left,padding.top); ctx.lineTo(padding.left,200-padding.bottom); ctx.lineTo(w-padding.right,200-padding.bottom); ctx.stroke();
+
+  // labels
+  ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+  for(let i=0;i<=4;i++){ const val = maxW - range*i/4; ctx.fillText(val.toFixed(1)+'kg', padding.left-6, padding.top+ph*i/4+4); }
+
+  // line
+  ctx.strokeStyle = '#ff85a2'; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
+  ctx.beginPath();
+  records.forEach((r,i)=>{
+    const x = padding.left + (i/(records.length-1||1))*pw;
+    const y = padding.top + ((maxW - r.weight)/range)*ph;
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+
+  // dots
+  records.forEach((r,i)=>{
+    const x = padding.left + (i/(records.length-1||1))*pw;
+    const y = padding.top + ((maxW - r.weight)/range)*ph;
+    ctx.fillStyle = '#ff85a2'; ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.fill();
+  });
+
+  // date labels
+  ctx.fillStyle = '#999'; ctx.textAlign = 'center'; ctx.font = '9px sans-serif';
+  const step = Math.max(1, Math.floor(records.length/6));
+  records.forEach((r,i)=>{ if(i%step===0 || i===records.length-1){ ctx.fillText(r.date.slice(5), padding.left+(i/(records.length-1||1))*pw, 200-6); } });
+}
+
+function renderMyBodyList(){
+  const el = document.getElementById('myWeightList');
+  if(!el) return;
+  const records = loadMyBody();
+  records.sort((a,b)=>b.date.localeCompare(a.date));
+  el.innerHTML = records.length ? '<div style="font-size:13px;font-weight:700;margin:8px 0">📋 历史记录</div>' : '';
+  records.forEach((r,i)=>{
+    const row = document.createElement('div');
+    row.className = 'record-row';
+    row.innerHTML = `<span>${r.date}</span> <b>${r.weight}kg</b><span class="del" data-idx="${i}">×</span>`;
+    row.querySelector('.del').addEventListener('click',()=>{
+      const all = loadMyBody();
+      const target = all.findIndex(x=>x.date===r.date&&Math.abs(x.weight-r.weight)<0.01);
+      if(target>=0){ all.splice(target,1); saveMyBody(all); renderMyBodyChart(); renderMyBodyList(); }
+    });
+    el.appendChild(row);
+  });
+}
+
+document.getElementById('saveMyBody')?.addEventListener('click', ()=>{
+  const date = document.getElementById('myRecordDate').value;
+  const weight = parseFloat(document.getElementById('myWeight').value);
+  if(!date || isNaN(weight)) return alert('请填写日期和体重');
+  const records = loadMyBody();
+  records.push({date, weight});
+  saveMyBody(records);
+  document.getElementById('myWeight').value = '';
+  renderMyBodyChart();
+  renderMyBodyList();
+});
+
+// --- 小可乐成长数据 ---
+const BABY_DATA_KEY = 'baby_growth_records';
+function loadBabyData(){ try{ return JSON.parse(localStorage.getItem(BABY_DATA_KEY))||[]; }catch(e){ return []; } }
+function saveBabyData(arr){ localStorage.setItem(BABY_DATA_KEY, JSON.stringify(arr)); }
+
+function renderBabyCharts(){
+  const records = loadBabyData();
+  records.sort((a,b)=>a.date.localeCompare(b.date));
+
+  function drawChart(canvasId, field, unit, color){
+    const canvas = document.getElementById(canvasId);
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const w = canvas.parentElement.clientWidth;
+    canvas.width = w * dpr; canvas.height = 200 * dpr;
+    canvas.style.width = w+'px'; canvas.style.height = '200px';
+    ctx.scale(dpr,dpr);
+    if(records.length === 0 || records.every(r=>!r[field])){ ctx.fillStyle='#ccc'; ctx.font='14px sans-serif'; ctx.textAlign='center'; ctx.fillText('暂无数据~', w/2, 100); return; }
+    const valid = records.filter(r=>r[field]!=null);
+    if(valid.length === 0) return;
+    const vals = valid.map(r=>r[field]);
+    const minV = Math.floor(Math.min(...vals) - 1);
+    const maxV = Math.ceil(Math.max(...vals) + 1);
+    const range = maxV - minV || 1;
+    const pad = {t:20,r:20,b:30,l:50};
+    const pw = w - pad.l - pad.r;
+    const ph = 200 - pad.t - pad.b;
+
+    ctx.strokeStyle = '#f0e3db'; ctx.lineWidth = 0.5;
+    for(let i=0;i<=4;i++){ const y=pad.t+ph*i/4; ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(w-pad.r,y); ctx.stroke(); }
+    ctx.strokeStyle = '#ccc'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,200-pad.b); ctx.lineTo(w-pad.r,200-pad.b); ctx.stroke();
+    ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+    for(let i=0;i<=4;i++){ const val = maxV - range*i/4; ctx.fillText(val.toFixed(1)+unit, pad.l-6, pad.t+ph*i/4+4); }
+    ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.lineJoin = 'round'; ctx.beginPath();
+    valid.forEach((r,i)=>{
+      const x = pad.l + (i/(valid.length-1||1))*pw;
+      const y = pad.t + ((maxV - r[field])/range)*ph;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+    valid.forEach((r,i)=>{
+      const x = pad.l + (i/(valid.length-1||1))*pw;
+      const y = pad.t + ((maxV - r[field])/range)*ph;
+      ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.fill();
+    });
+    ctx.fillStyle = '#999'; ctx.textAlign = 'center'; ctx.font = '9px sans-serif';
+    const step = Math.max(1, Math.floor(valid.length/6));
+    valid.forEach((r,i)=>{ if(i%step===0||i===valid.length-1){ ctx.fillText(r.date.slice(5), pad.l+(i/(valid.length-1||1))*pw, 200-6); } });
+  }
+
+  drawChart('babyHeightChart', 'height', 'cm', '#5dbd95');
+  drawChart('babyWeightChart', 'weight', 'kg', '#6bb5d9');
+}
+
+function renderBabyDataList(){
+  const el = document.getElementById('babyDataList');
+  if(!el) return;
+  const records = loadBabyData();
+  records.sort((a,b)=>b.date.localeCompare(a.date));
+  el.innerHTML = records.length ? '<div style="font-size:13px;font-weight:700;margin:8px 0">📋 小可乐成长记录</div>' : '';
+  records.forEach((r,i)=>{
+    const row = document.createElement('div');
+    row.className = 'record-row';
+    row.innerHTML = `<span>${r.date}</span> <b>${r.height||'--'}cm</b> <b>${r.weight||'--'}kg</b><span class="del" data-idx="${i}">×</span>`;
+    row.querySelector('.del').addEventListener('click',()=>{
+      const all = loadBabyData();
+      const target = all.findIndex(x=>x.date===r.date);
+      if(target>=0){ all.splice(target,1); saveBabyData(all); renderBabyCharts(); renderBabyDataList(); }
+    });
+    el.appendChild(row);
+  });
+}
+
+document.getElementById('saveBabyData')?.addEventListener('click', ()=>{
+  const date = document.getElementById('babyRecordDate').value;
+  const height = parseFloat(document.getElementById('babyHeight').value) || null;
+  const weight = parseFloat(document.getElementById('babyWeight').value) || null;
+  if(!date || (!height && !weight)) return alert('请填写日期和至少一项数据');
+  const records = loadBabyData();
+  records.push({date, height, weight});
+  saveBabyData(records);
+  document.getElementById('babyHeight').value = '';
+  document.getElementById('babyWeight').value = '';
+  renderBabyCharts();
+  renderBabyDataList();
+});
+
+// 初始化时渲染曲线
+renderMyBodyChart();
+renderMyBodyList();
+renderBabyCharts();
+renderBabyDataList();
+
+
 /* ====================== 初始化 ====================== */
 renderAge();
+
+// 自动填今天日期
+(function(){
+  const t = new Date().toISOString().slice(0,10);
+  const myD = document.getElementById('myRecordDate');
+  const babyD = document.getElementById('babyRecordDate');
+  if(myD) myD.value = t;
+  if(babyD) babyD.value = t;
+})();
+
 renderChecklist();
 renderWeekOverview();
 renderMonthOverview();
