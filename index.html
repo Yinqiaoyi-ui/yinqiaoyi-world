@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#e07a96">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="音乔伊的小世界">
+    <link rel="apple-touch-icon" href="data:image/png;base64,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">
+<title>音乔伊的小世界 · 成长工作台</title>
+<style>
+  :root{
+    --bg:#f8e8e0;
+    --card:#ffffff;
+    --ink:#2c211d;
+    --ink-soft:#3a2f2a;
+    --line:#ead4c8;
+    --pink:#f4a9bd;
+    --pink-deep:#e07a96;
+    --teal:#8fc9c4;
+    --teal-deep:#4f9b95;
+    --gold:#e8b86d;
+    --purple:#b6a4dd;
+    --green:#9cc39a;
+    --peach:#f6c6a8;
+    --shadow:0 6px 22px rgba(180,140,120,.12);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:linear-gradient(160deg,#f8e8e0 0%,#fbeef0 100%);
+    color:var(--ink);
+    line-height:1.7;
+    min-height:100vh;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:22px 18px 60px}
+
+  /* ---------- Header ---------- */
+  header{
+    background:linear-gradient(135deg,#d35d7d,#c25c79 55%,#b84e6c);
+    border-radius:var(--radius);
+    padding:26px 28px;
+    color:#fff;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+  header::after{
+    content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;
+    background:radial-gradient(circle,rgba(255,255,255,.35),transparent 70%);border-radius:50%;
+  }
+  header h1{font-size:25px;letter-spacing:1px;margin-bottom:6px}
+  header .sub{font-size:14px;opacity:.95}
+  .birth-row{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:14px}
+  .birth-row label{background:rgba(255,255,255,.22);padding:7px 14px;border-radius:30px;display:flex;align-items:center;gap:8px}
+  .birth-row input{background:#fff;color:var(--ink);border:none;border-radius:8px;padding:5px 9px;font-size:13px;font-family:inherit}
+  .birth-row .badge{background:rgba(255,255,255,.9);color:var(--pink-deep);padding:7px 14px;border-radius:30px;font-weight:700}
+  .encourage{margin-top:14px;font-size:14px;background:rgba(255,255,255,.32);padding:10px 16px;border-radius:12px;display:inline-block}
+
+  /* ---------- Nav ---------- */
+  nav{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+  .nav-btn{
+    background:var(--card);border:1px solid var(--line);color:var(--ink-soft);
+    padding:11px 18px;border-radius:30px;cursor:pointer;font-size:14px;font-weight:600;
+    transition:.2s;box-shadow:0 2px 8px rgba(180,140,120,.06);font-family:inherit;
+  }
+  .nav-btn:hover{transform:translateY(-2px);color:var(--pink-deep)}
+  .nav-btn.active{background:#c25c79;color:#fff;border-color:#c25c79}
+
+  /* ---------- Layout ---------- */
+  .grid{display:grid;grid-template-columns:1fr;gap:20px}
+  .module{display:none}
+  .module.active{display:block;animation:fade .35s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .card{background:var(--card);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow);margin-bottom:20px;border:1px solid var(--line)}
+  .card h2{font-size:20px;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+  .card h2 .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .card .lead{color:var(--ink-soft);font-size:14px;margin-bottom:16px}
+  .card h3{font-size:16px;margin:20px 0 10px;color:var(--ink);padding-left:11px;border-left:4px solid var(--pink)}
+  .card h4{font-size:14px;margin:14px 0 6px;color:var(--pink-deep)}
+
+  /* ---------- Phase blocks ---------- */
+  .phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .phase{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff8f4}
+  .phase .ph-title{font-weight:700;font-size:15px;margin-bottom:6px}
+  .phase .ph-tag{display:inline-block;font-size:12px;color:#fff;background:var(--teal-deep);padding:2px 10px;border-radius:20px;margin-bottom:8px}
+  .phase ul{margin-left:18px;font-size:13.5px;color:var(--ink-soft)}
+  .phase ul li{margin:3px 0}
+
+  /* ---------- Lists ---------- */
+  .plain{margin-left:18px;font-size:14px}
+  .plain li{margin:5px 0}
+  .note{background:#fff6e9;border-left:4px solid var(--gold);padding:12px 16px;border-radius:10px;font-size:13.5px;color:#8a6d3b;margin:14px 0}
+  .warn{background:#fdeaea;border-left:4px solid #e07979;padding:12px 16px;border-radius:10px;font-size:13.5px;color:#9b4a4a;margin:14px 0}
+
+  /* ---------- Weekly grid ---------- */
+  .week{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .day{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff8f4}
+  .day b{color:var(--pink-deep);font-size:14px}
+  .day p{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+
+  /* ---------- Books / resources ---------- */
+  .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .book{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff8f4}
+  .book .nm{font-weight:700;font-size:14px}
+  .book .au{font-size:12px;color:var(--ink-soft);margin:3px 0}
+  .book .why{font-size:12.5px;color:var(--teal-deep)}
+
+  /* ---------- Checklist ---------- */
+  .check-item{display:flex;align-items:flex-start;gap:11px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:9px;background:#fff;cursor:pointer;transition:.15s}
+  .check-item:hover{background:#fff7f4;border-color:var(--pink)}
+  .check-item .box{width:20px;height:20px;border-radius:6px;border:2px solid var(--pink);flex:0 0 auto;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;transition:.15s}
+  .check-item.done .box{background:var(--pink);border-color:var(--pink)}
+  .check-item.done .txt{text-decoration:line-through;color:#bbb}
+  .check-item .txt{font-size:14px}
+  .check-item .txt small{display:block;color:var(--ink-soft);font-size:12px;margin-top:2px}
+
+  /* ---------- Today overview ---------- */
+  .today-hero{background:linear-gradient(135deg,#c25c79,#a84362);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow);color:#fff}
+  .today-hero h2{color:#fff;font-size:22px;margin-bottom:6px}
+  .today-hero .meta{font-size:14px;color:rgba(255,255,255,.9)}
+  .progress-bar{height:10px;background:rgba(255,255,255,.55);border-radius:30px;overflow:hidden;margin:14px 0 6px}
+  .progress-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--pink-deep));width:0;transition:width .4s}
+  .sect-label{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin:18px 0 10px;color:var(--ink)}
+  .sect-label .sq{width:9px;height:9px;border-radius:3px;display:inline-block}
+
+  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;margin-top:30px;line-height:1.9}
+  .tagpill{display:inline-block;background:#fbeef0;color:var(--pink-deep);font-size:12px;padding:3px 11px;border-radius:20px;margin:2px 3px}
+
+  @media(max-width:640px){
+    header h1{font-size:21px}
+    .card{padding:18px 16px}
+    .birth-row label{padding:6px 10px}
+  }
+  /* ---------- 移动端 APP 化 ---------- */
+  body{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 12px)}
+  .install-tip{position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 30px rgba(180,140,120,.28);padding:13px 15px;z-index:99;display:none;align-items:flex-start;gap:10px}
+  .install-tip.show{display:flex;animation:fade .3s ease}
+  .install-tip .ic{background:var(--pink);color:#fff;font-size:12px;font-weight:700;padding:5px 9px;border-radius:9px;flex:0 0 auto}
+  .install-tip .tx{font-size:13px;color:var(--ink);flex:1;line-height:1.6}
+  .install-tip .tx b{color:var(--pink-deep)}
+  .install-tip .cls{background:var(--pink-deep);color:#fff;border:none;border-radius:20px;padding:7px 13px;font-size:12px;cursor:pointer;font-family:inherit;white-space:nowrap;flex:0 0 auto}
+  @media(min-width:768px){.install-tip{display:none!important}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HEADER ============ -->
+  <header>
+    <h1>音乔伊的小世界</h1>
+    <div class="sub">财商 · 健康 · 心理 · 理财 · 育儿 · AI轻资产创业 —— 温柔而坚定地，成为更好的自己</div>
+    <div class="birth-row">
+      <label>宝宝生日
+        <input type="date" id="babyBirth" max="2030-12-31">
+      </label>
+      <span class="badge" id="ageBadge">请填写宝宝生日</span>
+      <span id="phaseBadge" class="badge" style="background:rgba(255,255,255,.9);color:var(--teal-deep)"></span>
+    </div>
+    <div class="encourage" id="encourageText">今天也要好好爱自己，你已经在变得更好了。</div>
+  </header>
+
+  <!-- ============ NAV ============ -->
+  <nav id="nav">
+    <button class="nav-btn active" data-mod="today">今日概览</button>
+    <button class="nav-btn" data-mod="money">财商成长</button>
+    <button class="nav-btn" data-mod="health">健康恢复</button>
+    <button class="nav-btn" data-mod="mind">心理疗愈</button>
+    <button class="nav-btn" data-mod="invest">理财投资</button>
+    <button class="nav-btn" data-mod="baby">育儿月历</button>
+    <button class="nav-btn" data-mod="ai">AI创业</button>
+  </nav>
+
+  <div class="grid">
+
+    <!-- ============ TODAY ============ -->
+    <section class="module active" id="mod-today">
+      <div class="today-hero">
+        <h2 id="todayTitle">今日行动清单</h2>
+        <div class="meta" id="todayMeta"></div>
+        <div class="progress-bar"><i id="progFill"></i></div>
+        <div class="meta" id="progText" style="margin-top:4px"></div>
+      </div>
+
+      <div class="card">
+        <div class="sect-label"><span class="sq" style="background:var(--pink)"></span>健康恢复（温和优先）</div>
+        <div id="chk-health"></div>
+        <div class="sect-label"><span class="sq" style="background:var(--teal)"></span>心理疗愈（停止内耗）</div>
+        <div id="chk-mind"></div>
+        <div class="sect-label"><span class="sq" style="background:var(--gold)"></span>财商成长</div>
+        <div id="chk-money"></div>
+        <div class="sect-label"><span class="sq" style="background:var(--purple)"></span>理财投资（轻量关注）</div>
+        <div id="chk-invest"></div>
+        <div class="sect-label"><span class="sq" style="background:var(--green)"></span>育儿陪伴（2月宝宝）</div>
+        <div id="chk-baby"></div>
+        <div class="sect-label"><span class="sq" style="background:var(--peach)"></span>AI学习（每天一点点）</div>
+        <div id="chk-ai"></div>
+        <div class="note" style="margin-top:18px">小提示：清单是为你量身设计的"最小可行行动"，全部完成约 40–60 分钟，可拆分到碎片时间。完不成也没关系，明天继续就好。</div>
+      </div>
+    </section>
+
+    <!-- ============ MONEY ============ -->
+    <section class="module" id="mod-money">
+      <div class="card">
+        <h2><span class="dot" style="background:var(--pink)"></span>财商成长 · 整体规划</h2>
+        <div class="lead">你是小白，所以这条路要"由易到难、先建立兴趣再学硬知识"。核心心法：先改变和钱的关系，再学工具。别一上来就炒股，先建立赚钱—存钱—钱生钱的底层认知。</div>
+
+        <h3>三阶段路线（由简单到难）</h3>
+        <div class="phases">
+          <div class="phase">
+            <span class="ph-tag">阶段一 · 启蒙（第1–2月）</span>
+            <div class="ph-title">建立金钱感觉</div>
+            <ul>
+              <li>读完2本入门书，打破"钱很脏/谈钱俗"的念头</li>
+              <li>开始随手记账（不苛求精确）</li>
+              <li>搞懂：资产 vs 负债、被动收入</li>
+              <li>目标：愿意看、不抵触</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <span class="ph-tag">阶段二 · 基础（第3–6月）</span>
+            <div class="ph-title">管住钱、留得住</div>
+            <ul>
+              <li>建立"支出三账户"：日常/储蓄/梦想</li>
+              <li>攒下第一笔应急金（3–6个月开支）</li>
+              <li>学预算、防冲动消费</li>
+              <li>读懂家庭资产负债表</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <span class="ph-tag">阶段三 · 进阶（第7–12月）</span>
+            <div class="ph-title">让钱生钱</div>
+            <ul>
+              <li>学指数基金、定投、复利</li>
+              <li>理解风险与资产配置</li>
+              <li>用少量资金实盘练手</li>
+              <li>建立自己的投资纪律</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>书本推荐（小白友好，轻松易读优先）</h3>
+        <div class="res">
+          <div class="book"><div class="nm">《小狗钱钱》</div><div class="au">[德] 博多·舍费尔</div><div class="why">童话体讲理财，零基础必读，半小时就能看完一章。</div></div>
+          <div class="book"><div class="nm">《富爸爸穷爸爸》</div><div class="au">[美] 罗伯特·清崎</div><div class="why">建立"资产/负债"思维，适合启蒙阶段。</div></div>
+          <div class="book"><div class="nm">《好好花钱》</div><div class="au">陈小怪等</div><div class="why">接地气的大众理财，讲怎么不乱花。</div></div>
+          <div class="book"><div class="nm">《指数基金投资指南》</div><div class="au">银行螺丝钉</div><div class="why">定投入门神书，阶段三再用，写得很通俗。</div></div>
+          <div class="book"><div class="nm">《定投十年财务自由》</div><div class="au">银行螺丝钉</div><div class="why">手把手定投，配估值表用法。</div></div>
+          <div class="book"><div class="nm">《穷查理宝典》</div><div class="au">[美] 查理·芒格</div><div class="why">多元思维模型，进阶期慢慢读，不必通读。</div></div>
+        </div>
+
+        <h3>月度规划</h3>
+        <ul class="plain">
+          <li><b>第1月：</b>读《小狗钱钱》+ 开一个记账本（APP或笔记本都行），每天记一笔。</li>
+          <li><b>第2月：</b>读《富爸爸穷爸爸》+ 写"我的3个金钱梦想"（钱钱里的方法），开始想"除了工资还能怎么赚"。</li>
+          <li><b>第3月：</b>读完《好好花钱》+ 设三个账户，发工资先转储蓄账户。</li>
+          <li><b>第4–5月：</b>盘点家庭资产负债，定下应急金目标金额并开始攒。</li>
+          <li><b>第6月：</b>复盘前半年，奖励自己一件"梦想账户"里的小东西。</li>
+          <li><b>第7–8月：</b>读《指数基金投资指南》，搞懂市盈率、定投是什么。</li>
+          <li><b>第9–12月：</b>用小钱开始定投，每月复盘一次。</li>
+        </ul>
+
+        <h3>每周规划</h3>
+        <div class="week">
+          <div class="day"><b>周一</b><p>读财商书 20–30 分钟（或听书）</p></div>
+          <div class="day"><b>周二</b><p>看一条"财务小知识"短视频/文章</p></div>
+          <div class="day"><b>周三</b><p>整理本周记账，标出一笔"可省"的支出</p></div>
+          <div class="day"><b>周四</b><p>关注一条财经/家庭财务新闻，只了解不焦虑</p></div>
+          <div class="day"><b>周五</b><p>想一个"开源"小点子，记下来</p></div>
+          <div class="day"><b>周末</b><p>轻松复盘：这个月离目标近了吗？</p></div>
+        </div>
+
+        <h3>每日规划</h3>
+        <ul class="plain">
+          <li>记账 1 分钟：今天花了多少、花在哪（用APP最省事）。</li>
+          <li>看/听 1 条财商内容（公众号、听书、短视频都行）。</li>
+          <li>睡前问自己：今天有没有为"未来的自由"做一点点事？</li>
+        </ul>
+        <div class="note">"愿意学"比"学得多"重要。启蒙阶段哪怕一周只看一页书都算赢。把财商当成"和钱做朋友"的轻松游戏，别把它变成压力。</div>
+      </div>
+    </section>
+
+    <!-- ============ HEALTH ============ -->
+    <section class="module" id="mod-health">
+      <div class="card">
+        <h2><span class="dot" style="background:var(--teal)"></span>健康恢复 · 整体规划</h2>
+        <div class="lead">产后2个月（剖腹产），你正做产康。当前重点：盆底肌高张+松弛、轻度子宫脱垂、腹直肌分离2指，外加过敏性鼻炎、颈椎问题、腱鞘炎。原则：<b>温和、遵医嘱、不急于求成</b>。</div>
+
+        <div class="warn"><b>重要免责：</b>以下为康复科普与日常养护建议，不能替代医生/产康师面诊。尤其盆底肌"高张"和"颈椎错位"需要专业评估，请务必在医生或持证康复师指导下执行，避免自行盲目训练加重问题。</div>
+
+        <h3>你的身体档案（当前）</h3>
+        <div class="res">
+          <div class="book"><div class="nm">剖腹产 · 术后2月</div><div class="why">伤口多已愈合，但仍避免提重物、增加腹压的动作。</div></div>
+          <div class="book"><div class="nm">盆底肌：高张 + 松弛</div><div class="why">先"放松"再"训练"，盲目凯格尔可能加重高张。</div></div>
+          <div class="book"><div class="nm">轻度子宫脱垂</div><div class="why">避免久站、负重、便秘；做正确盆底训练。</div></div>
+          <div class="book"><div class="nm">腹直肌分离 2指</div><div class="why">轻度，避免卷腹/仰卧起坐；可做腹式呼吸。</div></div>
+          <div class="book"><div class="nm">颈椎 5/6 错位·曲度变直</div><div class="why">需骨科/康复科评估，避免随意按摩扭转。</div></div>
+          <div class="book"><div class="nm">过敏性鼻炎 + 腱鞘炎</div><div class="why">避过敏原+洗鼻；左手少发力、温热敷。</div></div>
+        </div>
+
+        <h3>月度规划（产后恢复节奏）</h3>
+        <ul class="plain">
+          <li><b>产后2月（本月）：</b>以"放松+激活"为主——腹式呼吸、盆底放松、轻柔腹横肌训练；继续产康；补钙铁多维；评估颈椎与盆底（复查）。</li>
+          <li><b>产后3月：</b>在康复师指导下进阶盆底肌力训练；腹直肌分离复查（希望收窄到1.5指内）；开始低强度散步。</li>
+          <li><b>产后4月：</b>核心稳定训练（死虫式等改良动作）；颈椎针对性拉伸（医生允许下）；逐步恢复运动。</li>
+          <li><b>产后5–6月：</b>评估脱垂与分离恢复情况；可加入产后瑜伽/普拉提（专业课）；建立长期运动习惯。</li>
+        </ul>
+
+        <h3>每周规划</h3>
+        <div class="week">
+          <div class="day"><b>每日</b><p>腹式呼吸10分钟 + 补钙铁多维 + 喝水</p></div>
+          <div class="day"><b>周一/四</b><p>盆底放松训练（呼吸放松/筋膜，按康复师方案）</p></div>
+          <div class="day"><b>周二/五</b><p>腹横肌激活 + 腹直肌修复轻柔训练</p></div>
+          <div class="day"><b>周三</b><p>颈椎养护（正确姿势+温热敷，不盲目按摩）</p></div>
+          <div class="day"><b>周六</b><p>左手腱鞘炎养护：热敷+减少用手+伸展</p></div>
+          <div class="day"><b>周日</b><p>轻度散步 + 过敏防护复盘（本周触发物？）</p></div>
+        </div>
+
+        <h3>每日规划（温和版，约30–40分钟，可拆分）</h3>
+        <ul class="plain">
+          <li><b>晨起：</b>喝温水，吃钙/铁/多维（铁随餐或遵医嘱），做5分钟腹式呼吸。</li>
+          <li><b>上午：</b>喂奶间隙做盆底放松呼吸（想象盆底像花瓣轻轻开合，只放松不使劲）。</li>
+          <li><b>午间：</b>腹横肌激活（平躺，呼气时肚脐轻收向脊柱，不憋气），10个×2组。</li>
+          <li><b>下午：</b>颈椎养护——热敷颈后10分钟；减少低头看手机；腱鞘炎手温热敷。</li>
+          <li><b>傍晚：</b>室内慢走15分钟（抱娃用正确的姿势，护腰护腕）。</li>
+          <li><b>睡前：</b>过敏性鼻炎：生理盐水洗鼻；回顾今天身体感受，哪里紧就先放松哪里。</li>
+        </ul>
+        <div class="note">关于"盆底肌高张"：很多人以为脱垂/漏尿就要拼命做凯格尔，但高张型恰恰要先降低张力。请在产康师评估后拿到"放松—再训练"的个性化方案。腹直肌分离2指期间，<b>严禁卷腹、仰卧起坐、平板支撑</b>，打喷嚏/咳嗽时用手托一下肚子减腹压。</div>
+      </div>
+    </section>
+
+    <!-- ============ MIND ============ -->
+    <section class="module" id="mod-mind">
+      <div class="card">
+        <h2><span class="dot" style="background:var(--purple)"></span>心理疗愈 · 整体规划</h2>
+        <div class="lead">你是高敏感+容易内耗的人，且不喜欢复杂的心理学大部头。这条路不靠啃书，靠"每天一点点小练习"重塑神经习惯。目标：少内耗、更松弛、更乐观。</div>
+
+        <h3>三阶段路线</h3>
+        <div class="phases">
+          <div class="phase">
+            <span class="ph-tag">阶段一 · 觉察（第1–2月）</span>
+            <div class="ph-title">看见内耗</div>
+            <ul>
+              <li>每天记录"三件好事"</li>
+              <li>识别"我是不是做错了/别人怎么看我"的念头</li>
+              <li>学会不评判自己</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <span class="ph-tag">阶段二 · 松绑（第3–6月）</span>
+            <div class="ph-title">打断内耗</div>
+            <ul>
+              <li>5分钟正念呼吸成为习惯</li>
+              <li>用"有用吗？"一句话打断反刍</li>
+              <li>降低信息过载（少刷引发焦虑的内容）</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <span class="ph-tag">阶段三 · 重建（第7–12月）</span>
+            <div class="ph-title">更乐观</div>
+            <ul>
+              <li>建立"允许自己不完美"的底色</li>
+              <li>用具体行动替代反复想</li>
+              <li>找到滋养自己的小仪式</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>轻松资源（不枯燥）</h3>
+        <div class="res">
+          <div class="book"><div class="nm">《高敏感是种天赋》</div><div class="au">伊尔斯·桑德</div><div class="why">写给高敏感者，读完会松一口气：你没病，只是更细腻。</div></div>
+          <div class="book"><div class="nm">《被讨厌的勇气》</div><div class="au">岸见一郎等</div><div class="why">对话体小说，不催眠；讲"课题分离"超治内耗。</div></div>
+          <div class="book"><div class="nm">冥想类APP</div><div class="au">潮汐 / 小睡眠 / 正念冥想</div><div class="why">每天5分钟引导冥想，比看书更易坚持。</div></div>
+          <div class="book"><div class="nm">播客《自我进化论》等</div><div class="au">通勤/喂奶时听</div><div class="why">用耳朵吸收，不费眼，适合宝妈碎片时间。</div></div>
+        </div>
+
+        <h3>月度规划</h3>
+        <ul class="plain">
+          <li><b>第1月：</b>只做"三件好事"——每天睡前写3件今天还行的事（再小都行）。</li>
+          <li><b>第2月：</b>加入"5分钟呼吸"；读《高敏感是种天赋》前3章。</li>
+          <li><b>第3月：</b>学"课题分离"：别人的情绪是别人的事。</li>
+          <li><b>第4–6月：</b>建立"内耗觉察—喊停"反射；减少刷焦虑内容。</li>
+          <li><b>第7–12月：</b>读《被讨厌的勇气》；把"允许不完美"变成口头禅。</li>
+        </ul>
+
+        <h3>每周规划</h3>
+        <div class="week">
+          <div class="day"><b>每日</b><p>三件好事 + 5分钟呼吸</p></div>
+          <div class="day"><b>周一</b><p>本周主题：少比较（关掉让你焦虑的账号）</p></div>
+          <div class="day"><b>周三</b><p>一次"内耗觉察"：今天反复想了啥？写下来</p></div>
+          <div class="day"><b>周五</b><p>做一件纯粹取悦自己的小事</p></div>
+          <div class="day"><b>周末</b><p>不安排、不内疚地休息半天</p></div>
+        </div>
+
+        <h3>每日规划</h3>
+        <ul class="plain">
+          <li><b>三件好事：</b>睡前写3件今天还不错的事（宝宝笑了/自己喝到热茶/天气好）。</li>
+          <li><b>5分钟正念呼吸：</b>只数呼吸，念头飘走就温柔拉回，不批评自己。</li>
+          <li><b>内耗喊停：</b>当出现"我是不是…"的循环，问一句"这想法有用吗？"然后放下。</li>
+          <li><b>信息节食：</b>刷到让你焦虑/比较的内容，立刻划走或取关。</li>
+        </ul>
+        <div class="note">高敏感不是弱点，是你的天赋。内耗往往源于"想太多、做太少"——用小小的行动（写一句、呼吸一下）打断大脑的循环，比想通更重要。</div>
+      </div>
+    </section>
+
+    <!-- ============ INVEST ============ -->
+    <section class="module" id="mod-invest">
+      <div class="card">
+        <h2><span class="dot" style="background:var(--gold)"></span>理财投资 · 整体规划</h2>
+        <div class="lead">目标：关注好股票和基金，在好的入场机会用定投等方式理财。小白起步，<b>先学习、后用小钱、纪律大于择时</b>。投资有风险，以下为思路参考，非投资建议。</div>
+
+        <div class="warn">风险提示：任何投资都可能亏损。新手请用"闲置资金+定投+长期"三原则，不要借钱炒、不要追热点。本工作台内容不构成投资建议。</div>
+
+        <h3>学习→实践路线图</h3>
+        <div class="phases">
+          <div class="phase">
+            <span class="ph-tag">第1–3月 · 观察</span>
+            <div class="ph-title">建立市场感</div>
+            <ul>
+              <li>搞懂指数：沪深300/中证500/创业板</li>
+              <li>学看"估值温度计"（PE百分位）</li>
+              <li>开好账户，先不投或极小额</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <span class="ph-tag">第4–6月 · 试水</span>
+            <div class="ph-title">开始定投</div>
+            <ul>
+              <li>选1–2只宽基指数基金</li>
+              <li>每周/每月固定金额定投</li>
+              <li>低估多投、高估少投</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <span class="ph-tag">第7–12月 · 优化</span>
+            <div class="ph-title">建立纪律</div>
+            <ul>
+              <li>做资产配比（股基/债基/现金）</li>
+              <li>设置止盈/再平衡规则</li>
+              <li>关注优秀主动基金与个股研究</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>关注什么（小白友好）</h3>
+        <ul class="plain">
+          <li><b>宽基指数基金：</b>沪深300、中证500、标普500（QDII）——分散风险，适合定投打底。</li>
+          <li><b>行业指数：</b>消费、医药、科技——波动大，少量配置。</li>
+          <li><b>债券/货币基金：</b>作为"压舱石"，情绪不稳时的安全垫。</li>
+          <li><b>好公司（个股）：</b>等有一定基础再研究，先看财报三大表、护城河，不盲从大V。</li>
+        </ul>
+
+        <h3>好入场机会怎么判断</h3>
+        <ul class="plain">
+          <li>看"估值百分位"：低于30%算低估区，适合多投；高于70%谨慎。</li>
+          <li>市场恐慌、人人谈股色变时，往往机会在酝酿（逆向思维）。</li>
+          <li>定投天然摊低成本，不必等"最低点"——没人抄得到底。</li>
+          <li>用"闲钱+3年以上不用的钱"，心态才稳。</li>
+        </ul>
+
+        <h3>常用工具</h3>
+        <div class="res">
+          <div class="book"><div class="nm">估值数据</div><div class="au">且慢 / 银行螺丝钉估值表</div><div class="why">看每日指数温度，决定是否多投。</div></div>
+          <div class="book"><div class="nm">基金平台</div><div class="au">天天基金 / 蛋卷 / 且慢</div><div class="why">买基金、看历史业绩与费率。</div></div>
+          <div class="book"><div class="nm">资讯</div><div class="au">财经新闻 / 雪球</div><div class="why">了解宏观，但别被短期涨跌带节奏。</div></div>
+        </div>
+
+        <h3>每月 / 每周 / 每日</h3>
+        <ul class="plain">
+          <li><b>每日（5分钟）：</b>扫一眼估值表/市场温度，不操作也行，先养感觉。</li>
+          <li><b>每周：</b>执行一次定投（金额固定）；记录一条"本周市场观察"。</li>
+          <li><b>每月：</b>月度复盘——持仓盈亏、是否低估加投、下月预算。</li>
+        </ul>
+        <div class="note">新手最大的敌人是"追涨杀跌"。把定投设成自动扣款，然后关掉APP少看，反而更容易赚到时间的钱。</div>
+      </div>
+    </section>
+
+    <!-- ============ BABY ============ -->
+    <section class="module" id="mod-baby">
+      <div class="card">
+        <h2><span class="dot" style="background:var(--green)"></span>育儿月历 · 按月推送</h2>
+        <div class="lead">宝宝当前 <b id="babyMonthText">2</b> 个月。下面按月给你该阶段的大运动、疫苗、喂养与注意事项。本卡会随你填写的宝宝生日自动提示当前月龄。</div>
+
+        <h3 id="curMonthTitle">第2月 · 本月重点</h3>
+        <div id="curMonthDetail"></div>
+
+        <h3>逐月规划（2–6月）</h3>
+
+        <h4>2个月（当前）</h4>
+        <ul class="plain">
+          <li><b>大运动：</b>俯卧时能抬头45°、竖抱头较稳；开始追视、偶然社会性微笑。</li>
+          <li><b>疫苗：</b>按当地接种本，本月通常含脊灰、百白破等第1/2剂（以接种本为准）。</li>
+          <li><b>喂养：</b>母乳按需，约8–12次/天；注意肠胀气和"二月闹"。</li>
+          <li><b>注意：</b>每天俯卧抬头（tummy time）清醒时做；记录喂养/睡眠/便便；观察疫苗反应。</li>
+        </ul>
+
+        <h4>3个月</h4>
+        <ul class="plain">
+          <li><b>大运动：</b>抬头90°、开始吃手探索、可能萌芽翻身。</li>
+          <li><b>疫苗：</b>按计划接种；留意接种后体温。</li>
+          <li><b>喂养：</b>逐渐规律，仍按需；警惕肠胀气高峰。</li>
+          <li><b>注意：</b>睡眠可能倒退；多趴、多互动说话。</li>
+        </ul>
+
+        <h4>4个月</h4>
+        <ul class="plain">
+          <li><b>大运动：</b>翻身（仰→侧）、抓握更稳、对称性更好。</li>
+          <li><b>疫苗：</b>按计划（如百白破后续剂次）。</li>
+          <li><b>注意：</b>开始了解"添加辅食"知识（通常6月）；口水多、爱啃手正常。</li>
+        </ul>
+
+        <h4>5个月</h4>
+        <ul class="plain">
+          <li><b>大运动：</b>靠坐、翻身熟练、双手互玩。</li>
+          <li><b>注意：</b>可能出牙不适；亲子阅读、儿歌互动。</li>
+        </ul>
+
+        <h4>6个月</h4>
+        <ul class="plain">
+          <li><b>大运动：</b>独坐萌芽、翻身自如。</li>
+          <li><b>喂养：</b>通常本月开始添辅食（米粉优先），仍母乳为主。</li>
+          <li><b>疫苗：</b>按计划（如乙肝疫苗第3剂、流脑等）。</li>
+        </ul>
+        <div class="note">疫苗程序以你当地《预防接种证》为准，不同城市剂次时间略有差异。如宝宝有早产、黄疸、发热等情况，接种前咨询社区医生。</div>
+      </div>
+    </section>
+
+    <!-- ============ AI ============ -->
+    <section class="module" id="mod-ai">
+      <div class="card">
+        <h2><span class="dot" style="background:var(--peach)"></span>AI学习 · 轻资产创业</h2>
+        <div class="lead">目标：与时俱进学AI，并用它开启低门槛副业。轻资产=几乎零成本、靠时间和技能变现。宝妈的优势：时间碎片、共情力强、懂母婴场景。</div>
+
+        <h3>学习路线（由玩到赚）</h3>
+        <div class="phases">
+          <div class="phase">
+            <span class="ph-tag">第1–2月 · 玩熟</span>
+            <div class="ph-title">成为AI用户</div>
+            <ul>
+              <li>用熟1–2个对话AI（如通义/文心/豆包/ChatGPT）</li>
+              <li>学基础提示词（角色+任务+要求）</li>
+              <li>用AI帮自己写文案、做计划</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <span class="ph-tag">第3–6月 · 上手</span>
+            <div class="ph-title">掌握创作工具</div>
+            <ul>
+              <li>学AI绘画（即梦/可灵/Midjourney）</li>
+              <li>学AI剪辑/数字人/表格自动化</li>
+              <li>做一个公开的AI作品集</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <span class="ph-tag">第7–12月 · 变现</span>
+            <div class="ph-title">轻资产副业</div>
+            <ul>
+              <li>选1个方向稳定产出</li>
+              <li>自媒体/接单/数字产品</li>
+              <li>建立稳定小额收入</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>适合的轻资产副业方向（宝妈友好）</h3>
+        <div class="res">
+          <div class="book"><div class="nm">母婴自媒体</div><div class="au">小红书/抖音图文</div><div class="why">用AI做图做标题，分享真实产后恢复/育儿，最容易起号。</div></div>
+          <div class="book"><div class="nm">AI代写/文案</div><div class="au">公众号/电商详情页</div><div class="why">帮小商家写文案、起名、脚本，按单收费。</div></div>
+          <div class="book"><div class="nm">AI绘画接单</div><div class="au">头像/插画/壁纸</div><div class="why">在闲鱼/小红书接定制头像、宝宝插画。</div></div>
+          <div class="book"><div class="nm">数字产品</div><div class="au">模板/清单/课程</div><div class="why">把你的"产后恢复表/育儿清单"做成可售卖PDF。</div></div>
+          <div class="book"><div class="nm">AI效率服务</div><div class="au">帮人做PPT/表格</div><div class="why">用AI帮小微企业做汇报、整理数据，按时计费。</div></div>
+          <div class="book"><div class="nm">知识陪伴</div><div class="au">社群/咨询</div><div class="why">把财商+育儿+心理学习笔记做成付费小社群。</div></div>
+        </div>
+
+        <h3>每月 / 每周 / 每日</h3>
+        <ul class="plain">
+          <li><b>每日（20–30分钟）：</b>玩/学1个AI功能或提示词，记一条"可变现灵感"。</li>
+          <li><b>每周：</b>用AI做1个小作品（一张图/一段文案/一个表格）。</li>
+          <li><b>每月：</b>复盘：这个月AI帮我省了什么时间？有没有可卖的东西？</li>
+        </ul>
+        <div class="note">别等"学完再开始"。最好的学习是边做边学——先发第一条母婴笔记，流量和技能会一起长出来。轻资产的核心是：先验证、再投入。</div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    为你量身定制 · 音乔伊的小世界<br>
+    健康与理财内容仅为科普/思路参考，<b>健康请遵医嘱，投资需谨慎</b>。<br>
+    数据仅保存在你本地浏览器，放心使用。愿你在养育宝宝的同时，也好好养育自己。
+  </footer>
+</div>
+
+<script>
+/* ====================== 宝宝生日与月龄 ====================== */
+const birthInput = document.getElementById('babyBirth');
+const ageBadge = document.getElementById('ageBadge');
+const phaseBadge = document.getElementById('phaseBadge');
+const babyMonthText = document.getElementById('babyMonthText');
+const curMonthTitle = document.getElementById('curMonthTitle');
+const curMonthDetail = document.getElementById('curMonthDetail');
+const encourageText = document.getElementById('encourageText');
+
+const STORE_BIRTH = 'mama_workbench_birth';
+const todayStr = () => new Date().toISOString().slice(0,10);
+
+function diffDays(a,b){ return Math.floor((b-a)/86400000); }
+
+function renderAge(){
+  const v = birthInput.value;
+  if(!v){ ageBadge.textContent='请填写宝宝生日'; phaseBadge.textContent=''; babyMonthText.textContent='2'; return; }
+  const birth = new Date(v+'T00:00:00');
+  const now = new Date();
+  let days = diffDays(birth, now);
+  if(days < 0){ ageBadge.textContent='生日晚于今天啦'; return; }
+  const weeks = Math.floor(days/7);
+  const months = Math.floor(days/30.44);
+  ageBadge.textContent = `产后第 ${weeks} 周 · 约 ${months} 个月`;
+  // 恢复阶段提示
+  let ph = months<3 ? '产康黄金期·温和为主' : months<6 ? '恢复进阶期·可加运动' : '巩固期·建立习惯';
+  phaseBadge.textContent = ph;
+  babyMonthText.textContent = Math.max(1,months);
+  renderCurMonth(Math.max(1,months));
+}
+
+function renderCurMonth(m){
+  const data = {
+    1:'第1月 · 新生儿适应期：多吃多睡、黄疸观察、脐带护理、按需喂养，妈妈以休息和恢复为主。',
+    2:'第2月 · 本月重点：俯卧抬头(tummy time)、追视与微笑互动；关注肠胀气/二月闹；按计划接种疫苗；记录喂养睡眠。',
+    3:'第3月 · 抬头更稳、开始吃手探索；睡眠可能倒退；多趴多说话；留意疫苗反应。',
+    4:'第4月 · 翻身萌芽、抓握更稳；开始了解添加辅食知识（通常6月）；口水多正常。',
+    5:'第5月 · 靠坐、翻身熟练；可能出牙不适；亲子阅读与儿歌互动。',
+    6:'第6月 · 独坐萌芽；通常本月开始添辅食(米粉优先)，仍母乳为主；按计划接种。'
+  };
+  const mm = Math.min(6, m);
+  curMonthTitle.textContent = `第${mm}月 · 本月重点`;
+  curMonthDetail.innerHTML = '<div class="plain"><li>'+ (data[mm]||data[6]) +'</li></div>';
+}
+
+birthInput.addEventListener('change', ()=>{
+  localStorage.setItem(STORE_BIRTH, birthInput.value);
+  renderAge();
+});
+if(localStorage.getItem(STORE_BIRTH)){ birthInput.value = localStorage.getItem(STORE_BIRTH); }
+
+/* ====================== 模块切换 ====================== */
+const navBtns = document.querySelectorAll('.nav-btn');
+const modules = document.querySelectorAll('.module');
+navBtns.forEach(b=>{
+  b.addEventListener('click', ()=>{
+    navBtns.forEach(x=>x.classList.remove('active'));
+    modules.forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById('mod-'+b.dataset.mod).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+/* ====================== 今日打卡 ====================== */
+const CHECKS = {
+  health:[
+    {id:'h1',t:'腹式呼吸 5–10 分钟',s:'躺着，吸气鼓肚、呼气轻收，只放松不使劲'},
+    {id:'h2',t:'吃钙 / 铁 / 多维',s:'铁随餐或遵医嘱，温水送服'},
+    {id:'h3',t:'盆底放松训练',s:'想象盆底像花瓣轻轻开合，先放松再练'},
+    {id:'h4',t:'腹横肌激活 + 腹直肌修复',s:'呼气肚脐轻收向脊柱，严禁卷腹'},
+    {id:'h5',t:'颈椎养护 + 左手热敷',s:'热敷颈后/手腕10分钟，少低头少用手腕发力'},
+    {id:'h6',t:'喝够水 + 轻度散步',s:'抱娃护腰护腕，室内慢走15分钟'}
+  ],
+  mind:[
+    {id:'m1',t:'写下"三件好事"',s:'今天再小也行：宝宝笑了/喝到热茶'},
+    {id:'m2',t:'5分钟正念呼吸',s:'只数呼吸，念头飘走就温柔拉回'},
+    {id:'m3',t:'内耗喊停一次',s:'问自己"这想法有用吗？"然后放下'}
+  ],
+  money:[
+    {id:'mo1',t:'记账 1 分钟',s:'今天花多少、花哪了，APP最省事'},
+    {id:'mo2',t:'看/听 1 条财商内容',s:'公众号、听书、短视频都行'}
+  ],
+  invest:[
+    {id:'i1',t:'扫一眼估值表/市场温度',s:'5分钟，不操作也行，先养感觉'},
+    {id:'i2',t:'记录一条市场观察',s:'今天低估还是高估？写一句话'}
+  ],
+  baby:[
+    {id:'b1',t:'俯卧抬头(tummy time)',s:'清醒时做，每次几分钟，一天多次'},
+    {id:'b2',t:'记录喂养/睡眠/便便',s:'随手记，方便发现规律与异常'},
+    {id:'b3',t:'亲子互动说话 + 观察',s:'多对视多说话；留意疫苗反应/肠胀气'}
+  ],
+  ai:[
+    {id:'a1',t:'学/玩 1 个AI功能或提示词',s:'通义/文心/豆包都行，试着让AI帮你做点事'},
+    {id:'a2',t:'记一条"可变现灵感"',s:'今天想到什么能卖/能帮人的点子？'}
+  ]
+};
+
+const dayKey = 'mama_check_' + todayStr();
+function loadDone(){ try{ return JSON.parse(localStorage.getItem(dayKey))||{}; }catch(e){ return {}; } }
+function saveDone(obj){ localStorage.setItem(dayKey, JSON.stringify(obj)); }
+
+function renderChecklist(){
+  const done = loadDone();
+  let total=0, finished=0;
+  for(const key in CHECKS){
+    const box = document.getElementById('chk-'+key);
+    if(!box) continue;
+    box.innerHTML='';
+    CHECKS[key].forEach(item=>{
+      total++;
+      const isDone = !!done[item.id];
+      if(isDone) finished++;
+      const el = document.createElement('div');
+      el.className = 'check-item' + (isDone?' done':'');
+      el.innerHTML = `<div class="box">${isDone?'✓':''}</div><div class="txt">${item.t}<small>${item.s}</small></div>`;
+      el.addEventListener('click', ()=>{
+        const d = loadDone();
+        d[item.id] = !d[item.id];
+        saveDone(d);
+        renderChecklist();
+      });
+      box.appendChild(el);
+    });
+  }
+  const pct = total? Math.round(finished/total*100):0;
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('progText').textContent = `今日完成 ${finished} / ${total} 项（${pct}%）`;
+  const titles = ['今天也要好好爱自己，你已经在变得更好了。','小步前进也是前进，给自己一个拥抱。','照顾好宝宝的同时，别忘了照顾你。','内耗少一点，行动多一点，今天就很棒。','你不是在孤军奋战，慢慢来。'];
+  encourageText.textContent = titles[new Date().getDay()%titles.length];
+  document.getElementById('todayMeta').textContent = '日期 '+todayStr()+' · 清单每天0点自动刷新，进度只保存在本机';
+  document.getElementById('todayTitle').textContent = '今日行动清单 · '+todayStr();
+}
+
+/* ====================== 初始化 ====================== */
+renderAge();
+renderChecklist();
+
+/* ====================== 安装到主屏幕引导 ====================== */
+(function(){
+  var tip=document.getElementById('installTip');
+  var tx=document.getElementById('installTx');
+  var cls=document.getElementById('installCls');
+  if(!tip) return;
+  if(localStorage.getItem('mama_install_tip')) return;
+  var ua=navigator.userAgent;
+  if(/iPhone|iPad|iPod/i.test(ua)){
+    tx.innerHTML='把工作台变成手机APP：点右上角 <b>分享</b> 按钮 → 选 <b>添加到主屏幕</b>，以后就能像APP一样全屏打开。';
+    tip.classList.add('show');
+  }else if(/Android/i.test(ua)){
+    tx.innerHTML='把工作台变成手机APP：点浏览器右上角 <b>⋮ 菜单</b> → 选 <b>安装应用 / 添加到主屏幕</b>，即可全屏使用。';
+    tip.classList.add('show');
+  }
+  cls.addEventListener('click',function(){ tip.classList.remove('show'); localStorage.setItem('mama_install_tip','1'); });
+})();
+
+</script>
+  <div class="install-tip" id="installTip">
+    <div class="ic">APP</div>
+    <div class="tx" id="installTx"></div>
+    <button class="cls" id="installCls">知道了</button>
+  </div>
+</body>
+</html>
