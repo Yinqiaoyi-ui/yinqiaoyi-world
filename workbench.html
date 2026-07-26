@@ -96,8 +96,9 @@
   .card h2{font-size:20px;margin-bottom:4px;display:flex;align-items:center;gap:10px}
   .card h2 .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
   .card .lead{color:var(--ink-soft);font-size:14px;margin-bottom:16px}
-  .card h3{font-size:15px;margin:18px 0 8px;color:var(--ink);padding-left:14px;border-left:4px solid var(--pink-deep);border-radius:2px}
+  .card h3{font-size:15px;margin:18px 0 8px;color:var(--ink);padding-left:14px;border-left:4px solid var(--mint);border-radius:2px}
   .card h4{font-size:14px;margin:14px 0 6px;color:var(--pink-deep)}
+  .mod-goal-detail{font-size:14px;color:var(--pink-deep);margin-bottom:12px;padding:10px 14px;background:var(--pink-light);border-radius:12px;line-height:1.6;font-weight:600}
 
   /* ---------- Phase blocks ---------- */
   .phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
@@ -157,24 +158,26 @@
   .ov-card.month::before{background:var(--yellow-deep)}
   .ov-card.month .ov-badge{background:var(--yellow-light);color:#b8933a}
 
-  /* ---------- 六模块网格（2列卡通卡片） ---------- */
-  .mod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:18px 0}
-  .mod-card{background:var(--card);border-radius:var(--radius-sm);padding:16px 14px;box-shadow:var(--shadow);border:2px solid transparent;cursor:pointer;transition:.25s;position:relative}
-  .mod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-  .mod-card:nth-child(1):hover{border-color:var(--pink-deep)}
-  .mod-card:nth-child(2):hover{border-color:var(--mint-deep)}
-  .mod-card:nth-child(3):hover{border-color:var(--lavender-deep)}
-  .mod-card:nth-child(4):hover{border-color:var(--yellow-deep)}
-  .mod-card:nth-child(5):hover{border-color:var(--sky-deep)}
-  .mod-card:nth-child(6):hover{border-color:var(--peach-deep)}
-  .mod-card .mod-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-  .mod-card .mod-icon{font-size:26px;background:#fdf6f0;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-  .mod-card .mod-title{font-weight:800;font-size:14px;color:var(--ink)}
-  .mod-card .mod-goal{font-size:12px;color:var(--pink-deep);margin-bottom:8px;padding:6px 10px;background:var(--pink-light);border-radius:10px;line-height:1.5}
-  .mod-card .mod-tease{font-size:12px;color:var(--ink-soft);line-height:1.5;margin-bottom:6px}
-  .mod-card .mod-tags{display:flex;flex-wrap:wrap;gap:5px}
-  .mod-card .mod-tag{font-size:10px;padding:2px 8px;border-radius:20px;background:#fef5e7;color:#b8933a;font-weight:600}
-  .mod-card .mod-today-task{font-size:11px;color:var(--ink-soft);margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}
+  /* ---------- 六模块网格（紧凑入口卡片） ---------- */
+  .mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+  .mod-card{background:var(--card);border-radius:14px;padding:14px 10px;box-shadow:var(--shadow);border:2px solid transparent;cursor:pointer;transition:.25s;text-align:center}
+  .mod-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .mod-card:nth-child(1){border-color:var(--pink-light)}.mod-card:nth-child(1):hover{border-color:var(--pink-deep)}
+  .mod-card:nth-child(2){border-color:var(--mint-light)}.mod-card:nth-child(2):hover{border-color:var(--mint-deep)}
+  .mod-card:nth-child(3){border-color:var(--lavender-light)}.mod-card:nth-child(3):hover{border-color:var(--lavender-deep)}
+  .mod-card:nth-child(4){border-color:var(--yellow-light)}.mod-card:nth-child(4):hover{border-color:var(--yellow-deep)}
+  .mod-card:nth-child(5){border-color:var(--sky-light)}.mod-card:nth-child(5):hover{border-color:var(--sky-deep)}
+  .mod-card:nth-child(6){border-color:var(--peach-light)}.mod-card:nth-child(6):hover{border-color:var(--peach-deep)}
+  .mod-card .mod-head{display:flex;align-items:center;justify-content:center;gap:6px}
+  .mod-card .mod-icon{font-size:22px}
+  .mod-card .mod-title{font-weight:800;font-size:13px;color:var(--ink)}
+  .mod-card .mod-arrow{font-size:12px;color:var(--ink-soft);opacity:.5}
+  @media(max-width:640px){
+    .mod-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+    .mod-card{padding:12px 6px}
+    .mod-card .mod-icon{font-size:20px}
+    .mod-card .mod-title{font-size:12px}
+  }
   @media(max-width:640px){
     .overview-row{grid-template-columns:repeat(3,1fr);gap:6px}
     .ov-card{padding:12px 6px}
@@ -324,383 +327,772 @@
     <!-- ============ MONEY ============ -->
     <section class="module" id="mod-money">
       <div class="card">
-        <h2><span class="dot" style="background:var(--pink)"></span>财商成长 · 整体规划</h2>
-        <div class="lead">你是小白，所以这条路要"由易到难、先建立兴趣再学硬知识"。核心心法：先改变和钱的关系，再学工具。别一上来就炒股，先建立赚钱—存钱—钱生钱的底层认知。</div>
+        <h2>💰 财商成长 · 从零到自由</h2>
+        <div class="mod-goal-detail">🎯 总目标：用一年时间，从连"基金是什么"都不知道的纯小白，成长为能自主打理家庭资产、建立稳定被动收入体系、不再为钱焦虑的独立女性。</div>
+        <div class="lead">亲爱的，我知道你可能觉得"理财"听起来很难、很遥远，甚至有点害怕。没关系，我们不赶时间。这条路就像学走路——先爬（看书）、再站（记账）、最后走（投资）。<b>核心心法：先改变你和钱的关系，再学工具。</b></div>
 
-        <h3>三阶段路线（由简单到难）</h3>
+        <h3>📖 为什么要学财商？（写给你的心里话）</h3>
+        <ul class="plain">
+          <li>你现在是全职带娃还是休产假？不管哪种，<b>有一份"不靠工资也能活"的底气</b>，会让你在婚姻和人生里更从容。</li>
+          <li>小可乐会长大，教育、兴趣班、甚至将来出国，<b>每一笔都是真金白银</b>。早规划早轻松。</li>
+          <li>你不需要成为股神，只需要做到：<b>赚来的钱留得住、存下的钱会生钱、花钱的时候不心慌</b>。</li>
+          <li>财商不是教你抠门，而是<b>让钱为你工作，而不是你为钱工作</b>——这样你才有更多时间陪小可乐。</li>
+        </ul>
+
+        <h3>🗺️ 三阶段路线（由简单到难，不跳级）</h3>
         <div class="phases">
           <div class="phase">
-            <span class="ph-tag">阶段一 · 启蒙（第1–2月）</span>
-            <div class="ph-title">建立金钱感觉</div>
+            <span class="ph-tag">🌱 阶段一 · 启蒙（第1–2月）</span>
+            <div class="ph-title">建立"金钱感觉"</div>
             <ul>
-              <li>读完2本入门书，打破"钱很脏/谈钱俗"的念头</li>
-              <li>开始随手记账（不苛求精确）</li>
-              <li>搞懂：资产 vs 负债、被动收入</li>
-              <li>目标：愿意看、不抵触</li>
+              <li>读完2本入门书，打破"谈钱俗气"的心理障碍</li>
+              <li>下载一个记账APP（推荐：随手记/挖财/钱迹），<b>不追求精确，只培养"看见钱"的习惯</b></li>
+              <li>搞懂三个概念：资产（往口袋装钱的）、负债（从口袋掏钱的）、被动收入（不干活也有的钱）</li>
+              <li>关键心态：<b>愿意看、不抵触，就赢了</b></li>
             </ul>
           </div>
           <div class="phase">
-            <span class="ph-tag">阶段二 · 基础（第3–6月）</span>
+            <span class="ph-tag">🌿 阶段二 · 基础（第3–6月）</span>
             <div class="ph-title">管住钱、留得住</div>
             <ul>
-              <li>建立"支出三账户"：日常/储蓄/梦想</li>
-              <li>攒下第一笔应急金（3–6个月开支）</li>
-              <li>学预算、防冲动消费</li>
-              <li>读懂家庭资产负债表</li>
+              <li>建立"三个账户"：<b>日常账户</b>（月支出）、<b>储蓄账户</b>（打死不动）、<b>梦想账户</b>（奖励自己）</li>
+              <li>发工资/收入后<b>先转20%到储蓄账户</b>，剩下的才花——这叫"先付给自己"</li>
+              <li>攒下第一笔应急金：<b>3–6个月的家庭月支出</b>（这是你的安全垫，有了它你才不会慌）</li>
+              <li>学做预算：把支出分成"必须花/可以省/纯粹浪费"三类</li>
+              <li>读懂一张家庭资产负债表——你和老公加起来，到底有多少钱、欠多少钱</li>
             </ul>
           </div>
           <div class="phase">
-            <span class="ph-tag">阶段三 · 进阶（第7–12月）</span>
+            <span class="ph-tag">🌳 阶段三 · 进阶（第7–12月）</span>
             <div class="ph-title">让钱生钱</div>
             <ul>
-              <li>学指数基金、定投、复利</li>
-              <li>理解风险与资产配置</li>
-              <li>用少量资金实盘练手</li>
-              <li>建立自己的投资纪律</li>
+              <li>学指数基金：沪深300是什么？为什么巴菲特推荐普通人买指数？</li>
+              <li>学定投：<b>每月固定时间、固定金额买入</b>，涨了赚收益、跌了赚份额</li>
+              <li>理解"复利"：每年8%的收益，10年后翻一倍——<b>时间是你最好的朋友</b></li>
+              <li>用500–1000元开始实盘练手，感受市场波动，建立投资纪律</li>
+              <li>学会看估值：PE百分位低于30%=便宜可以多买，高于70%=贵了少买</li>
             </ul>
           </div>
         </div>
 
-        <h3>书本推荐（小白友好，轻松易读优先）</h3>
+        <h3>📚 书单（按阅读顺序，小白友好）</h3>
         <div class="res">
-          <div class="book"><div class="nm">《小狗钱钱》</div><div class="au">[德] 博多·舍费尔</div><div class="why">童话体讲理财，零基础必读，半小时就能看完一章。</div></div>
-          <div class="book"><div class="nm">《富爸爸穷爸爸》</div><div class="au">[美] 罗伯特·清崎</div><div class="why">建立"资产/负债"思维，适合启蒙阶段。</div></div>
-          <div class="book"><div class="nm">《好好花钱》</div><div class="au">陈小怪等</div><div class="why">接地气的大众理财，讲怎么不乱花。</div></div>
-          <div class="book"><div class="nm">《指数基金投资指南》</div><div class="au">银行螺丝钉</div><div class="why">定投入门神书，阶段三再用，写得很通俗。</div></div>
-          <div class="book"><div class="nm">《定投十年财务自由》</div><div class="au">银行螺丝钉</div><div class="why">手把手定投，配估值表用法。</div></div>
-          <div class="book"><div class="nm">《穷查理宝典》</div><div class="au">[美] 查理·芒格</div><div class="why">多元思维模型，进阶期慢慢读，不必通读。</div></div>
+          <div class="book"><div class="nm">1.《小狗钱钱》</div><div class="au">博多·舍费尔</div><div class="why">12岁女孩和一条会说话的狗学理财的故事。全年龄段适读，2小时就能翻完。看完你会想写"梦想相册"和"梦想储蓄罐"。</div></div>
+          <div class="book"><div class="nm">2.《富爸爸穷爸爸》</div><div class="au">罗伯特·清崎</div><div class="why">建立"资产vs负债"思维框架的经典。不用全盘接受作者观点，但"让钱为你工作"这句话值得刻进DNA。</div></div>
+          <div class="book"><div class="nm">3.《好好赚钱》</div><div class="au">简七</div><div class="why">中国人写的、接地气的理财入门书。从记账到保险到基金，一站式扫盲，像闺蜜在跟你聊天。</div></div>
+          <div class="book"><div class="nm">4.《指数基金投资指南》</div><div class="au">银行螺丝钉</div><div class="why">定投圣经。看完你就知道为什么"傻傻地买、聪明地卖"比天天盯盘更赚钱。</div></div>
+          <div class="book"><div class="nm">5.《定投十年财务自由》</div><div class="au">银行螺丝钉</div><div class="why">手把手教你选基金、看估值、设止盈。实操性极强。</div></div>
+          <div class="book"><div class="nm">6.《纳瓦尔宝典》</div><div class="au">埃里克·乔根森</div><div class="why">进阶读物。关于财富和幸福的底层思考，读完格局会打开。</div></div>
         </div>
 
-        <h3>月度规划</h3>
+        <h3>📅 月度规划（跟着走就行）</h3>
         <ul class="plain">
-          <li><b>第1月：</b>读《小狗钱钱》+ 开一个记账本（APP或笔记本都行），每天记一笔。</li>
-          <li><b>第2月：</b>读《富爸爸穷爸爸》+ 写"我的3个金钱梦想"（钱钱里的方法），开始想"除了工资还能怎么赚"。</li>
-          <li><b>第3月：</b>读完《好好花钱》+ 设三个账户，发工资先转储蓄账户。</li>
-          <li><b>第4–5月：</b>盘点家庭资产负债，定下应急金目标金额并开始攒。</li>
-          <li><b>第6月：</b>复盘前半年，奖励自己一件"梦想账户"里的小东西。</li>
-          <li><b>第7–8月：</b>读《指数基金投资指南》，搞懂市盈率、定投是什么。</li>
-          <li><b>第9–12月：</b>用小钱开始定投，每月复盘一次。</li>
+          <li><b>第1月：</b>读《小狗钱钱》（用喂奶的碎片时间，一周就能翻完）→ 下载记账APP → 写"我的3个金钱梦想"（比如：给小可乐存一笔教育金、带爸妈去旅行、买一个不用看价签的包）。<b>这个月唯一的任务：让"钱"变成一个你愿意聊的话题。</b></li>
+          <li><b>第2月：</b>读《富爸爸穷爸爸》→ 继续记账，开始分类（吃、穿、用、娃），<b>找出一笔"原来可以不花的钱"</b> → 和老公聊一次家庭的财务现状。</li>
+          <li><b>第3月：</b>读《好好赚钱》→ 去银行开三个账户（或用一个APP分三个子账户）→ 发工资/收入当天，<b>先转储蓄账户，再花剩下的</b>。</li>
+          <li><b>第4–5月：</b>盘点家庭资产：存款、理财、房子、车、负债 → 算出一个数：<b>我们家每个月到底花多少钱？</b> → 定下应急金目标（月支出×6），开始攒。</li>
+          <li><b>第6月：</b>半年复盘！看看记账本，有没有什么"花钱模式"让你意外？→ 用梦想账户奖励自己一个小东西（你值得）。</li>
+          <li><b>第7–8月：</b>读《指数基金投资指南》→ 搞懂市盈率、市净率、定投 → 在天天基金/且慢开好账户。</li>
+          <li><b>第9–12月：</b>开始定投！每月500–1000元，选1–2只宽基指数 → 每月复盘一次，<b>不因涨了狂喜、不因跌了恐慌</b>。</li>
         </ul>
 
-        <h3>每周规划</h3>
+        <h3>📆 每周节奏</h3>
         <div class="week">
-          <div class="day"><b>周一</b><p>读财商书 20–30 分钟（或听书）</p></div>
-          <div class="day"><b>周二</b><p>看一条"财务小知识"短视频/文章</p></div>
-          <div class="day"><b>周三</b><p>整理本周记账，标出一笔"可省"的支出</p></div>
-          <div class="day"><b>周四</b><p>关注一条财经/家庭财务新闻，只了解不焦虑</p></div>
-          <div class="day"><b>周五</b><p>想一个"开源"小点子，记下来</p></div>
-          <div class="day"><b>周末</b><p>轻松复盘：这个月离目标近了吗？</p></div>
+          <div class="day"><b>周一</b><p>读财商书20–30分钟（或听书/播客）</p></div>
+          <div class="day"><b>周二</b><p>看一条"财务小知识"短视频（推荐：简七读财、银行螺丝钉）</p></div>
+          <div class="day"><b>周三</b><p>打开记账APP看一眼本周花了多少，标出一笔"可以省"的</p></div>
+          <div class="day"><b>周四</b><p>关注一条财经新闻（不用焦虑，只是培养"看见经济"的习惯）</p></div>
+          <div class="day"><b>周五</b><p>想一个"开源"小点子（闲鱼卖闲置？帮人做PPT？写一篇小红书？）</p></div>
+          <div class="day"><b>周末</b><p>轻松复盘：这周离"自由"近了一点点吗？对自己说一句"辛苦了"</p></div>
         </div>
 
-        <h3>每日规划</h3>
+        <h3>☀️ 每日最小行动（5分钟就够）</h3>
         <ul class="plain">
-          <li>记账 1 分钟：今天花了多少、花在哪（用APP最省事）。</li>
-          <li>看/听 1 条财商内容（公众号、听书、短视频都行）。</li>
-          <li>睡前问自己：今天有没有为"未来的自由"做一点点事？</li>
+          <li><b>记账1分钟：</b>打开APP，记下今天最大的一笔支出。不要求每笔都记，只记大额的。</li>
+          <li><b>看/听1条财商内容：</b>小红书搜"理财入门"、通勤听播客、喂奶时翻两页书。碎片时间拼起来就是一门课。</li>
+          <li><b>睡前问自己：</b>"今天有没有为未来的自由做一点点事？"——有的话，给自己一个肯定；没有的话，明天再来。</li>
         </ul>
-        <div class="note">"愿意学"比"学得多"重要。启蒙阶段哪怕一周只看一页书都算赢。把财商当成"和钱做朋友"的轻松游戏，别把它变成压力。</div>
+        <div class="note">💡 <b>给你的悄悄话：</b>你不需要成为理财专家。你只需要比昨天多懂一点点。一个月后回头看，你会惊讶自己走了多远。财商这条路，<b>愿意开始，就已经超过90%的人了</b>。</div>
       </div>
     </section>
 
     <!-- ============ HEALTH ============ -->
     <section class="module" id="mod-health">
       <div class="card">
-        <h2><span class="dot" style="background:var(--teal)"></span>健康恢复 · 整体规划</h2>
-        <div class="lead">产后2个月（剖腹产），你正做产康。当前重点：盆底肌高张+松弛、轻度子宫脱垂、腹直肌分离2指，外加过敏性鼻炎、颈椎问题、腱鞘炎。原则：<b>温和、遵医嘱、不急于求成</b>。</div>
+        <h2><span class="dot" style="background:var(--mint-deep)"></span>健康恢复 · 整体规划</h2>
+        <div class="lead">亲爱的，你刚经历了一场剖腹产，身体正在努力地修复自己。当前重点：盆底肌高张+松弛、轻度子宫脱垂、腹直肌分离2指，外加过敏性鼻炎、颈椎问题、腱鞘炎。原则：<b>温和、遵医嘱、不急于求成</b>。你的身体已经做了很了不起的事——孕育并生下了小可乐。现在，我们温柔地帮它恢复。</div>
 
         <div class="warn"><b>重要免责：</b>以下为康复科普与日常养护建议，不能替代医生/产康师面诊。尤其盆底肌"高张"和"颈椎错位"需要专业评估，请务必在医生或持证康复师指导下执行，避免自行盲目训练加重问题。</div>
 
-        <h3>你的身体档案（当前）</h3>
+        <h3>为什么你的康复很重要（写给你心里那个还在硬撑的自己）</h3>
+        <ul class="plain">
+          <li><b>你值得重新感受到身体的轻盈。</b>怀孕、生产、哺乳——你的身体扛了太多。它不欠你什么，反而是你欠它一场认真的修复。你值得有一天早上醒来，不再觉得腰酸、脖子僵、手腕疼。</li>
+          <li><b>你想抱起小可乐的时候不疼。</b>等他再大一点，他会伸出小手要你抱，会踉踉跄跄跑向你。你不想因为腱鞘炎或者腰疼，只能勉强挤出一个抱歉的笑。你想稳稳地接住他，想陪他跑、陪他跳、陪他长大。</li>
+          <li><b>身体是你一切梦想的地基。</b>你想学理财、想做副业、想带娃旅行——所有这些都需要一个好的身体状态。恢复不是"矫情"，是你在为自己未来的生活投资最重要的资产。</li>
+          <li><b>产后一年是康复的黄金窗口。</b>现在做的每一件小事——一次腹式呼吸、一次盆底放松、一次正确的姿势调整——都是在给十年后的自己存健康。窗口期会过去的，但好习惯会留下来。</li>
+          <li><b>你不是"恢复身材"，你是在"恢复能力"。</b>我们不谈瘦不瘦。我们谈的是：能不能轻松地蹲下抱起宝宝、能不能一整天不头疼、能不能在镜子前看见自己的时候觉得"我状态不错"。这才是真正的恢复。</li>
+        </ul>
+        <div class="note">💕 <b>每天对自己说一句：</b>"我在变好，一天比一天好。哪怕今天只做了腹式呼吸，也值得给自己一个肯定。"</div>
+
+        <h3>你的身体档案（当前状态，我们诚实地面对它）</h3>
         <div class="res">
-          <div class="book"><div class="nm">剖腹产 · 术后2月</div><div class="why">伤口多已愈合，但仍避免提重物、增加腹压的动作。</div></div>
-          <div class="book"><div class="nm">盆底肌：高张 + 松弛</div><div class="why">先"放松"再"训练"，盲目凯格尔可能加重高张。</div></div>
-          <div class="book"><div class="nm">轻度子宫脱垂</div><div class="why">避免久站、负重、便秘；做正确盆底训练。</div></div>
-          <div class="book"><div class="nm">腹直肌分离 2指</div><div class="why">轻度，避免卷腹/仰卧起坐；可做腹式呼吸。</div></div>
-          <div class="book"><div class="nm">颈椎 5/6 错位·曲度变直</div><div class="why">需骨科/康复科评估，避免随意按摩扭转。</div></div>
-          <div class="book"><div class="nm">过敏性鼻炎 + 腱鞘炎</div><div class="why">避过敏原+洗鼻；左手少发力、温热敷。</div></div>
+          <div class="book"><div class="nm">剖腹产 · 术后2月</div><div class="why">伤口多已愈合，但仍需温柔对待——不提重物、不猛起猛坐、咳嗽打喷嚏时用手护住肚子。你的刀口是一条荣誉勋章，不是缺陷。</div></div>
+          <div class="book"><div class="nm">盆底肌：高张 + 松弛</div><div class="why">这是个矛盾的状态——肌肉既紧绷又无力。所以不能上来就做凯格尔！要先学会"放松"，让肌肉学会在收缩之后也能彻底松开。就像一根橡皮筋，先把它从"一直绷着"的状态解开来。</div></div>
+          <div class="book"><div class="nm">轻度子宫脱垂</div><div class="why">这不是你的错。怀孕和分娩对盆底的考验太大了。现在能做的是：避免久站、避免便秘用力、做正确的盆底训练。随着盆底肌力的恢复，脱垂会逐渐改善。</div></div>
+          <div class="book"><div class="nm">腹直肌分离 2指</div><div class="why">轻度分离，好消息！这意味着通过腹式呼吸和腹横肌激活，有非常大的可能自然闭合。但切记：严禁卷腹、仰卧起坐、平板支撑——这些会让分离加重。</div></div>
+          <div class="book"><div class="nm">颈椎 5/6 错位 · 曲度变直</div><div class="why">长期低头喂奶、看手机，加上孕期体态改变，颈椎承受了太多。需要骨科/康复科专业评估，不要随便找人按摩扭转。温热敷、正确姿势、康复拉伸才是正解。</div></div>
+          <div class="book"><div class="nm">过敏性鼻炎 + 腱鞘炎</div><div class="why">鼻炎：注意规避过敏原（尘螨、花粉等），每天生理盐水洗鼻。腱鞘炎（妈妈手）：左手少发力，抱娃时用手掌而不是手指承重，每天温热敷，必要时戴护腕。</div></div>
         </div>
 
-        <h3>月度规划（产后恢复节奏）</h3>
+        <h3>月度规划（产后恢复节奏，不跳级、不焦虑）</h3>
         <ul class="plain">
-          <li><b>产后2月（本月）：</b>以"放松+激活"为主——腹式呼吸、盆底放松、轻柔腹横肌训练；继续产康；补钙铁多维；评估颈椎与盆底（复查）。</li>
-          <li><b>产后3月：</b>在康复师指导下进阶盆底肌力训练；腹直肌分离复查（希望收窄到1.5指内）；开始低强度散步。</li>
-          <li><b>产后4月：</b>核心稳定训练（死虫式等改良动作）；颈椎针对性拉伸（医生允许下）；逐步恢复运动。</li>
-          <li><b>产后5–6月：</b>评估脱垂与分离恢复情况；可加入产后瑜伽/普拉提（专业课）；建立长期运动习惯。</li>
+          <li><b>产后2月（本月 · 放松激活期）：</b>以"放松+激活"为主——腹式呼吸每天10分钟、盆底放松训练、轻柔腹横肌激活；继续按时去产康；补钙铁多维；去医院复查盆底和颈椎状况。这个月最重要的任务不是"练"，而是"学会感受自己的身体"——感受哪里紧、哪里松、哪里需要被看见。</li>
+          <li><b>产后3月（温和进阶期）：</b>在康复师指导下加入盆底肌力训练（不再是纯放松了）；腹直肌分离复查——希望收窄到1.5指以内；开始低强度散步，每天15-20分钟，感受阳光和风。</li>
+          <li><b>产后4月（核心重建期）：</b>核心稳定训练入门——死虫式（dead bug）等改良动作，不伤腹直肌；颈椎针对性拉伸（医生允许的前提下）；逐步增加运动量，但身体说了算。</li>
+          <li><b>产后5–6月（习惯养成期）：</b>评估脱垂与腹直肌分离的恢复进展；可以尝试产后瑜伽或普拉提（一定要找专业的产后课程，普通课不适合你）；建立长期的、可持续的运动习惯，不求剧烈，求坚持。</li>
         </ul>
 
-        <h3>每周规划</h3>
+        <h3>本月小目标（完成后打勾，月底给自己一个奖励）</h3>
+        <div class="check-item"><div class="box"></div><div class="txt">每天做腹式呼吸至少5天/周<small>躺着喂奶的时候就可以做，不额外花时间</small></div></div>
+        <div class="check-item"><div class="box"></div><div class="txt">按时去产康，不因为"太忙"或"不好意思"而请假<small>你的康复和宝宝的奶粉一样重要</small></div></div>
+        <div class="check-item"><div class="box"></div><div class="txt">去医院做一次盆底评估 + 颈椎复查<small>知道自己到底恢复到什么程度，比瞎猜安心多了</small></div></div>
+        <div class="check-item"><div class="box"></div><div class="txt">每天喝够水（至少1500ml）+ 按时吃钙铁多维<small>哺乳期的你，营养缺口比想象中大</small></div></div>
+        <div class="check-item"><div class="box"></div><div class="txt">左手腱鞘炎：每天热敷1次 + 抱娃时注意手腕姿势<small>妈妈手不是忍忍就好的，越早养护越容易恢复</small></div></div>
+        <div class="check-item"><div class="box"></div><div class="txt">鼻炎：每天睡前生理盐水洗鼻 + 记录今天的触发物<small>坚持一周，你会发现自己能呼吸得更顺畅</small></div></div>
+        <div class="check-item"><div class="box"></div><div class="txt">月底给自己一个"健康奖励"：买一件舒服的家居服/一个喜欢的杯子/一次按摩（医生允许的部位）<small>你值得被奖励，不是因为瘦了多少，而是因为你一直在照顾自己</small></div></div>
+
+        <h3>每周规划（跟着这个节奏，不慌不乱）</h3>
         <div class="week">
-          <div class="day"><b>每日</b><p>腹式呼吸10分钟 + 补钙铁多维 + 喝水</p></div>
-          <div class="day"><b>周一/四</b><p>盆底放松训练（呼吸放松/筋膜，按康复师方案）</p></div>
-          <div class="day"><b>周二/五</b><p>腹横肌激活 + 腹直肌修复轻柔训练</p></div>
-          <div class="day"><b>周三</b><p>颈椎养护（正确姿势+温热敷，不盲目按摩）</p></div>
-          <div class="day"><b>周六</b><p>左手腱鞘炎养护：热敷+减少用手+伸展</p></div>
-          <div class="day"><b>周日</b><p>轻度散步 + 过敏防护复盘（本周触发物？）</p></div>
+          <div class="day"><b>🌅 每日</b><p>腹式呼吸10分钟（喂奶时做）<br>补钙铁多维 + 喝够水<br>洗鼻 + 左手热敷</p></div>
+          <div class="day"><b>周一</b><p>盆底放松训练<br>（呼吸放松法：想象盆底像温暖的花瓣，吸气时微微张开，呼气时轻轻合拢——只是感受，不发力）<br>时长：10-15分钟</p></div>
+          <div class="day"><b>周二</b><p>腹横肌激活训练<br>（平躺屈膝，手放肚脐两侧，呼气时肚脐轻收向脊柱，保持5秒，放松。10次×2组，全程不憋气）</p></div>
+          <div class="day"><b>周三</b><p>颈椎养护日<br>（温热敷颈后10分钟 + 靠墙站立5分钟练习正确头位 + 减少低头看手机）</p></div>
+          <div class="day"><b>周四</b><p>盆底放松训练<br>（同周一，但这次试着在坐姿下做——喂奶时、吃饭时都可以练习）<br>时长：10-15分钟</p></div>
+          <div class="day"><b>周五</b><p>腹横肌激活 + 腹直肌轻柔修复<br>（同周二，如果身体感觉好，可加至12次×2组）</p></div>
+          <div class="day"><b>周六</b><p>腱鞘炎专项养护<br>（热敷手腕15分钟 + 手部轻柔伸展：手指张开→握拳，10次 + 减少用手腕发力的动作）</p></div>
+          <div class="day"><b>周日</b><p>放松日<br>（室内慢走15-20分钟 + 过敏防护复盘：这周鼻炎犯了吗？触发了什么？+ 回顾身体感受，给自己一句"辛苦了"）</p></div>
         </div>
 
-        <h3>每日规划（温和版，约30–40分钟，可拆分）</h3>
+        <h3>每日规划（温和版，约30–40分钟，全部可拆分到碎片时间）</h3>
         <ul class="plain">
-          <li><b>晨起：</b>喝温水，吃钙/铁/多维（铁随餐或遵医嘱），做5分钟腹式呼吸。</li>
-          <li><b>上午：</b>喂奶间隙做盆底放松呼吸（想象盆底像花瓣轻轻开合，只放松不使劲）。</li>
-          <li><b>午间：</b>腹横肌激活（平躺，呼气时肚脐轻收向脊柱，不憋气），10个×2组。</li>
-          <li><b>下午：</b>颈椎养护——热敷颈后10分钟；减少低头看手机；腱鞘炎手温热敷。</li>
-          <li><b>傍晚：</b>室内慢走15分钟（抱娃用正确的姿势，护腰护腕）。</li>
-          <li><b>睡前：</b>过敏性鼻炎：生理盐水洗鼻；回顾今天身体感受，哪里紧就先放松哪里。</li>
+          <li><b>晨起（约8分钟）：</b>醒来先喝一杯温水，唤醒身体。吃钙片+铁剂+多维（铁随餐或遵医嘱）。躺在床上做5分钟腹式呼吸——一只手放胸口、一只手放肚子，吸气时让肚子轻轻鼓起来，呼气时肚脐微微收向脊柱。不用力，只是感受。</li>
+          <li><b>上午喂奶间隙（约5分钟）：</b>坐着喂奶时，做盆底放松呼吸。想象你的盆底像一朵花——吸气时花瓣轻轻打开（不是用力撑开，是自然地、柔软地），呼气时花瓣合拢。全程放松，不憋气，不使劲。这是"感受"训练，不是"力量"训练。</li>
+          <li><b>午间（约10分钟）：</b>宝宝睡着时，平躺下来做腹横肌激活。屈膝，脚踩床面，手放在肚脐两侧。慢慢呼气，肚脐轻轻收向脊柱（想象用肚脐去碰后背），保持5秒，放松。10次×2组。全程不憋气、不耸肩、不卷腹。如果感觉腰酸就停下来，说明发力错了。</li>
+          <li><b>下午（约10分钟）：</b>颈椎养护时间——用热毛巾或热水袋敷颈后10分钟（温热就好，别烫到）。坐着的时候提醒自己收下巴、头向后靠（像用后脑勺去碰一堵墙）。左手腕同样热敷，轻轻转动手腕。减少单手刷手机的时间——这一点最难，但颈椎和手腕都会感谢你。</li>
+          <li><b>傍晚（约15分钟）：</b>室内慢走15分钟。抱娃的时候注意：用手掌和前臂托住宝宝，不要让手腕单独承重；站直，不要驼背挺肚子；如果腰酸就坐下来喂。走路时感受脚踩地面的感觉，一步一步，稳稳的。</li>
+          <li><b>睡前（约5分钟）：</b>过敏性鼻炎：用生理盐水洗鼻（洗鼻器或喷雾都可以），清理一天积累的过敏原。然后躺下来，闭上眼睛，从头到脚扫描一遍自己的身体——哪里紧？哪里酸？哪里需要多一点的关注？对那个部位说一声"辛苦了，我在照顾你"。</li>
         </ul>
-        <div class="note">关于"盆底肌高张"：很多人以为脱垂/漏尿就要拼命做凯格尔，但高张型恰恰要先降低张力。请在产康师评估后拿到"放松—再训练"的个性化方案。腹直肌分离2指期间，<b>严禁卷腹、仰卧起坐、平板支撑</b>，打喷嚏/咳嗽时用手托一下肚子减腹压。</div>
+        <div class="note">💡 <b>关于盆底肌高张的重要提醒：</b>很多人以为脱垂或漏尿就要拼命做凯格尔运动，但高张型恰恰相反——肌肉已经太紧了，再收缩只会更糟。你需要先"学会放松"，再"学会正确收缩"。请在产康师评估后，拿到属于你的"放松→再训练"个性化方案。腹直肌分离2指期间，<b>严禁卷腹、仰卧起坐、平板支撑、俄罗斯转体</b>。打喷嚏或咳嗽时，用手轻轻托住肚子减轻腹压。</div>
+
+        <div class="note" style="background:var(--mint-light);border-left:5px solid var(--mint-deep);color:#3a6b52">🌸 <b>给你的悄悄话：</b>康复这条路，最难的不是动作，是心态。你可能会在某一天觉得"怎么还没好"，也可能会在看到别人"产后三个月就恢复马甲线"的时候怀疑自己。请记住——每个人恢复的节奏不一样，剖腹产和顺产不一样，有没有高张不一样，有没有人帮忙带娃更不一样。你不需要和别人比，你只需要比昨天的自己好一点点。哪怕今天只做了一次腹式呼吸，也比什么都没做强。你已经在康复了，只是它需要时间。而时间，是你给自己的最好的礼物。</div>
       </div>
     </section>
 
     <!-- ============ MIND ============ -->
     <section class="module" id="mod-mind">
       <div class="card">
-        <h2><span class="dot" style="background:var(--purple)"></span>心理疗愈 · 整体规划</h2>
-        <div class="lead">你是高敏感+容易内耗的人，且不喜欢复杂的心理学大部头。这条路不靠啃书，靠"每天一点点小练习"重塑神经习惯。目标：少内耗、更松弛、更乐观。</div>
+        <h2><span class="dot" style="background:var(--lavender-deep)"></span>心理疗愈 · 整体规划</h2>
+        <div class="lead">你是高敏感+容易内耗的人，不喜欢复杂的心理学大部头。这条路不靠啃书，靠"每天一点点小练习"重塑神经习惯。目标：少内耗、更松弛、更乐观。高敏感不是弱点——是你比别人更细腻地感知世界的天赋。</div>
 
-        <h3>三阶段路线</h3>
+        <h3>写给高敏感的你</h3>
+        <div style="background:var(--lavender-light);border-radius:16px;padding:20px;margin:12px 0;border:2px solid var(--lavender);line-height:1.9">
+          <p style="margin-bottom:14px">亲爱的音乔伊，</p>
+          <p style="margin-bottom:14px">我想和你说几句话，不是作为一份"规划"，而是作为一个理解你的人。</p>
+          <p style="margin-bottom:14px"><b>你总是想太多，这不是毛病。</b>你能从别人一个眼神里读出十层含义，能在一句话的尾音里捕捉到对方可能都没意识到的情绪，能在安静的房间里感到不安——这不是"太敏感"，这是你的神经系统比别人调得更精细。就像有些人天生味觉灵敏能当品酒师，你天生情绪雷达灵敏——只是你还不知道怎么把它从"负担"调成"礼物"。</p>
+          <p style="margin-bottom:14px"><b>产后激素变化让一切都放大了。</b>你现在感觉到的焦虑、易哭、反复纠结，不只是性格——你的身体正在经历一场巨大的激素地震。加上睡眠不足、带娃的重复劳动、对自己"够不够好"的持续审判……你真的很辛苦。承认辛苦不是软弱，是诚实。</p>
+          <p style="margin-bottom:14px"><b>你不需要"修好"自己，你只需要"善待"自己。</b>这一年我们不做"性格改造"，我们只做三件事：看见内耗、温柔打断、重新选择。就像对待一个容易受惊的小动物——不是训它"别怕"，而是给它一个安全的空间，让它慢慢知道：这里没有危险。</p>
+          <p style="margin-bottom:14px"><b>你已经是足够好的妈妈了。</b>你可能每天都在怀疑自己——奶够不够？抱姿对不对？他哭的时候我是不是做错了什么？但请相信：只要你在努力、在关心、在深夜爬起来喂奶，你就是小可乐最好的妈妈。完美妈妈不存在，但"足够好的妈妈"——你已经是了。</p>
+          <p>这条路，我们慢慢走。不急。</p>
+          <p style="margin-top:10px;text-align:right;color:var(--lavender-deep);font-weight:600">—— 你的工作台，陪你一起</p>
+        </div>
+
+        <h3>三阶段路线（不赶时间，一步一步来）</h3>
         <div class="phases">
-          <div class="phase">
-            <span class="ph-tag">阶段一 · 觉察（第1–2月）</span>
-            <div class="ph-title">看见内耗</div>
+          <div class="phase" style="background:var(--lavender-light);border-color:var(--lavender)">
+            <span class="ph-tag" style="background:var(--lavender-deep)">阶段一 · 觉察（第1–2月）</span>
+            <div class="ph-title">看见内耗，但不批评它</div>
             <ul>
-              <li>每天记录"三件好事"</li>
-              <li>识别"我是不是做错了/别人怎么看我"的念头</li>
-              <li>学会不评判自己</li>
+              <li>每天记录"三件好事"——用具体的、温暖的问法</li>
+              <li>识别脑海中"我是不是做错了/别人怎么看我"的自动念头</li>
+              <li>学会在念头出现时不评判自己，只是说："哦，又来啦"</li>
+              <li>核心心态：不消灭内耗，先认识它长什么样</li>
             </ul>
           </div>
-          <div class="phase">
-            <span class="ph-tag">阶段二 · 松绑（第3–6月）</span>
-            <div class="ph-title">打断内耗</div>
+          <div class="phase" style="background:var(--lavender-light);border-color:var(--lavender)">
+            <span class="ph-tag" style="background:var(--lavender-deep)">阶段二 · 松绑（第3–6月）</span>
+            <div class="ph-title">温柔地打断循环</div>
             <ul>
-              <li>5分钟正念呼吸成为习惯</li>
-              <li>用"有用吗？"一句话打断反刍</li>
-              <li>降低信息过载（少刷引发焦虑的内容）</li>
+              <li>5分钟正念呼吸成为像刷牙一样的日常习惯</li>
+              <li>用"这想法有用吗？"一句话打断反刍思维</li>
+              <li>降低信息过载——少刷让你焦虑的比较型内容</li>
+              <li>学"课题分离"：别人的情绪是别人的事，你不需要为全世界负责</li>
             </ul>
           </div>
-          <div class="phase">
-            <span class="ph-tag">阶段三 · 重建（第7–12月）</span>
-            <div class="ph-title">更乐观</div>
+          <div class="phase" style="background:var(--lavender-light);border-color:var(--lavender)">
+            <span class="ph-tag" style="background:var(--lavender-deep)">阶段三 · 重建（第7–12月）</span>
+            <div class="ph-title">长出新的神经通路</div>
             <ul>
-              <li>建立"允许自己不完美"的底色</li>
-              <li>用具体行动替代反复想</li>
-              <li>找到滋养自己的小仪式</li>
+              <li>把"允许自己不完美"从一句口号变成身体记忆</li>
+              <li>用具体的小行动替代反复的内心纠结</li>
+              <li>找到属于你的滋养小仪式——一杯茶、一段音乐、一个深呼吸</li>
+              <li>回头看的时候，能对年初的自己说："你那时候好辛苦，现在好多了"</li>
             </ul>
           </div>
         </div>
 
-        <h3>轻松资源（不枯燥）</h3>
+        <h3>每日深度书写提示（不只是"写三件好事"，我们来聊聊天）</h3>
+        <ul class="plain">
+          <li><b>🌅 晨间一问：</b>今天醒来第一个念头是什么？是期待、焦虑、还是麻木？不需要改变它，只需要把它写下来。写下来的那一刻，它就不再是你大脑里的迷雾，而是纸上的一句话。</li>
+          <li><b>☀️ 上午一问：</b>今天哪一刻你觉得自己"做得够好了"？——可能是宝宝哭的时候你耐心哄了，可能是忍住没对老公发火，可能是喝了杯热水而不是冷掉的。找到那一刻，把它写下来。</li>
+          <li><b>🌤️ 午后一问：</b>今天有没有一个瞬间，你因为别人的话/眼神/行为而反复想？如果有，问自己：这是我能控制的吗？如果答案是不能，就写"这是ta的课题，不是我的"。</li>
+          <li><b>🌙 睡前三件好事（升级版）：</b>不要只写"天气好""宝宝乖"。试着写具体一点——"今天宝宝吃完奶在我怀里睡着，他的小手攥着我的手指，那一刻世界很安静"。越具体，你的大脑越能记住这个温暖的感觉。</li>
+          <li><b>🌙 睡前二问：</b>今天有没有什么事，你本来很担心，但实际并没有那么糟？写下来，这是你的大脑在"修正"焦虑预测的证据。</li>
+          <li><b>🌙 睡前三问：</b>如果可以给今天的自己发一条微信，你会说什么？试试看，用你对闺蜜说话的语气，对自己说一句话。</li>
+        </ul>
+        <div class="note">📝 不需要每题都写。挑1-2道你今天最有感觉的题目，哪怕只写两句话。关键是"写了"，不是"写得好"。</div>
+
+        <h3>内耗急救工具箱（当你开始螺旋的时候，打开这个）</h3>
         <div class="res">
-          <div class="book"><div class="nm">《高敏感是种天赋》</div><div class="au">伊尔斯·桑德</div><div class="why">写给高敏感者，读完会松一口气：你没病，只是更细腻。</div></div>
-          <div class="book"><div class="nm">《被讨厌的勇气》</div><div class="au">岸见一郎等</div><div class="why">对话体小说，不催眠；讲"课题分离"超治内耗。</div></div>
-          <div class="book"><div class="nm">冥想类APP</div><div class="au">潮汐 / 小睡眠 / 正念冥想</div><div class="why">每天5分钟引导冥想，比看书更易坚持。</div></div>
-          <div class="book"><div class="nm">播客《自我进化论》等</div><div class="au">通勤/喂奶时听</div><div class="why">用耳朵吸收，不费眼，适合宝妈碎片时间。</div></div>
+          <div class="book" style="border-color:var(--lavender);background:var(--lavender-light)">
+            <div class="nm">🧊 1. 冷水刺激法</div>
+            <div class="why">当你发现自己在反复想同一件事停不下来时，立刻去洗手间，用冷水拍脸或握住一块冰10秒钟。强烈的感官刺激会打断大脑的反刍回路，像按了一次"重启键"。</div>
+          </div>
+          <div class="book" style="border-color:var(--lavender);background:var(--lavender-light)">
+            <div class="nm">📋 2. "写到纸上"法</div>
+            <div class="why">把你脑子里所有在转的东西写下来——不要整理、不要修饰、不要管逻辑。写满一张纸，然后问自己："这里面哪些是我能控制的？哪些不是？"把"不能控制的"那部分撕掉或划掉。物理上看见它消失，对大脑有奇效。</div>
+          </div>
+          <div class="book" style="border-color:var(--lavender);background:var(--lavender-light)">
+            <div class="nm">⏱️ 3. 5-4-3-2-1 感官锚定</div>
+            <div class="why">快速说出：你看到的5样东西、你摸到的4样东西、你听到的3个声音、你闻到的2种气味、你尝到的1种味道。这个练习把你的注意力从"脑子里"拉回"身体里"，通常1-2分钟就能让焦虑降级。</div>
+          </div>
+          <div class="book" style="border-color:var(--lavender);background:var(--lavender-light)">
+            <div class="nm">🪑 4. "十分钟法则"</div>
+            <div class="why">当你想发一条可能后悔的消息、做一件冲动的事、或者陷入"我是不是有问题"的自我攻击时，告诉自己："我先等10分钟。10分钟后如果还觉得有必要，再做。"你会发现大部分冲动在10分钟后就消失了。</div>
+          </div>
+          <div class="book" style="border-color:var(--lavender);background:var(--lavender-light)">
+            <div class="nm">🤲 5. 自我慈悲触摸</div>
+            <div class="why">把一只手放在胸口，另一只手放在肚子上。深呼吸三次，对自己说："这一刻很难，但不会一直这么难。我正在尽我所能，这已经够了。"身体的触感和温暖的声音会激活副交感神经，让你从"战斗/逃跑"模式切换到"休息/修复"模式。</div>
+          </div>
         </div>
 
-        <h3>月度规划</h3>
+        <h3>每周深度反思提示（周末花15分钟，和自己聊聊天）</h3>
         <ul class="plain">
-          <li><b>第1月：</b>只做"三件好事"——每天睡前写3件今天还行的事（再小都行）。</li>
-          <li><b>第2月：</b>加入"5分钟呼吸"；读《高敏感是种天赋》前3章。</li>
-          <li><b>第3月：</b>学"课题分离"：别人的情绪是别人的事。</li>
-          <li><b>第4–6月：</b>建立"内耗觉察—喊停"反射；减少刷焦虑内容。</li>
-          <li><b>第7–12月：</b>读《被讨厌的勇气》；把"允许不完美"变成口头禅。</li>
+          <li><b>这周我内耗最多的时刻是什么？</b>把它描述出来——在什么场景、因为谁、在想什么。不批评，只是像一个记者一样记录。记录本身就有疗愈作用。</li>
+          <li><b>这周有没有一个瞬间，我以为自己撑不住，但最后撑过去了？</b>怎么做到的？那个"做到"的力量来自哪里？记住它，下次内耗的时候它是你的武器。</li>
+          <li><b>这周我对自己温柔了一次吗？</b>可能是允许自己没完成全部计划、可能是睡了一个午觉、可能是说了"不"。把它写下来，这是一次胜利。</li>
+          <li><b>这周谁或什么事让我感到被滋养了？</b>是宝宝的一个笑容、老公的一句"辛苦了"、还是读到的一篇文章？多靠近这些人和事，它们是你的充电站。</li>
+          <li><b>下周我想对自己更好一点的一件事：</b>写一个具体的、小小的承诺。比如"下周每天给自己留5分钟不被打扰地喝茶"。不需要宏大，只需要能做到。</li>
         </ul>
 
-        <h3>每周规划</h3>
+        <h3>轻松资源（不枯燥，像聊天一样）</h3>
+        <div class="res">
+          <div class="book"><div class="nm">《高敏感是种天赋》</div><div class="au">伊尔斯·桑德</div><div class="why">读到一半你可能会哭——不是因为难过，是因为"终于有人懂我了"。高敏感不是病，是你感知世界的精度比别人高。</div></div>
+          <div class="book"><div class="nm">《被讨厌的勇气》</div><div class="au">岸见一郎 等</div><div class="why">对话体小说，像看剧一样轻松。里面"课题分离"的概念专治"老觉得别人的不高兴是我造成的"。</div></div>
+          <div class="book"><div class="nm">冥想类APP</div><div class="au">潮汐 / 小睡眠 / 正念冥想</div><div class="why">每天5分钟引导冥想。别想"我要放空大脑"——你做不到的。你只需要听那个声音，让念头来、让念头走。</div></div>
+          <div class="book"><div class="nm">播客《自我进化论》等</div><div class="au">通勤/喂奶/做家务时听</div><div class="why">耳朵吸收不费眼。像有一个温柔的朋友在你旁边聊天，陪你度过那些重复的、疲惫的时刻。</div></div>
+        </div>
+
+        <h3>月度规划（慢慢来，每个月只加一个新习惯）</h3>
+        <ul class="plain">
+          <li><b>第1月：</b>只做一件事——每天睡前写"三件好事"。用升级版的问法，写具体、写温暖。不要求自己写得好，只要求写了。一个月后回头看，你会有一本"为什么今天值得活"的合集。</li>
+          <li><b>第2月：</b>加入"5分钟正念呼吸"——每天固定一个时间（比如喂完夜奶后），听APP引导，只数呼吸。念头飘走100次，就温柔拉回100次。不骂自己"怎么又走神了"，而是说"哦，我走神了，回来吧"。</li>
+          <li><b>第3月：</b>学"课题分离"——每当觉得"ta是不是不高兴了/是不是我做错了什么"，问自己："ta的情绪是ta的课题，还是我的？"把别人的还给别人，把自己的留给自己。</li>
+          <li><b>第4–6月：</b>建立"内耗觉察→喊停"的条件反射。当你发现自己又开始反复想了，在心里说一声"哦，老节目又开始了"，然后用工具箱里的一个方法打断它。练习得越多，打断得越快。</li>
+          <li><b>第7–12月：</b>读《被讨厌的勇气》，把"允许自己不完美"变成身体记忆。每次想批评自己的时候，试着换成："我已经尽力了，这很好。"说出口，听到自己的声音说这句话。</li>
+        </ul>
+
+        <h3>每周节奏（给每一天一个温柔的主题）</h3>
         <div class="week">
-          <div class="day"><b>每日</b><p>三件好事 + 5分钟呼吸</p></div>
-          <div class="day"><b>周一</b><p>本周主题：少比较（关掉让你焦虑的账号）</p></div>
-          <div class="day"><b>周三</b><p>一次"内耗觉察"：今天反复想了啥？写下来</p></div>
-          <div class="day"><b>周五</b><p>做一件纯粹取悦自己的小事</p></div>
-          <div class="day"><b>周末</b><p>不安排、不内疚地休息半天</p></div>
+          <div class="day"><b>🌅 每日</b><p>三件好事（升级版问法）<br>5分钟正念呼吸<br>内耗觉察+喊停</p></div>
+          <div class="day"><b>周一</b><p>本周主题：少比较<br>（关掉一个让你焦虑的账号，取消一个让你觉得自己不够好的关注）</p></div>
+          <div class="day"><b>周二</b><p>写一段"晨间一问"<br>（今天醒来第一个念头是什么？写下来就好）</p></div>
+          <div class="day"><b>周三</b><p>内耗深度觉察日<br>（今天反复想了什么？写满半张纸，然后划掉"不能控制的"那部分）</p></div>
+          <div class="day"><b>周四</b><p>信息节食日<br>（减少刷手机30分钟，把省下的时间用来做一件纯粹取悦自己的小事）</p></div>
+          <div class="day"><b>周五</b><p>课题分离练习日<br>（今天有因为别人的情绪而自责吗？写"这是ta的课题"）</p></div>
+          <div class="day"><b>周六</b><p>滋养自己日<br>（做一件纯粹为自己做的事——泡个澡、看一部电影、吃一块蛋糕——不带任何愧疚）</p></div>
+          <div class="day"><b>周日</b><p>每周深度反思<br>（用上面的5个问题，花15分钟和自己聊聊这一周）<br>然后：不安排、不内疚地休息半天</p></div>
         </div>
 
-        <h3>每日规划</h3>
+        <h3>每日最小行动（哪怕只做一项，也在改变）</h3>
         <ul class="plain">
-          <li><b>三件好事：</b>睡前写3件今天还不错的事（宝宝笑了/自己喝到热茶/天气好）。</li>
-          <li><b>5分钟正念呼吸：</b>只数呼吸，念头飘走就温柔拉回，不批评自己。</li>
-          <li><b>内耗喊停：</b>当出现"我是不是…"的循环，问一句"这想法有用吗？"然后放下。</li>
-          <li><b>信息节食：</b>刷到让你焦虑/比较的内容，立刻划走或取关。</li>
+          <li><b>三件好事（升级版）：</b>睡前花3分钟，写3件今天具体的好事。不是"宝宝乖"，是"今天下午宝宝趴在我胸口睡着了，他的呼吸很轻，我的世界很安静"。</li>
+          <li><b>5分钟正念呼吸：</b>打开APP，跟着声音走。念头飘走100次，就温柔地拉回100次。这不是"失败"，这就是练习本身。</li>
+          <li><b>内耗喊停：</b>当脑子里出现"我是不是……"的循环时，深吸一口气，问自己："这个想法对我有帮助吗？"如果没有，说一声"谢谢提醒，但我不需要了"，然后放下。</li>
+          <li><b>信息节食：</b>刷到让你焦虑、比较、自卑的内容——立刻划走或取关。你的情绪空间是珍贵的，不是什么内容都配占据它。</li>
+          <li><b>一句话自我慈悲：</b>每天至少一次，把手放在胸口，对自己说："我正在尽我所能，这已经够了。"说出口，让你的耳朵也听到。</li>
         </ul>
-        <div class="note">高敏感不是弱点，是你的天赋。内耗往往源于"想太多、做太少"——用小小的行动（写一句、呼吸一下）打断大脑的循环，比想通更重要。</div>
+        <div class="note" style="background:var(--lavender-light);border-left:5px solid var(--lavender-deep);color:#5a3f8a">💜 <b>给你的悄悄话：</b>高敏感不是弱点，是你比别人更早感受到风雨、也更早看见彩虹的天赋。内耗往往源于"想太多、做太少"——但这不是你的错，是你的大脑太尽责了，它在努力保护你。我们要做的不是关掉它，而是轻轻拍拍它说："谢谢你为我担心，但现在让我来。我可以用一个小小的行动——写一句话、呼吸一次、握一块冰——来告诉你：我们很安全。"你不需要变成另一个人。你只需要变成更温柔地对待自己的那个人。</div>
       </div>
     </section>
 
     <!-- ============ INVEST ============ -->
     <section class="module" id="mod-invest">
       <div class="card">
-        <h2><span class="dot" style="background:var(--gold)"></span>理财投资 · 整体规划</h2>
+        <h2><span class="dot" style="background:var(--yellow-deep)"></span>理财投资 · 整体规划</h2>
         <div class="lead">目标：关注好股票和基金，在好的入场机会用定投等方式理财。小白起步，<b>先学习、后用小钱、纪律大于择时</b>。投资有风险，以下为思路参考，非投资建议。</div>
 
-        <div class="warn">风险提示：任何投资都可能亏损。新手请用"闲置资金+定投+长期"三原则，不要借钱炒、不要追热点。本工作台内容不构成投资建议。</div>
+        <div class="warn"><b>⚠️ 风险提示：</b>任何投资都可能亏损。新手请严格遵守"闲置资金+定投+长期"三原则——不要借钱投资、不要追热点、不要听消息炒短线。以下内容仅为学习思路参考，<b>不构成任何投资建议</b>。请根据自身情况独立判断，必要时咨询专业理财师。</div>
 
-        <h3>学习→实践路线图</h3>
+        <!-- ===== 写给投资小白的你 ===== -->
+        <h3>💌 写给投资小白的你</h3>
+        <div style="background:var(--yellow-light);border-radius:16px;padding:20px;margin:12px 0;border:2px solid var(--yellow);line-height:1.9">
+          <p style="margin-bottom:14px">亲爱的音乔伊，</p>
+          <p style="margin-bottom:14px">我知道，"投资"这两个字可能让你觉得遥远、复杂、甚至有点害怕。你可能听过太多人亏钱的故事，也可能觉得"我连基金是什么都没搞懂，怎么敢投？"</p>
+          <p style="margin-bottom:14px"><b>没关系的。</b>每一个投资高手都是从"什么都不懂"开始的。差别只在于：有人因为害怕而永远不开始，有人因为好奇而一步步往前走。你愿意读到这一页，说明你已经是后者了。</p>
+          <p style="margin-bottom:14px"><b>你不必成为股神，也不必每天盯盘。</b>你只需要做一件事——用每个月工资/收入里的一小部分（比如500元），定期买入一两只你了解过的指数基金，然后忘记它。一年后、三年后、五年后回头看，你会感谢今天这个"笨笨地开始"的自己。</p>
+          <p style="margin-bottom:14px"><b>投资不是赌博，是耐心。</b>它不像买彩票——今天买、明天开。它像种一棵树——今天埋下种子，浇水、施肥、等它慢慢长大。你不需要每天去量它长高了多少，你只需要确保它活着，然后交给时间。</p>
+          <p style="margin-bottom:14px"><b>你作为妈妈，比大多数投资者更有优势。</b>你知道什么叫"长期"——你正在经历怀孕、生产、哺乳，每一件都需要时间和耐心。投资也一样。你不需要赚快钱，你需要的是稳稳的、让钱陪你和小可乐一起长大。</p>
+          <p>来吧，我们从"看"开始。不着急投，先了解。让"钱生钱"这个念头，从陌生变成熟悉，从害怕变成期待。</p>
+          <p style="margin-top:10px;text-align:right;color:#b8933a;font-weight:600">—— 你的工作台，陪你一起慢慢变富</p>
+        </div>
+
+        <!-- ===== 学习路线图（含月度具体行动） ===== -->
+        <h3>🗺️ 学习→实践路线图（跟着走就行）</h3>
         <div class="phases">
-          <div class="phase">
-            <span class="ph-tag">第1–3月 · 观察</span>
-            <div class="ph-title">建立市场感</div>
+          <div class="phase" style="border-color:var(--yellow);background:var(--yellow-light)">
+            <span class="ph-tag" style="background:var(--yellow-deep);color:#fff">第1–3月 · 观察期</span>
+            <div class="ph-title">建立市场感（不投钱）</div>
             <ul>
-              <li>搞懂指数：沪深300/中证500/创业板</li>
-              <li>学看"估值温度计"（PE百分位）</li>
-              <li>开好账户，先不投或极小额</li>
+              <li><b>第1月：</b>搞懂什么是"指数"——沪深300（A股最大的300家公司）、中证500（中盘股）、创业板（成长型公司）。每天花5分钟看一张估值表，不操作，只培养"看见"的习惯。</li>
+              <li><b>第2月：</b>学看"估值温度计"——PE百分位低于30%算便宜（低估区），30%-70%算合理，高于70%算贵（高估区）。记住口诀：<b>"便宜多买点，贵了少买点，特别贵就等等"</b>。</li>
+              <li><b>第3月：</b>在天天基金/蛋卷/且慢开好账户，完成实名认证，熟悉APP界面。可以不投钱，先把自选基金加入观察列表，每天瞄一眼涨跌，感受市场的节奏。</li>
             </ul>
           </div>
-          <div class="phase">
-            <span class="ph-tag">第4–6月 · 试水</span>
-            <div class="ph-title">开始定投</div>
+          <div class="phase" style="border-color:var(--yellow);background:var(--yellow-light)">
+            <span class="ph-tag" style="background:var(--yellow-deep);color:#fff">第4–6月 · 试水期</span>
+            <div class="ph-title">小额定投练手感</div>
             <ul>
-              <li>选1–2只宽基指数基金</li>
-              <li>每周/每月固定金额定投</li>
-              <li>低估多投、高估少投</li>
+              <li><b>第4月：</b>选1–2只宽基指数基金（推荐：沪深300指数基金+中证500指数基金），设置每月1日自动扣款，金额从300–500元开始。记住——<b>金额不重要，养成习惯才重要</b>。</li>
+              <li><b>第5月：</b>观察第一个月的定投结果。涨了？跌了？写下你的感受——"涨了开心"和"跌了心慌"都是正常的，这是你在建立情绪免疫。</li>
+              <li><b>第6月：</b>半年小复盘——看看这3个月的定投曲线。大概率是平的或微跌的，这是好事！定投的核心逻辑就是"跌了赚份额，涨了赚收益"。<b>半年不涨不跌反而攒了最多份额。</b></li>
             </ul>
           </div>
-          <div class="phase">
-            <span class="ph-tag">第7–12月 · 优化</span>
-            <div class="ph-title">建立纪律</div>
+          <div class="phase" style="border-color:var(--yellow);background:var(--yellow-light)">
+            <span class="ph-tag" style="background:var(--yellow-deep);color:#fff">第7–12月 · 优化期</span>
+            <div class="ph-title">建立投资纪律</div>
             <ul>
-              <li>做资产配比（股基/债基/现金）</li>
-              <li>设置止盈/再平衡规则</li>
-              <li>关注优秀主动基金与个股研究</li>
+              <li><b>第7–8月：</b>做资产配比——股基（60%–70%）+ 债基（20%–30%）+ 现金/货币基金（10%）。债基是你的"情绪稳定器"，股市大跌时它不会跟着跌，让你晚上睡得着。</li>
+              <li><b>第9–10月：</b>设置止盈规则——比如"盈利达到20%就卖出1/3"。不要贪，落袋为安才是真的赚。设置再平衡规则——每半年检查一次，把涨多了的卖出、跌多了的补仓。</li>
+              <li><b>第11–12月：</b>年度大复盘！看看这一年的定投收益率、你的情绪变化、以及你对"钱生钱"这件事的理解。恭喜你——你已经从"小白"变成了一个"有纪律的投资者"。</li>
             </ul>
           </div>
         </div>
 
-        <h3>关注什么（小白友好）</h3>
+        <!-- ===== 每月定投实操日历 ===== -->
+        <h3>📆 每月定投实操日历</h3>
+        <div style="background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px;margin:12px 0">
+          <table style="width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.8">
+            <tr style="background:var(--yellow-light)">
+              <td style="padding:10px;border-bottom:1px solid var(--line);font-weight:700;width:100px">月初 1–5号</td>
+              <td style="padding:10px;border-bottom:1px solid var(--line)">💰 <b>发薪日 · 先付给自己</b>：收到工资/收入后，<b>第一时间转出定投金额</b>（比如500元）到基金账户。剩下的钱才是这个月可以花的。这个顺序很重要——不要等花完了看剩多少再投，那是永远投不了的。</td>
+            </tr>
+            <tr>
+              <td style="padding:10px;border-bottom:1px solid var(--line);font-weight:700">月中 15号</td>
+              <td style="padding:10px;border-bottom:1px solid var(--line)">📊 <b>月中检查日</b>：打开APP看一眼估值表。PE百分位低于30%了吗？如果是，可以手动加投一笔（额度不超过月定投的一半）。如果正常，就什么都不做，继续等。</td>
+            </tr>
+            <tr style="background:var(--yellow-light)">
+              <td style="padding:10px;border-bottom:1px solid var(--line);font-weight:700">月末 25–30号</td>
+              <td style="padding:10px;border-bottom:1px solid var(--line)">📝 <b>月度复盘日</b>：花10分钟写下——本月定投总金额是多少？目前持仓盈亏多少？市场发生了什么大事？下个月的定投计划有没有需要调整的？一句话总结这个月的投资心情。</td>
+            </tr>
+            <tr>
+              <td style="padding:10px;font-weight:700">任意一天</td>
+              <td style="padding:10px">🔔 <b>大跌日特别行动</b>：如果某天市场跌了3%以上（你会从新闻里看到），打开"市场大跌时怎么办"指南（就在下面），按步骤做。大跌不是灾难，是打折促销。</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- ===== 市场大跌时怎么办 ===== -->
+        <h3>🆘 市场大跌时怎么办 · 情绪管理指南</h3>
+        <div style="background:#fff0f0;border:2px solid #f09090;border-radius:16px;padding:20px;margin:12px 0;line-height:1.9">
+          <p style="margin-bottom:12px;font-weight:700;color:#9b4a4a;font-size:15px">当你打开APP发现一片绿油油，心跳加速、想立刻卖出的时候——先深呼吸，看这里：</p>
+          <p style="margin-bottom:10px"><b>第一步：关掉APP。</b>对，立刻关掉。你现在做的任何决定，都是恐惧驱动的，而恐惧不会帮你赚钱。</p>
+          <p style="margin-bottom:10px"><b>第二步：问自己三个问题：</b></p>
+          <ul style="margin-left:20px;margin-bottom:10px">
+            <li>这笔钱我急用吗？——如果答案是"不急"（你有应急金），那就没事。</li>
+            <li>我买的基金/指数本身变了吗？——沪深300还是那300家公司，它们不会因为跌了一天就倒闭。</li>
+            <li>跌了意味着什么？——对定投的人来说，跌了等于同样的钱可以买更多份额。这是超市打折，不是世界末日。</li>
+          </ul>
+          <p style="margin-bottom:10px"><b>第三步：如果还有闲钱，考虑加投一笔。</b>但前提是：①你有3–6个月的应急金，②你用的是3年以上不用的钱，③你加投后晚上睡得着觉。如果任何一个答案是"不确定"，那就什么都不做。</p>
+          <p style="margin-bottom:10px"><b>第四步：做一件让你放松的事。</b>抱抱小可乐、喝杯热茶、看一集喜欢的剧。市场明天还在，你的心情比那点波动重要一万倍。</p>
+          <p style="margin-bottom:10px;color:#9b4a4a;font-weight:600">记住三句话，把它们贴在你能看到的地方：</p>
+          <p style="margin-bottom:4px">① <b>定投不择时，越跌越开心（因为买得便宜）。</b></p>
+          <p style="margin-bottom:4px">② <b>市场短期是投票机，长期是称重机。</b></p>
+          <p style="margin-bottom:0">③ <b>你投的不是钱，是耐心。耐心，是最被低估的资产。</b></p>
+        </div>
+
+        <!-- ===== 关注什么（对话式） ===== -->
+        <h3>💬 到底该买什么？（像闺蜜聊天一样跟你讲清楚）</h3>
         <ul class="plain">
-          <li><b>宽基指数基金：</b>沪深300、中证500、标普500（QDII）——分散风险，适合定投打底。</li>
-          <li><b>行业指数：</b>消费、医药、科技——波动大，少量配置。</li>
-          <li><b>债券/货币基金：</b>作为"压舱石"，情绪不稳时的安全垫。</li>
-          <li><b>好公司（个股）：</b>等有一定基础再研究，先看财报三大表、护城河，不盲从大V。</li>
+          <li><b>宽基指数基金——你的"主食"：</b>沪深300（A股大盘）、中证500（中盘成长）、标普500（美国大盘，通过QDII买）。它们的优点是——分散到几百家公司，不会因为一家公司暴雷就血本无归。适合定投打底，占总投入的60%–70%。<b>就像吃饭，主食不能少。</b></li>
+          <li><b>行业指数——你的"配菜"：</b>消费、医药、科技。这些行业长期看涨，但波动比宽基大很多。可以少量配置（不超过20%），在低估的时候买，高估的时候卖。<b>就像辣椒，放一点提味，放多了受不了。</b></li>
+          <li><b>债券/货币基金——你的"压舱石"：</b>当股市大跌、你心慌的时候，看看债基和货基——它们稳如老狗。不是用来赚大钱的，是用来让你在跌的时候不至于全盘皆输、晚上能睡着的。<b>安全感，也是投资的一部分。</b></li>
+          <li><b>个股——等你准备好了再碰：</b>个股需要对一家公司有深度了解——它靠什么赚钱？护城河宽不宽？管理层靠不靠谱？财报健不健康？这些需要时间积累。建议至少学习6个月以上再考虑买第一只个股。而且一开始只用非常小的钱试水。<b>别急，好公司永远在那里等你。</b></li>
         </ul>
 
-        <h3>好入场机会怎么判断</h3>
+        <!-- ===== 好入场机会 ===== -->
+        <h3>🔍 怎么判断"现在是不是好时机"？</h3>
         <ul class="plain">
-          <li>看"估值百分位"：低于30%算低估区，适合多投；高于70%谨慎。</li>
-          <li>市场恐慌、人人谈股色变时，往往机会在酝酿（逆向思维）。</li>
-          <li>定投天然摊低成本，不必等"最低点"——没人抄得到底。</li>
-          <li>用"闲钱+3年以上不用的钱"，心态才稳。</li>
+          <li><b>看估值百分位：</b>在且慢APP或银行螺丝钉估值表里找到你想买的指数，看它的PE百分位。低于30%＝便宜＝可以多买一点；30%–70%＝正常＝按计划定投就行；高于70%＝贵了＝少买或暂停定投。这个逻辑很简单，不需要懂高深的数学。</li>
+          <li><b>看市场情绪：</b>当朋友圈没人聊股票、新闻标题都是"股市暴跌"、你身边的人都劝你别买的时候——往往是机会最大的时候（逆向思维）。反之，当出租车司机都在跟你推荐股票时——你该警惕了。</li>
+          <li><b>定投天然摊低成本：</b>你不需要猜最低点。每月固定时间买入，自动在便宜时多买份额、贵时少买份额。时间越长，你的成本越接近市场平均价。这就是为什么定投被称为"懒人投资法"——它不靠聪明，靠纪律。</li>
+          <li><b>最重要的前提：</b>你用来投资的钱，必须是3年以上不用的闲钱。如果你下个月要交房租、要付月嫂费——这笔钱不能投。应急金备好之后，剩下的闲钱才能安心放进市场。</li>
         </ul>
 
-        <h3>常用工具</h3>
+        <!-- ===== 常用工具 ===== -->
+        <h3>🛠️ 常用工具（都帮你找好了）</h3>
         <div class="res">
-          <div class="book"><div class="nm">估值数据</div><div class="au">且慢 / 银行螺丝钉估值表</div><div class="why">看每日指数温度，决定是否多投。</div></div>
-          <div class="book"><div class="nm">基金平台</div><div class="au">天天基金 / 蛋卷 / 且慢</div><div class="why">买基金、看历史业绩与费率。</div></div>
-          <div class="book"><div class="nm">资讯</div><div class="au">财经新闻 / 雪球</div><div class="why">了解宏观，但别被短期涨跌带节奏。</div></div>
+          <div class="book"><div class="nm">📊 估值数据</div><div class="au">且慢APP · 银行螺丝钉每日估值表（公众号）</div><div class="why">每天看一眼指数温度，决定今天是"多买"还是"少买"还是"不动"。免费、小白友好。</div></div>
+          <div class="book"><div class="nm">📱 基金平台</div><div class="au">天天基金 · 蛋卷基金 · 且慢</div><div class="why">这三个都是正规的基金销售平台。天天基金品种最全，蛋卷和且慢体验更简洁。建议先下载且慢或蛋卷——界面好看，对新手友好。</div></div>
+          <div class="book"><div class="nm">📰 资讯获取</div><div class="au">雪球APP · 简七读财（公众号）· 银行螺丝钉（公众号）</div><div class="why">雪球像投资界的"微博"，但内容良莠不齐，新手只看不发言。简七读财和银行螺丝钉是真正的小白友好内容——像朋友在跟你聊天，不贩卖焦虑。</div></div>
         </div>
 
-        <h3>每月 / 每周 / 每日</h3>
+        <!-- ===== 每日/每周/每月节奏 ===== -->
+        <h3>⏰ 每日 / 每周 / 每月节奏（5–15分钟就够）</h3>
         <ul class="plain">
-          <li><b>每日（5分钟）：</b>扫一眼估值表/市场温度，不操作也行，先养感觉。</li>
-          <li><b>每周：</b>执行一次定投（金额固定）；记录一条"本周市场观察"。</li>
-          <li><b>每月：</b>月度复盘——持仓盈亏、是否低估加投、下月预算。</li>
+          <li><b>☀️ 每日（5分钟）：</b>打开且慢APP，扫一眼估值表——今天整体是贵还是便宜？不用操作，看完就关。养成这个习惯就像每天看天气预报一样自然。</li>
+          <li><b>📅 每周（10分钟）：</b>如果定投日在这周，确保自动扣款已设置。记一句话"本周市场观察"——涨了？跌了？为什么？（不用写很长，一句话就行。写下来是为了训练你的"市场嗅觉"）。</li>
+          <li><b>📆 每月（15分钟）：</b>月度复盘——持仓盈亏多少？这个月有没有按计划定投？下个月需要调整金额吗？用一句话总结这个月的投资心情。如果这个月亏了，别慌，定投越亏越要坚持（前提是你买的是宽基指数，不是乱买的个股）。</li>
         </ul>
-        <div class="note">新手最大的敌人是"追涨杀跌"。把定投设成自动扣款，然后关掉APP少看，反而更容易赚到时间的钱。</div>
+        <div class="note" style="background:var(--yellow-light);border-left:5px solid var(--yellow-deep);color:#8a6d3b;font-size:14px;line-height:1.8">💛 <b>新手最大的敌人不是市场，是自己。</b>追涨杀跌、频繁操作、听消息买股票——这些"投资多动症"会让你在不知不觉中亏掉手续费和本金。最好的策略反而是最笨的：<b>设好自动定投，然后关掉APP少看。</b>你越少操作，越容易赚到时间的钱。定投的美妙之处在于——它不要求你聪明，只要求你坚持。而坚持，是你作为一个妈妈最擅长的事。</div>
+
+        <div class="note" style="background:#fff9e6;border-left:5px solid var(--yellow-deep);color:#8a6d3b;font-size:14px;line-height:1.9;margin-top:16px">🌸 <b>最后，想对你说：</b><br><br>投资这条路，不需要你跑得多快。你只需要每月固定存下一小笔钱，买一两只你了解的指数基金，然后安安心心地陪小可乐长大。十年后回头看，你会发现——那些你觉得"微不足道"的每月500元，已经悄悄变成了小可乐的教育金、你们一家人的旅行基金、或者你"随时可以说不"的底气。<br><br><b>你不必成为最聪明的投资者，你只需要成为最坚持的那个。</b>而坚持这件事，从你决定每天凌晨起来喂奶的那一刻起，你就已经做到了。<br><br>慢慢来，我们一起。💕</div>
       </div>
     </section>
 
     <!-- ============ BABY ============ -->
     <section class="module" id="mod-baby">
       <div class="card">
-        <h2><span class="dot" style="background:var(--green)"></span>育儿月历 · 按月推送</h2>
+        <h2><span class="dot" style="background:var(--sky-deep)"></span>育儿月历 · 按月推送</h2>
         <div class="lead">宝宝当前 <b id="babyMonthText">2</b> 个月。下面按月给你该阶段的大运动、疫苗、喂养与注意事项。本卡会随你填写的宝宝生日自动提示当前月龄。</div>
+
+        <!-- ===== 给小可乐的妈妈 ===== -->
+        <h3>💌 给小可乐的妈妈</h3>
+        <div style="background:var(--sky-light);border-radius:16px;padding:20px;margin:12px 0;border:2px solid var(--sky);line-height:1.9">
+          <p style="margin-bottom:14px">亲爱的音乔伊，</p>
+          <p style="margin-bottom:14px">你现在可能正经历着人生中最奇妙也最疲惫的一段时光——怀里抱着一个软软的小生命，他的每一次呼吸、每一个表情、每一声啼哭，都牵动着你的全部神经。</p>
+          <p style="margin-bottom:14px"><b>我想先跟你说：你做得很好。</b>真的。不管你今天有没有完成tummy time的目标，不管你是不是因为太累而忘了记录喂养，不管你是不是偶尔怀疑"我是不是一个好妈妈"——你都是。因为一个好妈妈的定义，不是"完美"，而是"在乎"。</p>
+          <p style="margin-bottom:14px"><b>小可乐不需要一个完美的妈妈，他只需要你。</b>你的声音、你的气味、你的体温、你看他的眼神——这些是他认识这个世界的第一扇窗。你喂奶的时候低头看他的样子，你半夜爬起来抱着他哄睡的样子，你对着他笑、对着他说话、对着他唱歌的样子——这些，就是他童年里最温暖的底色。</p>
+          <p style="margin-bottom:14px"><b>别被"科学育儿"绑架。</b>那些育儿书、公众号、短视频告诉你"这个月宝宝应该会翻身了""那个月应该能睡整觉了"——请记住，那只是平均值。你的小可乐有他自己的节奏。他可能比标准快一点，也可能慢一点。那又怎样？他会长大的，会的。他会在某一天突然翻身、突然坐起来、突然迈出第一步——然后你会又惊喜又鼻酸地发现，那个整天躺着的、小小的婴儿，已经变成了一个满地跑的小朋友。</p>
+          <p style="margin-bottom:14px"><b>你不需要什么都懂。</b>宝宝第一次发烧时你会慌，第一次便秘时你会急，第一次从床上滚下去时你会心疼到哭。这些都是正常的。你不是天生就会当妈妈的——你是在一次一次的慌张、学习、试错中，慢慢变成小可乐最信赖的那个人的。</p>
+          <p>这份月历不是用来考核你的。它只是一个温柔的路标，提醒你：这个月宝宝大概在学什么、需要注意什么。完成了当然好，没完成也没关系。因为最重要的那些事——拥抱、注视、陪伴、爱——你每天都在做。</p>
+          <p style="margin-top:10px;text-align:right;color:var(--sky-deep);font-weight:600">—— 陪小可乐一起长大的工作台</p>
+        </div>
 
         <h3 id="curMonthTitle">第2月 · 本月重点</h3>
         <div id="curMonthDetail"></div>
 
-        <h3>逐月规划（2–6月）</h3>
+        <!-- ===== 本月必做清单 ===== -->
+        <h3>✅ 本月必做清单（完成了就打勾，月底给自己一朵小红花）</h3>
+        <div id="babyMonthChecklist"></div>
 
-        <h4>2个月（当前）</h4>
+        <!-- ===== 逐月规划（2–12月） ===== -->
+        <h3>📅 逐月规划（2–12个月，每个月都有新惊喜）</h3>
+
+        <h4>🟢 2个月 · 社交微笑的开始</h4>
         <ul class="plain">
-          <li><b>大运动：</b>俯卧时能抬头45°、竖抱头较稳；开始追视、偶然社会性微笑。</li>
-          <li><b>疫苗：</b>按当地接种本，本月通常含脊灰、百白破等第1/2剂（以接种本为准）。</li>
-          <li><b>喂养：</b>母乳按需，约8–12次/天；注意肠胀气和"二月闹"。</li>
-          <li><b>注意：</b>每天俯卧抬头（tummy time）清醒时做；记录喂养/睡眠/便便；观察疫苗反应。</li>
+          <li><b>大运动：</b>俯卧时能抬头45°，竖抱时头较稳。每天累计tummy time 15-20分钟（分多次，每次2-3分钟）。宝宝趴着的时候，你可以趴在他对面，让他能看到你的脸。</li>
+          <li><b>精细动作：</b>双手开始松开（不再紧握拳头），能短暂抓握摇铃。给他一个轻的、安全的小玩具，看看他会不会握住。</li>
+          <li><b>语言：</b>发出"啊""哦"等元音，开始"咿呀学语"。你可以模仿他的声音——这会让宝宝很开心，也是在教他"对话"的基本模式。</li>
+          <li><b>社交：</b>出现社会性微笑——不是吃饱了的无意识笑，而是看到你的脸时真正的、有情感的笑。这是宝宝给你的第一份"礼物"，请好好享受。</li>
+          <li><b>疫苗：</b>按当地接种本，本月通常含脊灰、百白破等第1/2剂（以接种本为准）。接种前后注意体温变化。</li>
+          <li><b>喂养：</b>母乳按需，约8–12次/天。这个月是"二月闹"的高发期——肠胀气、黄昏闹、频繁要吃。不是你奶不够，是宝宝在经历生长发育的猛长期。</li>
+          <li><b>睡眠：</b>每天睡14–17小时，但可能开始出现昼夜颠倒。白天保持光线充足、有声音，晚上保持昏暗安静，帮他建立日夜节律。</li>
+          <li><b>特别注意：</b>肠胀气——飞机抱、顺时针揉肚子、排气操、母乳妈妈减少产气食物（豆类、奶制品、十字花科蔬菜）。如果宝宝哭闹不止且伴随双腿蜷缩、腹部硬鼓，可能是肠绞痛，抱抱他、安抚他，会过去的。</li>
         </ul>
 
-        <h4>3个月</h4>
+        <h4>🟢 3个月 · 开始探索世界</h4>
         <ul class="plain">
-          <li><b>大运动：</b>抬头90°、开始吃手探索、可能萌芽翻身。</li>
-          <li><b>疫苗：</b>按计划接种；留意接种后体温。</li>
-          <li><b>喂养：</b>逐渐规律，仍按需；警惕肠胀气高峰。</li>
-          <li><b>注意：</b>睡眠可能倒退；多趴、多互动说话。</li>
+          <li><b>大运动：</b>抬头可达90°，前臂支撑。开始尝试翻身（仰卧→侧卧），可能第一次翻身失败急得大哭。没关系，给他加油，他很快就能做到的。</li>
+          <li><b>精细动作：</b>开始吃手、看手、玩手——这是他在认识自己的身体。给他不同材质的玩具（布书、硅胶玩具）让他摸。</li>
+          <li><b>语言：</b>发出笑声、"咕咕"声，开始用不同的哭声表达不同需求。你能慢慢听出"饿了"和"困了"的哭声是不一样的。</li>
+          <li><b>社交：</b>对熟悉的人笑得多，对陌生人可能会安静观察。开始喜欢看人脸，尤其是眼睛。多跟他对视、做夸张的表情——宝宝会模仿你。</li>
+          <li><b>疫苗：</b>按计划接种；留意接种后24-48小时内的体温和情绪变化。38.5℃以下物理降温，以上咨询医生。</li>
+          <li><b>喂养：</b>逐渐形成约3–4小时一次的规律，但仍按需喂养。这个月可能出现厌奶期——不是不爱喝，是喝奶的效率提高了，喝得快了就以为够了。</li>
+          <li><b>睡眠：</b>可能经历第一次睡眠倒退——之前能睡4小时，现在2小时就醒。这是正常的，宝宝的大脑在快速发育，睡眠模式在重组。熬过去就好。</li>
+          <li><b>特别注意：</b>多趴、多说话、多唱歌。宝宝醒着的时候不要总让他躺着——抱着他在房间里走走，给他讲解"这是灯""这是窗户"。你说话的声音是他最早的语言课。</li>
         </ul>
 
-        <h4>4个月</h4>
+        <h4>🟡 4个月 · 翻身小能手</h4>
         <ul class="plain">
-          <li><b>大运动：</b>翻身（仰→侧）、抓握更稳、对称性更好。</li>
-          <li><b>疫苗：</b>按计划（如百白破后续剂次）。</li>
-          <li><b>注意：</b>开始了解"添加辅食"知识（通常6月）；口水多、爱啃手正常。</li>
+          <li><b>大运动：</b>翻身（仰→侧→俯），有的宝宝能从俯卧翻回仰卧。从此再也不能把宝宝单独放在沙发或尿布台上——一秒都不行。安全第一！</li>
+          <li><b>精细动作：</b>抓握更稳、能伸手够玩具、把东西往嘴里塞（口欲期正常现象）。给他安全的、可啃咬的玩具，保持玩具清洁。</li>
+          <li><b>语言：</b>咿呀声更丰富，开始模仿音调。你跟他说话时他会"回答"你——虽然听不懂但节奏感十足。</li>
+          <li><b>社交：</b>能区分熟人和生人，开始出现"认生"迹象。这其实是好事——说明宝宝认知能力在发展。被宝宝拒绝的亲友不要难过，给他点时间。</li>
+          <li><b>疫苗：</b>按计划（如百白破后续剂次、脊灰疫苗等）。</li>
+          <li><b>喂养：</b>开始了解添加辅食的知识——通常在6个月开始，但4个月起可以开始准备：买好餐椅、辅食碗勺、了解第一口辅食的原则（米粉→蔬菜泥→果泥→肉泥，每种试3-5天观察过敏）。</li>
+          <li><b>睡眠：</b>可能继续睡眠倒退。建立固定的睡前仪式——洗澡→按摩→喂奶→关灯→放床上。仪式感是帮助宝宝"知道该睡觉了"的信号。</li>
+          <li><b>特别注意：</b>口水多、爱啃手、牙龈痒——可能是出牙前兆。准备牙胶（冷藏后使用更舒服）。流口水多要注意下巴和脖子保持干燥，避免口水疹。</li>
         </ul>
 
-        <h4>5个月</h4>
+        <h4>🟡 5个月 · 坐起来看世界</h4>
         <ul class="plain">
-          <li><b>大运动：</b>靠坐、翻身熟练、双手互玩。</li>
-          <li><b>注意：</b>可能出牙不适；亲子阅读、儿歌互动。</li>
+          <li><b>大运动：</b>靠坐（需要有支撑）、翻身熟练、能在俯卧时用手掌撑起上半身。可以在宝宝背后放一个哺乳枕，让他练习"坐着看世界"的视角。</li>
+          <li><b>精细动作：</b>双手互玩、能换手拿玩具、喜欢拍打和摇晃东西。给他不同形状、不同声音的玩具——摇铃、软积木、触觉球。</li>
+          <li><b>语言：</b>开始发辅音——"ba""da""ma"（虽然还不知道这些声音代表什么，但妈妈听到"ma"的时候还是会心花怒放）。</li>
+          <li><b>社交：</b>喜欢跟人互动，尤其是"躲猫猫"游戏——用双手捂住脸然后"哇"地打开，宝宝会咯咯笑。这个游戏他永远玩不腻。</li>
+          <li><b>疫苗：</b>按计划接种。</li>
+          <li><b>喂养：</b>仍然母乳/配方奶为主。如果宝宝对大人吃饭表现出浓厚兴趣（盯着你的嘴看、伸手抓你的筷子），说明他快准备好接受辅食了。</li>
+          <li><b>睡眠：</b>部分宝宝开始能睡较长觉（5–6小时不醒），但每个宝宝差异巨大。如果他还不能，不是你的问题。</li>
+          <li><b>特别注意：</b>可能出牙——第一颗牙通常在4–7个月冒出来。出牙期宝宝会烦躁、夜醒增多、喜欢咬东西、可能低烧。多抱抱他，冷牙胶会让他舒服很多。亲子阅读可以从这个月开始——布书、纸板书、翻翻书，哪怕他只是在咬书也没关系，重要的是你在跟他一起"看"。</li>
         </ul>
 
-        <h4>6个月</h4>
+        <h4>🟠 6个月 · 辅食大冒险</h4>
         <ul class="plain">
-          <li><b>大运动：</b>独坐萌芽、翻身自如。</li>
-          <li><b>喂养：</b>通常本月开始添辅食（米粉优先），仍母乳为主。</li>
-          <li><b>疫苗：</b>按计划（如乙肝疫苗第3剂、流脑等）。</li>
+          <li><b>大运动：</b>独坐萌芽（可能还需要手支撑）、翻身自如、有些宝宝开始匍匐爬行。给他一个安全的活动空间——铺上爬行垫，收走周围的危险物品。</li>
+          <li><b>精细动作：</b>能用整只手抓东西（耙状抓握）、喜欢把东西从一只手换到另一只手。开始练习"捏"的动作——可以放一些小泡芙在餐盘上让他自己尝试。</li>
+          <li><b>语言：</b>对自己的名字有反应，听到叫名字会转头。开始理解简单的词——"不可以""过来""抱抱"。</li>
+          <li><b>社交：</b>认生高峰——见到陌生人会哭或躲到妈妈怀里。不要强迫他"给阿姨抱"，尊重他的节奏。他需要时间观察和适应。</li>
+          <li><b>疫苗：</b>按计划（如乙肝疫苗第3剂、流脑疫苗等）。</li>
+          <li><b>喂养：</b><b>本月重点——添加辅食！</b>第一口选高铁米粉（纯大米、单一成分），用母乳或配方奶调成稀糊状。第1天1勺，逐渐增加到第5天3–4勺。观察5天无过敏后，加下一种（如南瓜泥、胡萝卜泥）。记住原则：<b>一次只加一种新食物，观察3–5天。</b>仍然母乳/配方奶为主，辅食是"补充"不是"替代"。</li>
+          <li><b>睡眠：</b>可能开始有"分离焦虑"——你离开房间就哭。睡前仪式更重要了，给宝宝一个安抚物（小毯子、安抚巾），让他有安全感。</li>
+          <li><b>特别注意：</b>辅食添加的注意事项——①不要加盐、糖、蜂蜜（1岁以下禁蜂蜜！）；②从稀到稠、从细到粗；③观察大便变化（颜色、质地会变，只要不腹泻不便秘就正常）；④宝宝吃饱的信号是——闭嘴转头、推勺子、注意力转移，不要硬喂。</li>
         </ul>
-        <div class="note">疫苗程序以你当地《预防接种证》为准，不同城市剂次时间略有差异。如宝宝有早产、黄疸、发热等情况，接种前咨询社区医生。</div>
+
+        <h4>🟠 7个月 · 坐稳了</h4>
+        <ul class="plain">
+          <li><b>大运动：</b>独坐稳定（不需要手支撑）、可能开始匍匐爬或标准爬。有些宝宝会"倒退爬"——先学会后退再学会前进，完全正常。</li>
+          <li><b>精细动作：</b>开始用拇指和食指捏东西（钳状抓握），能自己拿手指食物吃。给他切成小块的软食物（熟胡萝卜、香蕉、牛油果），让他练习自己吃。</li>
+          <li><b>语言：</b>开始模仿简单音节，能发"baba""mama""dada"，虽然可能还分不清谁是谁。多跟他说话、唱歌、念绘本——输入越多，输出越早。</li>
+          <li><b>社交：</b>喜欢照镜子，对镜子里的自己笑、拍打。这是自我认知的开始。可以跟他玩"指五官"的游戏——"宝宝的眼睛在哪里？""妈妈的鼻子在哪里？"</li>
+          <li><b>疫苗：</b>按计划接种。</li>
+          <li><b>喂养：</b>辅食增加到每天2顿，种类逐渐丰富——谷物、蔬菜、水果、肉泥、蛋黄（从1/4开始试）。继续母乳/配方奶，每天约600–800ml。</li>
+          <li><b>睡眠：</b>大部分宝宝开始能睡整觉（连续6–8小时）。如果还不能，别焦虑，睡眠训练不是必须的。选择适合你和宝宝的安抚方式。</li>
+          <li><b>特别注意：</b>宝宝开始到处移动了——检查家中安全隐患！插座盖上保护盖、桌角贴上防撞条、地上的小物件全部收起来（这个阶段的宝宝抓到什么都往嘴里放）。</li>
+        </ul>
+
+        <h4>🔴 8个月 · 探险家上线</h4>
+        <ul class="plain">
+          <li><b>大运动：</b>爬行熟练（标准手膝爬），能从趴着自己坐起来，能扶着东西站一会儿。给他创造安全的爬行环境——不同材质的地面、枕头堆成的"小山"、沙发和茶几之间的"隧道"。</li>
+          <li><b>精细动作：</b>钳状抓握熟练，能捡起小东西（所以地板上的小物件一定要清干净！）。喜欢扔东西、看东西掉到地上——这不是调皮，是他在学"因果关系"。</li>
+          <li><b>语言：</b>理解"不"的意思（虽然不一定听），能用动作表达需求——伸手要抱、推开不想要的。教他简单手势——"再见""飞吻""拍手"。</li>
+          <li><b>社交：</b>分离焦虑高峰期——你一离开就哭。玩"躲猫猫"和"妈妈走了→又回来了"的游戏，帮他理解"看不见不等于消失"。每次离开都跟他说"妈妈去一下厨房，马上回来"，然后真的马上回来——信任是这样建立的。</li>
+          <li><b>疫苗：</b>按计划（如麻腮风疫苗等）。</li>
+          <li><b>喂养：</b>辅食增加到每天2–3顿，可以尝试软的手指食物——蒸软的西兰花、胡萝卜条、小肉丸。让他自己抓着吃，虽然会弄得一团糟，但这是自主进食的宝贵练习。</li>
+          <li><b>睡眠：</b>可能因为大运动发育（爬、站）导致睡眠波动——宝宝半夜醒来练习新技能是正常的。不要开灯、不要玩，安静地帮他重新入睡。</li>
+          <li><b>特别注意：</b>这个月的宝宝好奇心爆棚——抽屉、柜子、垃圾桶、电源线……把危险物品锁好或放到他够不到的地方。可以给他一个"安全抽屉"——放塑料碗、木勺等安全物品，让他自由探索。</li>
+        </ul>
+
+        <h4>🔴 9个月 · 站起来了</h4>
+        <ul class="plain">
+          <li><b>大运动：</b>能扶着家具站得很稳，有些宝宝开始扶着沙发"横着走"（cruising）。给他稳固的、低矮的家具让他扶着练习。不要用学步车——学步车不安全且不利于学走路。</li>
+          <li><b>精细动作：</b>能用食指指东西、能用拇指食指精确捏起小物件。开始喜欢戳洞、按按钮——给他有按钮的玩具、洞洞书。</li>
+          <li><b>语言：</b>开始有意识地叫"妈妈""爸爸"（知道谁是谁了）。理解简单指令——"拍手""再见""亲亲"。这是语言爆发期前的重要准备期，多跟他说完整的句子，不要只说"婴儿语"。</li>
+          <li><b>社交：</b>开始出现"陌生人焦虑"和"分离焦虑"的双重高峰期。尊重他的情绪——不强迫他给别人抱，不偷偷溜走（会增加焦虑），离开时好好告别。</li>
+          <li><b>疫苗：</b>按计划接种。</li>
+          <li><b>喂养：</b>辅食增加到每天3顿，逐渐接近家庭饮食（无盐无糖版）。可以尝试更多种类的肉、鱼、豆制品。开始练习用吸管杯喝水。</li>
+          <li><b>睡眠：</b>白天小睡从3次减少到2次（上午一次、下午一次）。清醒时间变长，需要更多活动和互动来消耗精力。</li>
+          <li><b>特别注意：</b>这个月的宝宝什么都想自己来——自己拿勺子、自己喝水、自己翻书。给他机会尝试，哪怕吃得满脸都是、水洒了一地。自理能力就是这样一点点练出来的。</li>
+        </ul>
+
+        <h4>🔵 10个月 · 小沟通家</h4>
+        <ul class="plain">
+          <li><b>大运动：</b>爬行飞快、扶着走稳、能独立站几秒钟。有些宝宝会开始独走几步。如果他还不会走——完全正常，独立行走的正常范围是10–18个月。</li>
+          <li><b>精细动作：</b>能把东西放进容器再拿出来（反复玩这个游戏）、能翻厚纸板书页、会模仿涂鸦。给他一个安全的抽屉或盒子，里面放各种安全的小物件，他会玩很久。</li>
+          <li><b>语言：</b>能说出1–2个有意义的词（除了"爸爸妈妈"），理解更多词语和指令。开始用"婴语"跟你"聊天"——一连串的咿咿呀呀，音调起伏像在说话。认真"听"他说，然后回应——这对他语言发展至关重要。</li>
+          <li><b>社交：</b>开始有幽默感——会故意做一些动作逗你笑，然后自己也笑。开始出现"模仿行为"——你拍桌子他也拍，你打电话他也拿东西放耳边。</li>
+          <li><b>疫苗：</b>按计划接种。</li>
+          <li><b>喂养：</b>三顿辅食+1–2次加餐（水果、酸奶等），母乳/配方奶每天约500–600ml。可以尝试让宝宝和大人一起上桌吃饭——他坐在自己的餐椅上，和你们吃差不多的时间。</li>
+          <li><b>睡眠：</b>大部分宝宝白天睡两次（上午和下午各1–1.5小时），晚上睡10–12小时。继续保持睡前仪式。</li>
+          <li><b>特别注意：</b>这个阶段是语言发展的关键窗口期。多读绘本（每天至少15分钟）、多唱歌、多跟他说"这是什么""我们在做什么"。不要觉得他听不懂就不说——他每时每刻都在吸收。</li>
+        </ul>
+
+        <h4>🔵 11个月 · 快要会走了</h4>
+        <ul class="plain">
+          <li><b>大运动：</b>独站时间变长、扶着走变成"推着走"（推着凳子或学步推车走）、有些宝宝迈出独立的第一步。光脚比穿鞋更适合学走路——脚底的感觉帮助他掌握平衡。</li>
+          <li><b>精细动作：</b>能用勺子自己吃（虽然一半在嘴里一半在桌上）、能叠2–3块积木、会脱袜子。给他一把小勺子，让他自己来——哪怕吃得慢、吃得乱，这是成长的必经之路。</li>
+          <li><b>语言：</b>词汇量2–5个，能理解50个以上的词。开始用"指+发声"来表达需求——指着奶瓶说"neinei"。多回应他的"指认"——他说了，你回应，他就会更愿意说。</li>
+          <li><b>社交：</b>开始有自己的"意愿"——不喜欢的会摇头或推开，喜欢的会伸手要。开始出现"自我意识"的萌芽——所以可能会有"不"的表示。这不是叛逆，是成长。</li>
+          <li><b>疫苗：</b>按计划接种。</li>
+          <li><b>喂养：</b>三顿辅食+加餐，逐渐向家庭饮食过渡（注意口味清淡，不加盐糖）。鼓励自主进食——给他机会自己用手或勺子吃，虽然收拾战场很累，但这是培养他自主性的重要一步。</li>
+          <li><b>睡眠：</b>可能因为学走路而出现睡眠波动——大脑太兴奋了。保持耐心，睡前多些安静的亲子时光——读书、按摩、轻声聊天。</li>
+          <li><b>特别注意：</b>保护宝宝的安全感——不要在他犯错时吓唬或嘲笑。他打翻杯子、摔倒、弄洒食物时，说"没关系，我们来擦干净"。他需要知道：犯错是安全的，妈妈永远是他的安全基地。</li>
+        </ul>
+
+        <h4>🔵 12个月 · 一周岁生日快乐！🎂</h4>
+        <ul class="plain">
+          <li><b>大运动：</b>大部分宝宝开始独立行走（从几步到几米），少数可能还需要再等1–2个月。不管走不走，爬行期练出的上肢力量和协调性都不会浪费。</li>
+          <li><b>精细动作：</b>能用蜡笔乱涂、能翻书页、能把小东西放进瓶子里。给他安全的涂鸦工具——大蜡笔+大白纸，他会创作出第一幅"作品"。</li>
+          <li><b>语言：</b>词汇量3–8个，能听懂简单指令，开始用"婴语+手势"进行复杂表达。你可能是唯一能"翻译"他在说什么的人——这是你们之间最美的密码。</li>
+          <li><b>社交：</b>会主动引起你的注意——拉你的衣服、拿玩具给你看、发出声音叫你。开始模仿大人行为——"打电话""梳头""擦桌子"。你是他最重要的模仿对象。</li>
+          <li><b>疫苗：</b>按计划（可能含水痘疫苗等）。</li>
+          <li><b>喂养：</b>可以开始喝全脂牛奶（如果母乳不够或已断奶），每天约400–500ml奶制品。三餐+加餐，可以和大人吃一样的饭菜（注意切小、煮软、不加盐糖）。一岁后可以开始用杯子喝奶，逐渐戒掉奶瓶。</li>
+          <li><b>睡眠：</b>大部分宝宝白天睡一次午觉（1.5–2.5小时），晚上睡10–12小时。总睡眠约11–14小时/天。</li>
+          <li><b>特别注意：</b><b>恭喜你！小可乐一岁了！</b>回想过去的一年——从一个只会吃和睡的新生儿，到现在会爬、会站、会叫妈妈、会用小手抓东西吃的小朋友——你和他一起经历了多少第一次。这一年，你辛苦了。你半夜爬起来喂过无数次奶，你在他哭的时候手足无措过，你在医院排队打疫苗时一个人抱着他满头大汗。但你也看到过他的第一个微笑、听到过他的第一声"妈妈"、感受过他的小手第一次攥紧你的手指。这些都值得。接下来的一年，他会走得更稳、说得更多、笑得更大声。而你，也会从一个新手妈妈，变成一个从容的、有经验的、了不起的妈妈。🌸</li>
+        </ul>
+
+        <div class="note" style="background:var(--sky-light);border-left:5px solid var(--sky-deep);color:#3a5a6a">💉 <b>疫苗提醒：</b>疫苗程序以你当地《预防接种证》为准，不同城市剂次时间略有差异。如宝宝有早产、黄疸、发热、过敏等情况，接种前务必咨询社区医生。接种后24–48小时内注意观察体温和精神状态。</div>
+
+        <!-- ===== 妈妈加油站 ===== -->
+        <h3>💪 妈妈加油站 · 你也很重要</h3>
+        <div style="background:var(--sky-light);border-radius:16px;padding:20px;margin:12px 0;border:2px solid var(--sky);line-height:1.9">
+          <p style="margin-bottom:12px;font-weight:700;color:var(--sky-deep);font-size:15px">在照顾小可乐的同时，也请照顾你自己。</p>
+          <p style="margin-bottom:10px"><b>每天做一件"为自己"的事：</b>哪怕只有5分钟——喝一杯热茶不被任何人打扰、洗个热水澡、敷一片面膜、读一页书、听一首喜欢的歌。你不是"妈妈机器"，你是一个有自己需求的人。</p>
+          <p style="margin-bottom:10px"><b>每周给自己放一次"假"：</b>哪怕只有1小时——让老公或家人带娃，你出门走一走、去咖啡馆坐一坐、或者就在家里关上门睡一觉。你不是自私，你是在"充电"。电量耗尽的妈妈，没办法给宝宝最好的陪伴。</p>
+          <p style="margin-bottom:10px"><b>每月做一件"不只是妈妈"的事：</b>可能是和朋友吃顿饭、去看一场电影、写一篇文章、学一个新技能。宝宝需要的是一个快乐的妈妈，不是一个牺牲一切的妈妈。</p>
+          <p style="margin-bottom:10px"><b>当你崩溃的时候：</b>承认"我今天真的很累""我真的撑不住了""我需要帮助"。告诉你的伴侣、你的家人、你的朋友——你不是一个人。产后抑郁不是矫情，如果你持续感到情绪低落、对任何事都提不起兴趣、甚至有伤害自己或宝宝的想法——请立刻寻求专业帮助。</p>
+          <p style="margin-bottom:0"><b>记住：</b>你不是在"牺牲"自己来养孩子。你是在"带着"孩子一起成长。他长大的同时，你也在变成更好的自己——更耐心、更坚韧、更懂得爱。这份成长，是你送给小可乐最好的礼物，也是你送给自己最好的礼物。</p>
+        </div>
       </div>
     </section>
 
     <!-- ============ AI ============ -->
     <section class="module" id="mod-ai">
       <div class="card">
-        <h2><span class="dot" style="background:var(--peach)"></span>AI学习 · 轻资产创业</h2>
-        <div class="lead">目标：与时俱进学AI，并用它开启低门槛副业。轻资产=几乎零成本、靠时间和技能变现。宝妈的优势：时间碎片、共情力强、懂母婴场景。</div>
+        <h2><span class="dot" style="background:var(--peach-deep)"></span>AI学习 · 轻资产创业</h2>
+        <div class="lead">目标：与时俱进学AI，并用它开启低门槛副业。轻资产=几乎零成本、靠时间和技能变现。宝妈的优势：时间碎片、共情力强、懂母婴场景——这些都是AI无法替代的。</div>
 
-        <h3>学习路线（由玩到赚）</h3>
+        <!-- ===== 写给想创业的你 ===== -->
+        <h3>💌 写给想创业的你</h3>
+        <div style="background:var(--peach-light);border-radius:16px;padding:20px;margin:12px 0;border:2px solid var(--peach);line-height:1.9">
+          <p style="margin-bottom:14px">亲爱的音乔伊，</p>
+          <p style="margin-bottom:14px">我知道你心里有一个小火苗——关于"不只是妈妈"的另一种可能。你可能在喂奶的间隙想过："除了带娃，我还能做点什么？"你可能在看到别人靠自媒体月入过万的时候，心里又羡慕又怀疑自己能不能做到。</p>
+          <p style="margin-bottom:14px"><b>答案是：你可以。</b>不是因为别人做到了，而是因为你拥有他们不一定有的东西——你是妈妈。你知道什么叫在碎片时间里高效工作（因为宝宝只给你碎片时间），你知道什么叫耐心和坚持（因为你已经熬过了多少个不眠之夜），你知道什么叫"真实"——而真实，恰恰是现在最稀缺的内容。</p>
+          <p style="margin-bottom:14px"><b>AI不是来抢你饭碗的，是来给你递工具的。</b>以前，一个人要做自媒体需要会写、会拍、会剪、会运营——门槛很高。现在，AI可以帮你写文案、帮你做图、帮你剪视频、帮你分析数据。你只需要做一件事：<b>把你的想法和感受告诉AI，让它帮你表达出来。</b></p>
+          <p style="margin-bottom:14px"><b>你的优势是"真人"。</b>在AI可以批量生产内容的时代，真正稀缺的不是"完美"，而是"真实"。你的产后恢复日记、你的育儿踩坑经验、你的理财学习笔记——这些带着体温的内容，AI写不出来。因为它没有经历过剖腹产的刀口、没有在凌晨三点抱着哭闹的宝宝掉过眼泪、没有在第一次收到工资以外的收入时激动到手抖。</p>
+          <p style="margin-bottom:14px"><b>别等"准备好"了再开始。</b>这是新手最容易犯的错误——总觉得要先学会所有AI工具、研究透平台算法、准备好100篇内容——然后才敢发第一条。但真相是：<b>你永远不可能完全准备好。你只需要开始，然后在路上学习。</b>先发第一条小红书笔记（哪怕只有100字+一张图），然后看数据、看反馈、慢慢优化。第一个月的你，和第十二个月的你，中间隔着的是"做"，不是"想"。</p>
+          <p style="margin-bottom:14px"><b>轻资产的意义是：失败的成本几乎为零。</b>不需要租办公室、不需要雇人、不需要进货囤货。你唯一的投入是你的时间和想法。就算这个方向不行，换一个就是了。你不是在"创业"，你是在"探索自己还能做什么"。找到那个方向之前的所有尝试，都不是失败——是信息收集。</p>
+          <p>来吧，从今天开始。每天花20分钟——玩一个AI功能、记一条灵感、发一条内容。不需要完美，只需要真实。一年后回头看，你会感谢今天这个"笨笨地开始"的自己。</p>
+          <p style="margin-top:10px;text-align:right;color:var(--peach-deep);font-weight:600">—— 陪你找到另一种可能的工作台</p>
+        </div>
+
+        <!-- ===== 学习路线（含具体工具名） ===== -->
+        <h3>🗺️ 学习路线（由玩到赚，具体到工具）</h3>
         <div class="phases">
-          <div class="phase">
-            <span class="ph-tag">第1–2月 · 玩熟</span>
-            <div class="ph-title">成为AI用户</div>
+          <div class="phase" style="border-color:var(--peach);background:var(--peach-light)">
+            <span class="ph-tag" style="background:var(--peach-deep);color:#fff">第1–2月 · 玩熟期</span>
+            <div class="ph-title">成为AI超级用户</div>
             <ul>
-              <li>用熟1–2个对话AI（如通义/文心/豆包/ChatGPT）</li>
-              <li>学基础提示词（角色+任务+要求）</li>
-              <li>用AI帮自己写文案、做计划</li>
+              <li><b>对话AI：</b>深度用熟<b>通义千问</b>（阿里系，免费）、<b>豆包</b>（字节系，免费）、<b>DeepSeek</b>（推理能力极强）或 <b>ChatGPT</b>（需科学上网）。每天用它帮你做一件实事——写一条朋友圈文案、整理今天的待办清单、帮你把一段碎碎念润色成小红书笔记。</li>
+              <li><b>提示词基本功：</b>学"角色+任务+要求+格式"四要素。比如："你是一个有10年经验的小红书母婴博主（角色），帮我写一条关于二月闹的笔记（任务），语气温暖真诚、像闺蜜聊天（要求），300字以内、带3个emoji（格式）。"</li>
+              <li><b>第一个月目标：</b>每天用AI完成一个任务，记录"AI今天帮我省了多少时间"。不用学任何理论，先用起来。用得多，自然就熟了。</li>
             </ul>
           </div>
-          <div class="phase">
-            <span class="ph-tag">第3–6月 · 上手</span>
-            <div class="ph-title">掌握创作工具</div>
+          <div class="phase" style="border-color:var(--peach);background:var(--peach-light)">
+            <span class="ph-tag" style="background:var(--peach-deep);color:#fff">第3–6月 · 上手期</span>
+            <div class="ph-title">掌握创作工具链</div>
             <ul>
-              <li>学AI绘画（即梦/可灵/Midjourney）</li>
-              <li>学AI剪辑/数字人/表格自动化</li>
-              <li>做一个公开的AI作品集</li>
+              <li><b>AI绘画：</b>学会用<b>即梦</b>（字节系，免费额度多）或 <b>可灵</b>（快手系）生成图片——给宝宝做成长插画、做小红书封面图、做微信头像。进阶可学<b>Midjourney</b>（付费，但效果最好）。先学会"图生图"——上传一张照片让AI生成同风格的新图，比从零生成容易得多。</li>
+              <li><b>AI视频：</b>学会用<b>剪映</b>（免费，手机就能用）的一键成片、AI配音、智能字幕功能。学会用<b>可灵</b>或<b>即梦</b>的"图生视频"功能——把一张静态图变成几秒钟的动态视频。</li>
+              <li><b>AI写作：</b>用对话AI帮你批量生成内容——母婴知识科普、产后恢复日记、理财学习笔记。你负责提供"真实经历+个人观点"，AI负责"组织结构+润色表达"。</li>
+              <li><b>AI效率工具：</b>学会用AI做Excel表格、做PPT、整理数据——这些技能以后可以帮小微企业做服务变现。</li>
             </ul>
           </div>
-          <div class="phase">
-            <span class="ph-tag">第7–12月 · 变现</span>
-            <div class="ph-title">轻资产副业</div>
+          <div class="phase" style="border-color:var(--peach);background:var(--peach-light)">
+            <span class="ph-tag" style="background:var(--peach-deep);color:#fff">第7–12月 · 变现期</span>
+            <div class="ph-title">找到你的副业方向</div>
             <ul>
-              <li>选1个方向稳定产出</li>
-              <li>自媒体/接单/数字产品</li>
-              <li>建立稳定小额收入</li>
+              <li><b>第7–8月：</b>选定一个主方向（母婴自媒体/AI绘画接单/数字产品），每周稳定产出2–3条内容。不在乎数据，在乎"持续输出"这个习惯的养成。</li>
+              <li><b>第9–10月：</b>根据数据反馈优化——什么内容互动高？什么时间发效果好？你的粉丝最关心什么？把"有效"的加倍，"无效"的调整。</li>
+              <li><b>第11–12月：</b>建立第一个变现闭环——可能是接了一条广告、卖出了第一个数字产品、收到了第一笔代写订单。金额不重要，重要的是"从0到1"的突破。有了1，就会有2、3、10。</li>
             </ul>
           </div>
         </div>
 
-        <h3>适合的轻资产副业方向（宝妈友好）</h3>
+        <!-- ===== 本周AI挑战 ===== -->
+        <h3>🎯 本周AI挑战（挑一个试试，完成了给自己打勾）</h3>
+        <div style="background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px;margin:12px 0">
+          <div class="check-item"><div class="box"></div><div class="txt"><b>挑战一：用AI写一条小红书笔记</b><small>告诉AI你的真实经历（比如"二月闹的应对"），让它帮你写成一篇温暖的小红书笔记。然后——发出去！不管有没有人看，先发出去。</small></div></div>
+          <div class="check-item"><div class="box"></div><div class="txt"><b>挑战二：用AI生成一张图</b><small>打开即梦或可灵，输入一个描述（比如"温暖的婴儿房，柔和的粉色和米色，阳光从窗户洒进来"），看看AI画出了什么。</small></div></div>
+          <div class="check-item"><div class="box"></div><div class="txt"><b>挑战三：让AI帮你省一件事</b><small>把今天要做的一件事交给AI——让它帮你写待办清单、整理购物清单、写一条朋友圈——感受一下"有AI帮忙"是什么感觉。</small></div></div>
+          <div class="check-item"><div class="box"></div><div class="txt"><b>挑战四：研究一个同行</b><small>在小红书或抖音上找一个你喜欢的母婴博主，分析她：发什么内容？多久发一次？封面长什么样？标题怎么写？用AI帮你总结她的"成功公式"。</small></div></div>
+        </div>
+
+        <!-- ===== 变现倒计时 ===== -->
+        <h3>⏳ 变现倒计时 · 12个月里程碑</h3>
+        <div style="background:var(--peach-light);border:2px solid var(--peach);border-radius:16px;padding:20px;margin:12px 0;line-height:1.9">
+          <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:8px;font-weight:700;width:70px;color:var(--peach-deep)">第1月</td>
+              <td style="padding:8px">玩熟1个AI对话工具，每天用它做一件事。发布第一条小红书笔记（内容不重要，重要的是"发了"）。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:8px;font-weight:700;color:var(--peach-deep)">第2月</td>
+              <td style="padding:8px">学基础提示词，用AI生成第一张图。在小红书发布至少4条笔记，观察哪条数据最好。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:8px;font-weight:700;color:var(--peach-deep)">第3月</td>
+              <td style="padding:8px">学会AI绘画（即梦/可灵），开始做固定风格的内容。注册第二个平台（抖音或闲鱼），扩大内容覆盖面。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:8px;font-weight:700;color:var(--peach-deep)">第4月</td>
+              <td style="padding:8px">学会AI视频（剪映一键成片），从"图文"升级到"视频"。每周至少发布2条内容，建立"持续创作"的节奏感。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:8px;font-weight:700;color:var(--peach-deep)">第5月</td>
+              <td style="padding:8px">学会AI效率工具（做表/做PPT），开始考虑"数字产品"方向——你的"产后恢复清单""育儿月历模板"可以变成可售卖的PDF。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:8px;font-weight:700;color:var(--peach-deep)">第6月</td>
+              <td style="padding:8px"><b>半年里程碑！</b>复盘：哪个平台最适合你？哪类内容数据最好？你的粉丝最需要什么？根据数据调整方向，砍掉效果差的，加码效果好的。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:8px;font-weight:700;color:var(--peach-deep)">第7月</td>
+              <td style="padding:8px">选定主方向，开始稳定产出（每周2–3条）。在闲鱼上架第一个数字产品（定价9.9元）——不管有没有人买，先上架。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:8px;font-weight:700;color:var(--peach-deep)">第8月</td>
+              <td style="padding:8px">开始尝试"AI代写/接单"——在闲鱼/小红书发布"AI帮你写文案/做PPT"的服务，定价从一杯奶茶钱开始（15–30元）。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:8px;font-weight:700;color:var(--peach-deep)">第9月</td>
+              <td style="padding:8px">优化产品和服务——哪个卖得好就多做哪个。开始积累客户评价和案例，为提价做准备。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:8px;font-weight:700;color:var(--peach-deep)">第10月</td>
+              <td style="padding:8px">尝试"知识陪伴"方向——把你的财商+育儿+AI学习笔记整理成付费小社群或专栏。先免费分享建立信任，再推出付费版本。</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:8px;font-weight:700;color:var(--peach-deep)">第11月</td>
+              <td style="padding:8px">建立稳定收入流——争取每个月有至少一笔副业收入（哪怕只有100元）。有了第一笔，信心和动力都会翻倍。</td>
+            </tr>
+            <tr>
+              <td style="padding:8px;font-weight:700;color:var(--peach-deep)">第12月</td>
+              <td style="padding:8px"><b>🎉 年度里程碑！</b>复盘这一年的AI+副业之路——你学会了多少工具？发了多少条内容？赚了多少钱？最重要的是——你从一个"想创业"的人，变成了一个"在创业"的人。这个转变，比任何数字都珍贵。</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- ===== 平台推荐 + 起步指南 ===== -->
+        <h3>📱 三大平台 · 起步指南（挑一个先开始）</h3>
         <div class="res">
-          <div class="book"><div class="nm">母婴自媒体</div><div class="au">小红书/抖音图文</div><div class="why">用AI做图做标题，分享真实产后恢复/育儿，最容易起号。</div></div>
-          <div class="book"><div class="nm">AI代写/文案</div><div class="au">公众号/电商详情页</div><div class="why">帮小商家写文案、起名、脚本，按单收费。</div></div>
-          <div class="book"><div class="nm">AI绘画接单</div><div class="au">头像/插画/壁纸</div><div class="why">在闲鱼/小红书接定制头像、宝宝插画。</div></div>
-          <div class="book"><div class="nm">数字产品</div><div class="au">模板/清单/课程</div><div class="why">把你的"产后恢复表/育儿清单"做成可售卖PDF。</div></div>
-          <div class="book"><div class="nm">AI效率服务</div><div class="au">帮人做PPT/表格</div><div class="why">用AI帮小微企业做汇报、整理数据，按时计费。</div></div>
-          <div class="book"><div class="nm">知识陪伴</div><div class="au">社群/咨询</div><div class="why">把财商+育儿+心理学习笔记做成付费小社群。</div></div>
+          <div class="book" style="border-color:var(--peach);background:var(--peach-light)">
+            <div class="nm">📕 小红书 · 最适合你起步</div>
+            <div class="au">图文为主 · 母婴/理财/个人成长</div>
+            <div class="why"><b>第一步：</b>今天注册账号，完善头像、昵称、简介（写"产后妈妈 | 财商学习 | AI探索 | 和小可乐一起成长"）。<br><b>第一步实操：</b>用手机拍一张今天的照片（宝宝的小手/你喝的茶/桌上的一本书），用AI（即梦/醒图）加一个好看的滤镜和标题，发第一篇笔记——内容写"产后2个月，我开始学理财了，有一起的吗？"<br><b>为什么选小红书：</b>女性用户占比高、母婴内容友好、对新人流量扶持好。图文制作成本低，适合碎片时间操作。</div>
+          </div>
+          <div class="book" style="border-color:var(--peach);background:var(--peach-light)">
+            <div class="nm">🎵 抖音 · 视频进阶选择</div>
+            <div class="au">短视频为主 · 育儿日常/知识科普</div>
+            <div class="why"><b>第一步：</b>用剪映的"一键成片"功能，把宝宝的一小段视频配上音乐和字幕，发第一条抖音。<br><b>第一步实操：</b>拍一段10–15秒的短视频——可以是宝宝做tummy time、可以是你的产后康复日常、可以是你在看理财书。用剪映自动剪辑+加字幕+配音乐（选热门BGM），标题写真实感受。<br><b>为什么选抖音：</b>流量池大、算法推荐精准。但视频制作比图文成本高，建议先在小红书练手1–2个月，有感觉了再同步到抖音。</div>
+          </div>
+          <div class="book" style="border-color:var(--peach);background:var(--peach-light)">
+            <div class="nm">🐟 闲鱼 · 变现最直接</div>
+            <div class="au">数字产品/服务接单</div>
+            <div class="why"><b>第一步：</b>把你的第一个"数字产品"——比如这份工作台里的"产后恢复每日清单"整理成一份干净的PDF，上架闲鱼，定价9.9元。<br><b>第一步实操：</b>用AI帮你把清单排版美化（告诉AI"帮我把这个清单做成一份漂亮的待办表，适合打印"），导出PDF，在闲鱼发布"宝妈产后恢复每日打卡清单 | 可打印PDF | 9.9元"。<br><b>为什么选闲鱼：</b>不需要粉丝基础、不需要养号、上架就能卖。门槛最低的变现方式。适合卖数字产品（PDF/模板/清单/教程）和服务（AI代写/PPT/文案）。</div>
+          </div>
         </div>
 
-        <h3>每月 / 每周 / 每日</h3>
+        <!-- ===== 副业方向 + 第一步 ===== -->
+        <h3>🚀 六个副业方向 · 每个都有"第一步"</h3>
+        <div class="res">
+          <div class="book"><div class="nm">母婴自媒体</div><div class="au">小红书/抖音图文+视频</div><div class="why"><b>第一步：</b>今天用手机拍一张宝宝相关的照片（喂奶、tummy time、你的产康日常都行），用AI帮你写一段100字的真实感受，发到小红书。标题用"产后X个月 | 今天的我..."。真实比精致更重要。</div></div>
+          <div class="book"><div class="nm">AI代写/文案</div><div class="au">闲鱼/小红书接单</div><div class="why"><b>第一步：</b>在闲鱼发布一条服务——"AI辅助文案 | 朋友圈/小红书/产品介绍 | 15元/条"。不需要等你"很会写"了才接单——AI会帮你写，你只需要把关和润色。</div></div>
+          <div class="book"><div class="nm">AI绘画接单</div><div class="au">闲鱼/小红书接定制</div><div class="why"><b>第一步：</b>用即梦或可灵生成3张不同风格的"宝宝插画"（卡通头像、水彩风、绘本风），发到小红书——"AI给宝宝画的成长插画 | 可定制你家宝宝"。</div></div>
+          <div class="book"><div class="nm">数字产品</div><div class="au">模板/清单/课程PDF</div><div class="why"><b>第一步：</b>把你的"产后恢复清单""育儿月历""记账模板"中任意一个，用AI排版成一份好看的PDF。上架闲鱼，定价9.9–19.9元。不需要完美，先上架，有人买就继续优化。</div></div>
+          <div class="book"><div class="nm">AI效率服务</div><div class="au">帮人做PPT/表格</div><div class="why"><b>第一步：</b>在闲鱼发布服务——"AI帮你做PPT | 工作汇报/商业计划 | 30元/份"。接到第一单后，用AI（Gamma.app或通义千问的PPT功能）生成初稿，你调整润色后交付。</div></div>
+          <div class="book"><div class="nm">知识陪伴社群</div><div class="au">微信群/知识星球</div><div class="why"><b>第一步：</b>在小红书持续分享你的"财商学习笔记""育儿踩坑经验""AI学习心得"，积累100个粉丝后，建立一个免费微信群——"宝妈成长互助群"，先提供价值，再考虑付费。</div></div>
+        </div>
+
+        <!-- ===== 每日/每周/每月 ===== -->
+        <h3>⏰ 每日 / 每周 / 每月节奏（碎片时间刚好）</h3>
         <ul class="plain">
-          <li><b>每日（20–30分钟）：</b>玩/学1个AI功能或提示词，记一条"可变现灵感"。</li>
-          <li><b>每周：</b>用AI做1个小作品（一张图/一段文案/一个表格）。</li>
-          <li><b>每月：</b>复盘：这个月AI帮我省了什么时间？有没有可卖的东西？</li>
+          <li><b>☀️ 每日（20–30分钟）：</b>玩/学1个AI功能或提示词，让AI帮你做一件实事。打开小红书/抖音，看一条你喜欢的博主的内容，分析她哪里做得好。记一条"可变现灵感"——今天想到了什么可以卖/可以帮人的点子？写在手机备忘录里。</li>
+          <li><b>📅 每周（1小时）：</b>用AI做1个小作品——一张图/一篇文案/一个短视频/一份数字产品。发布至少1条内容到你的主平台。花10分钟看数据——上一条内容的阅读量、互动量如何？哪类内容更受欢迎？</li>
+          <li><b>📆 每月（2小时）：</b>月度复盘——这个月发了多少条内容？哪个平台数据最好？有没有产生第一笔收入？（哪怕只有1块钱也值得庆祝！）下个月的重点是什么？调整方向、加码有效、砍掉无效。</li>
         </ul>
-        <div class="note">别等"学完再开始"。最好的学习是边做边学——先发第一条母婴笔记，流量和技能会一起长出来。轻资产的核心是：先验证、再投入。</div>
+        <div class="note" style="background:var(--peach-light);border-left:5px solid var(--peach-deep);color:#8a5a3a;font-size:14px;line-height:1.8">🧡 <b>最重要的提醒：别等"学完再开始"。</b>AI工具更新迭代的速度比你学习的速度还快。你不可能把所有工具都学会再动手——你只需要学会"今天要用到的那个功能"。最好的学习方式是<b>边做边学</b>——今天要做一张图，就学AI绘画；明天要发一条视频，就学剪映。先发第一条内容，流量和技能会一起长出来。轻资产的核心不是"不花钱"，而是<b>"先验证想法、再投入资源"</b>。你先用免费的工具、免费的流量、零成本的尝试，找到那个"真的有人需要、你真的能做"的方向，然后再考虑投入更多时间或金钱。</div>
+
+        <div class="note" style="background:#fff4eb;border-left:5px solid var(--peach-deep);color:#8a5a3a;font-size:14px;line-height:1.9;margin-top:16px">🌸 <b>最后，想对你说：</b><br><br>你不需要成为"创业女神"。你不需要融资、不需要团队、不需要all in。你只需要在带娃的间隙，每天拿出20分钟，做一件"为自己"的事——学一个AI功能、发一条内容、记一个灵感。<br><br>一个月后，你会有一个小小的作品集。三个月后，你会有一个在成长的自媒体账号。半年后，你可能已经收到了第一笔副业收入。一年后，你会拥有一个"不只是妈妈"的身份——你是一个会用AI创作的创作者，一个能把想法变成收入的小创业者，一个在养育小可乐的同时也在养育自己梦想的人。<br><br><b>轻资产创业，创业的不是项目，是你自己。</b>而你自己，值得这份投入。💕</div>
       </div>
     </section>
 
@@ -764,11 +1156,107 @@ function renderCurMonth(m){
     3:'第3月 · 抬头更稳、开始吃手探索；睡眠可能倒退；多趴多说话；留意疫苗反应。',
     4:'第4月 · 翻身萌芽、抓握更稳；开始了解添加辅食知识（通常6月）；口水多正常。',
     5:'第5月 · 靠坐、翻身熟练；可能出牙不适；亲子阅读与儿歌互动。',
-    6:'第6月 · 独坐萌芽；通常本月开始添辅食(米粉优先)，仍母乳为主；按计划接种。'
+    6:'第6月 · 独坐萌芽；通常本月开始添辅食(米粉优先)，仍母乳为主；按计划接种。',
+    7:'第7月 · 独坐稳定；可能开始爬行(匍匐或标准爬)；辅食增加到每天2顿；检查家中安全隐患。',
+    8:'第8月 · 爬行熟练、扶着站；分离焦虑高峰期；辅食2-3顿+手指食物；建立安全的探索环境。',
+    9:'第9月 · 扶着走(cruising)；有意识叫爸妈；辅食3顿+吸管杯；尊重陌生人焦虑。',
+    10:'第10月 · 独站几秒；词汇1-2个；三顿辅食+加餐；语言发展关键期，多读绘本。',
+    11:'第11月 · 推着走、可能独走几步；词汇2-5个；鼓励自主进食；保护安全感。',
+    12:'第12月 · 🎂 一周岁！独立行走、词汇爆发；三顿家庭餐+牛奶；回顾这一年，你真的好棒。'
   };
-  const mm = Math.min(6, m);
+  const mm = Math.min(12, Math.max(1, m));
   curMonthTitle.textContent = `第${mm}月 · 本月重点`;
   curMonthDetail.innerHTML = '<div class="plain"><li>'+ (data[mm]||data[6]) +'</li></div>';
+
+  // 渲染本月必做清单
+  const checklistEl = document.getElementById('babyMonthChecklist');
+  if(checklistEl){
+    const checklists = {
+      2: [
+        {t:'每天tummy time累计15-20分钟',s:'分多次，每次2-3分钟，趴着时你在他对面让他看到你的脸'},
+        {t:'每天跟宝宝说话、唱歌至少15分钟',s:'描述你在做什么、你看到了什么，你的声音是他最早的语言课'},
+        {t:'记录喂养/睡眠/便便',s:'随手记，发现规律和异常。注意肠胀气信号——双腿蜷缩、腹部硬鼓'},
+        {t:'按计划接种疫苗',s:'接种前后注意体温变化，备好退热贴'},
+        {t:'给自己拍一张和宝宝的合照',s:'这个月的你和他，以后回头看会觉得很珍贵'}
+      ],
+      3: [
+        {t:'每天tummy time累计20-30分钟',s:'宝宝抬头更稳了，可以放玩具在前面吸引他'},
+        {t:'给宝宝不同材质的玩具触摸',s:'布书、硅胶玩具、触觉球——他在用双手认识世界'},
+        {t:'观察并记录宝宝的睡眠变化',s:'可能出现睡眠倒退，这是大脑发育的正常现象'},
+        {t:'按计划接种疫苗',s:'留意接种后24-48小时体温变化'}
+      ],
+      4: [
+        {t:'确保安全——绝不让宝宝独自在高处',s:'宝宝会翻身了！沙发、尿布台、床——一秒钟都不能离开'},
+        {t:'开始了解辅食知识',s:'买好餐椅、辅食碗勺，了解第一口辅食原则'},
+        {t:'每天亲子阅读5-10分钟',s:'布书、纸板书，哪怕他在咬书也没关系'},
+        {t:'按计划接种疫苗',s:'关注百白破等后续剂次'}
+      ],
+      5: [
+        {t:'准备牙胶（冷藏后使用更舒服）',s:'出牙期宝宝会烦躁，冷牙胶是最安全的缓解方式'},
+        {t:'玩"躲猫猫"游戏',s:'用手捂住脸然后"哇"地打开——这个游戏他永远玩不腻'},
+        {t:'开始亲子阅读固定时间',s:'每天一个固定时段读书，建立"阅读=快乐"的神经链接'}
+      ],
+      6: [
+        {t:'本月重点——开始添加辅食！',s:'第一口选高铁米粉，从1勺开始，观察5天无过敏再加下一种'},
+        {t:'准备辅食工具',s:'米粉、辅食碗勺、围兜、餐椅——全部就位'},
+        {t:'按计划接种疫苗',s:'乙肝第3剂、流脑等'},
+        {t:'安全升级——宝宝开始移动了',s:'收走地上的小物件，给插座盖上保护盖'}
+      ],
+      7: [
+        {t:'辅食增加到每天2顿',s:'谷物+蔬菜+水果+肉泥，每种新食物观察3-5天'},
+        {t:'检查家中安全隐患',s:'插座保护盖、桌角防撞条、收走小物件——宝宝抓到什么都往嘴里放'},
+        {t:'给宝宝手指食物练习',s:'熟胡萝卜、香蕉、牛油果，切成小块让他自己抓着吃'}
+      ],
+      8: [
+        {t:'创造安全的爬行环境',s:'不同材质的地面、枕头堆成"小山"——让爬行变得有趣'},
+        {t:'玩"妈妈走了又回来"游戏',s:'每次离开都告知并很快回来，帮助宝宝建立信任'},
+        {t:'给宝宝一个"安全抽屉"',s:'放塑料碗、木勺等安全物品，让他自由探索'}
+      ],
+      9: [
+        {t:'不用学步车！',s:'学步车不安全且不利于学走路，让宝宝光脚扶着稳固家具练习'},
+        {t:'辅食增加到每天3顿',s:'逐渐接近家庭饮食（无盐无糖版），开始用吸管杯'},
+        {t:'不强迫宝宝给别人抱',s:'尊重他的陌生人焦虑，给他时间观察和适应'}
+      ],
+      10: [
+        {t:'每天读绘本至少15分钟',s:'语言发展关键窗口期——多输入才能多输出'},
+        {t:'让宝宝和大人一起上桌吃饭',s:'他坐在餐椅上，和你们吃差不多的时间'},
+        {t:'回应宝宝的"指认"',s:'他指什么你就说什么——每一次回应都在帮他建立语言连接'}
+      ],
+      11: [
+        {t:'鼓励自主进食',s:'给他一把小勺子让他自己来，哪怕吃得乱七八糟'},
+        {t:'保护宝宝的安全感',s:'他犯错时不说"你怎么这样"，说"没关系，我们来擦干净"'},
+        {t:'光脚练习走路',s:'光脚比穿鞋更适合学走路，脚底的感觉帮助掌握平衡'}
+      ],
+      12: [
+        {t:'🎂 给小可乐过一岁生日！',s:'不需要多隆重，一张照片、一段视频、一封写给一年后的小可乐的信'},
+        {t:'开始喝全脂牛奶，逐渐戒掉奶瓶',s:'每天约400-500ml奶制品，用杯子喝奶'},
+        {t:'回顾这一年的成长',s:'翻看手机里的照片——从一个新生儿到现在，你们一起经历了多少第一次'}
+      ]
+    };
+    const items = checklists[mm] || checklists[2];
+    checklistEl.innerHTML = items.map(item => {
+      const stored = loadBabyMonthChecks();
+      const done = !!stored[`baby_m${mm}_${item.t}`];
+      return `<div class="check-item${done?' done':''}" data-baby-check="baby_m${mm}_${item.t}">
+        <div class="box">${done?'✓':''}</div>
+        <div class="txt">${item.t}<small>${item.s}</small></div>
+      </div>`;
+    }).join('');
+    // 绑定点击事件
+    checklistEl.querySelectorAll('.check-item').forEach(el => {
+      el.addEventListener('click', ()=>{
+        const key = el.dataset.babyCheck;
+        const stored = loadBabyMonthChecks();
+        stored[key] = !stored[key];
+        localStorage.setItem('mama_baby_month_checks', JSON.stringify(stored));
+        renderCurMonth(m);
+      });
+    });
+  }
+}
+
+function loadBabyMonthChecks(){
+  try{ return JSON.parse(localStorage.getItem('mama_baby_month_checks'))||{}; }catch(e){ return {}; }
 }
 
 birthInput.addEventListener('change', ()=>{
@@ -810,11 +1298,11 @@ document.getElementById('ovToday').addEventListener('click', ()=>{
 });
 document.getElementById('ovWeek').addEventListener('click', ()=>{
   showMod('week');
-  document.getElementById('ovWeek').style.borderColor = 'var(--teal-deep)';
+  document.getElementById('ovWeek').style.borderColor = 'var(--mint-deep)';
 });
 document.getElementById('ovMonth').addEventListener('click', ()=>{
   showMod('month');
-  document.getElementById('ovMonth').style.borderColor = 'var(--gold)';
+  document.getElementById('ovMonth').style.borderColor = 'var(--yellow-deep)';
 });
 
 /* ====================== 本周概览渲染 ====================== */
@@ -836,15 +1324,15 @@ function renderWeekOverview(){
     <h2>📅 本周概览（${fmt(monday)} ~ ${fmt(sunday)}）</h2>
     <div class="lead">小可乐：产后第 ${babyWeeks} 周</div>
     <div class="week">
-      <div class="day"><b>周一</b><p>💪 盆底放松<br>💰 读财商书</p></div>
-      <div class="day"><b>周二</b><p>💪 腹横肌激活<br>📈 看市场温度</p></div>
-      <div class="day"><b>周三</b><p>💪 颈椎养护<br>🧘 内耗觉察</p></div>
-      <div class="day"><b>周四</b><p>💰 财经新闻<br>🤖 玩AI功能</p></div>
-      <div class="day"><b>周五</b><p>💪 盆底放松<br>💰 开源点子</p></div>
-      <div class="day"><b>周六</b><p>💪 腱鞘炎养护<br>👶 tummy time</p></div>
-      <div class="day"><b>周日</b><p>🧘 不安排休息<br>📈 周复盘</p></div>
+      <div class="day"><b>🌅 周一 · 启动日</b><p>💪 盆底放松训练（10–15分钟）<br>💰 读财商书/听播客20分钟<br>📝 写一条"晨间一问"</p></div>
+      <div class="day"><b>💪 周二 · 核心日</b><p>💪 腹横肌激活+腹直肌修复（10次×2组）<br>📈 扫一眼市场温度（不操作）<br>🤖 用AI做一件小事（写文案/做图）</p></div>
+      <div class="day"><b>🧘 周三 · 觉察日</b><p>💪 颈椎养护+热敷10分钟<br>🧘 内耗深度觉察（写满半张纸）<br>👶 记录喂养/睡眠/便便</p></div>
+      <div class="day"><b>📰 周四 · 信息日</b><p>💰 关注一条财经新闻<br>🤖 玩1个AI新功能<br>🧘 信息节食（少刷手机30分钟）</p></div>
+      <div class="day"><b>💡 周五 · 创意日</b><p>💪 盆底放松训练（坐姿练习）<br>💰 想一个"开源"小点子<br>📝 记一条"可变现灵感"</p></div>
+      <div class="day"><b>👶 周六 · 亲子日</b><p>💪 腱鞘炎专项养护+左手热敷<br>👶 tummy time+追视互动+多说话<br>🧘 滋养自己（做一件纯粹为自己）</p></div>
+      <div class="day"><b>🌸 周日 · 复盘日</b><p>🧘 不安排任务，休息半天<br>📈 周复盘：这周离目标近了？<br>💕 对自己说一句"辛苦了"</p></div>
     </div>
-    <div class="note" style="margin-top:14px">本周重点：坚持每日腹式呼吸 + 盆底放松，这是产康黄金期的核心。财商读完《小狗钱钱》前3章。</div>
+    <div class="note" style="margin-top:14px">📌 <b>本周核心：</b>① 坚持每日腹式呼吸+盆底放松——这是产康黄金期的地基；② 财商读完《小狗钱钱》前3章，写下你的"3个金钱梦想"；③ 每天至少跟小可乐说话15分钟——你的声音是他最好的早教。完不成的任务不焦虑，下周继续。</div>
   </div>`;
 }
 
@@ -865,16 +1353,16 @@ function renderMonthOverview(){
   el.innerHTML = `<div class="card">
     <h2>🗓️ 本月概览（${curM}）</h2>
     <div class="lead">小可乐：${babyMonths} 个月 · ${recoveryPhase}</div>
-    <h3>本月六大模块里程碑</h3>
+    <h3>📋 本月六大模块里程碑</h3>
     <div class="res">
-      <div class="book"><div class="nm">💰 财商</div><div class="why">读《小狗钱钱》+ 开记账本，建立金钱感觉。</div></div>
-      <div class="book"><div class="nm">💪 健康</div><div class="why">腹式呼吸+盆底放松为核心，补钙铁多维，产康复查。</div></div>
-      <div class="book"><div class="nm">🧘 心理</div><div class="why">每天"三件好事"，开始觉察内耗模式。</div></div>
-      <div class="book"><div class="nm">📈 理财</div><div class="why">观察市场、学看估值温度计，开好账户不投或极小额定投。</div></div>
-      <div class="book"><div class="nm">👶 育儿</div><div class="why">俯卧抬头、追视互动、关注肠胀气、按计划接种疫苗。</div></div>
-      <div class="book"><div class="nm">🤖 AI</div><div class="why">用熟1个AI对话工具，学基础提示词。</div></div>
+      <div class="book"><div class="nm">💰 财商成长</div><div class="why"><b>目标：</b>读完《小狗钱钱》+ 下载记账APP开始记录。写下你的"3个金钱梦想"——比如给小可乐存教育金、带爸妈旅行、买一个不看价签的包。<br><b>本月行动：</b>每天记账1分钟+看1条财商内容。让"钱"变成你愿意聊的话题。</div></div>
+      <div class="book"><div class="nm">💪 健康恢复</div><div class="why"><b>目标：</b>以腹式呼吸+盆底放松为核心，补钙铁多维，按时去产康复查。<br><b>本月行动：</b>每天腹式呼吸10分钟（喂奶时做），每周至少5天。盆底放松训练每周3次。去医院做一次盆底评估+颈椎复查。</div></div>
+      <div class="book"><div class="nm">🧘 心理疗愈</div><div class="why"><b>目标：</b>每天"三件好事"（升级版），开始觉察内耗模式。学会在念头出现时不说"我怎么又这样"，而是说"哦，又来啦"。<br><b>本月行动：</b>睡前写三件好事+5分钟正念呼吸。识别一次内耗循环并尝试用工具箱打断。</div></div>
+      <div class="book"><div class="nm">📈 理财投资</div><div class="why"><b>目标：</b>观察市场、学看估值温度计、开好基金账户。<br><b>本月行动：</b>每天扫一眼估值表（5分钟）。搞懂什么是"指数"——沪深300、中证500、创业板。在天天基金或且慢开好账户，先不投钱。</div></div>
+      <div class="book"><div class="nm">👶 小可乐育儿</div><div class="why"><b>目标：</b>俯卧抬头(tummy time)、追视互动、关注肠胀气/二月闹、按计划接种疫苗。<br><b>本月行动：</b>每天tummy time累计15-20分钟（分多次）。记录喂养/睡眠/便便。多跟宝宝说话、对视、唱歌——你的声音是他最好的早教。</div></div>
+      <div class="book"><div class="nm">🤖 AI轻创业</div><div class="why"><b>目标：</b>用熟1个AI对话工具（通义千问/豆包/DeepSeek），学基础提示词四要素。<br><b>本月行动：</b>每天让AI帮你做一件事——写文案/做计划/润色笔记。发布第一条小红书笔记（内容不重要，重要的是"发了"）。</div></div>
     </div>
-    <div class="note" style="margin-top:14px">本月关键词：<b>温和开始</b>。不追求完美，每天做一点点就很好。月底来复盘一次，看看离总目标近了没有。</div>
+    <div class="note" style="margin-top:14px;line-height:1.8">🌟 <b>本月关键词：温和开始</b>。不追求完美，每天做一点点就很好。记住——你在同时做六件事（健康+心理+财商+投资+育儿+AI），每一件都需要时间和耐心。不要因为某一项没完成就否定全部。月底来复盘一次，看看离总目标近了没有。哪怕只前进了1%，也是前进。<br><br>💕 <b>本月给自己的话：</b>"我不用成为全能妈妈。我在学习、在恢复、在尝试——这本身就值得骄傲。"</div>
   </div>`;
 }
 
