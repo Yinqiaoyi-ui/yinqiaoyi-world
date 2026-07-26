@@ -462,11 +462,15 @@
         <div class="lead">记录你的身高体重变化，观察产后恢复曲线</div>
         <div class="body-form">
           <label>日期 <input type="date" id="myRecordDate" value=""></label>
+          <label>身高(cm) <input type="number" id="myHeight" step="0.1" placeholder="如 160" style="width:80px"></label>
           <label>体重(kg) <input type="number" id="myWeight" step="0.1" placeholder="如 55.0" style="width:80px"></label>
           <button class="btn-save" id="saveMyBody">💾 保存</button>
         </div>
         <div style="margin-top:14px">
           <canvas id="myWeightChart" height="200" style="max-width:100%"></canvas>
+        </div>
+        <div style="margin-top:8px">
+          <canvas id="myHeightChart" height="200" style="max-width:100%"></canvas>
         </div>
         <div id="myWeightList" class="record-list"></div>
       </div>
@@ -1473,61 +1477,56 @@ const MY_BODY_KEY = 'mama_body_records';
 function loadMyBody(){ try{ return JSON.parse(localStorage.getItem(MY_BODY_KEY))||[]; }catch(e){ return []; } }
 function saveMyBody(arr){ localStorage.setItem(MY_BODY_KEY, JSON.stringify(arr)); }
 
-function renderMyBodyChart(){
+function renderMyBodyCharts(){
   const records = loadMyBody();
   records.sort((a,b)=>a.date.localeCompare(b.date));
-  const canvas = document.getElementById('myWeightChart');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const dpr = window.devicePixelRatio || 1;
-  const w = canvas.parentElement.clientWidth;
-  canvas.width = w * dpr; canvas.height = 200 * dpr;
-  canvas.style.width = w+'px'; canvas.style.height = '200px';
-  ctx.scale(dpr,dpr);
-  if(records.length === 0){ ctx.fillStyle='#ccc'; ctx.font='14px sans-serif'; ctx.textAlign='center'; ctx.fillText('暂无数据，添加第一条记录吧~', w/2, 100); return; }
 
-  const padding = {top:20,right:20,bottom:30,left:50};
-  const pw = w - padding.left - padding.right;
-  const ph = 200 - padding.top - padding.bottom;
-  const weights = records.map(r=>r.weight);
-  const minW = Math.floor(Math.min(...weights) - 2);
-  const maxW = Math.ceil(Math.max(...weights) + 2);
-  const range = maxW - minW || 1;
+  function drawOne(canvasId, field, unit, color){
+    const canvas = document.getElementById(canvasId);
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const w = canvas.parentElement.clientWidth;
+    canvas.width = w * dpr; canvas.height = 200 * dpr;
+    canvas.style.width = w+'px'; canvas.style.height = '200px';
+    ctx.scale(dpr,dpr);
+    const valid = records.filter(r=>r[field]!=null);
+    if(valid.length === 0){ ctx.fillStyle='#ccc'; ctx.font='14px sans-serif'; ctx.textAlign='center'; ctx.fillText('暂无数据，添加第一条记录吧~', w/2, 100); return; }
 
-  // bg grid
-  ctx.strokeStyle = '#f0e3db'; ctx.lineWidth = 0.5;
-  for(let i=0;i<=4;i++){ const y=padding.top+ph*i/4; ctx.beginPath(); ctx.moveTo(padding.left,y); ctx.lineTo(w-padding.right,y); ctx.stroke(); }
+    const vals = valid.map(r=>r[field]);
+    const minV = Math.floor(Math.min(...vals) - 2);
+    const maxV = Math.ceil(Math.max(...vals) + 2);
+    const range = maxV - minV || 1;
+    const pad = {top:20,right:20,bottom:30,left:50};
+    const pw = w - pad.l - pad.r;
+    const ph = 200 - pad.t - pad.b;
 
-  // axes
-  ctx.strokeStyle = '#ccc'; ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(padding.left,padding.top); ctx.lineTo(padding.left,200-padding.bottom); ctx.lineTo(w-padding.right,200-padding.bottom); ctx.stroke();
+    ctx.strokeStyle = '#f0e3db'; ctx.lineWidth = 0.5;
+    for(let i=0;i<=4;i++){ const y=pad.t+ph*i/4; ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(w-pad.r,y); ctx.stroke(); }
+    ctx.strokeStyle = '#ccc'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,200-pad.b); ctx.lineTo(w-pad.r,200-pad.b); ctx.stroke();
+    ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+    for(let i=0;i<=4;i++){ const val = maxV - range*i/4; ctx.fillText(val.toFixed(1)+unit, pad.l-6, pad.t+ph*i/4+4); }
+    ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.lineJoin = 'round'; ctx.beginPath();
+    valid.forEach((r,i)=>{
+      const x = pad.l + (i/(valid.length-1||1))*pw;
+      const y = pad.t + ((maxV - r[field])/range)*ph;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+    valid.forEach((r,i)=>{
+      const x = pad.l + (i/(valid.length-1||1))*pw;
+      const y = pad.t + ((maxV - r[field])/range)*ph;
+      ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.fill();
+    });
+    ctx.fillStyle = '#999'; ctx.textAlign = 'center'; ctx.font = '9px sans-serif';
+    const step = Math.max(1, Math.floor(valid.length/6));
+    valid.forEach((r,i)=>{ if(i%step===0||i===valid.length-1){ ctx.fillText(r.date.slice(5), pad.l+(i/(valid.length-1||1))*pw, 200-6); } });
+  }
 
-  // labels
-  ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
-  for(let i=0;i<=4;i++){ const val = maxW - range*i/4; ctx.fillText(val.toFixed(1)+'kg', padding.left-6, padding.top+ph*i/4+4); }
-
-  // line
-  ctx.strokeStyle = '#ff85a2'; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
-  ctx.beginPath();
-  records.forEach((r,i)=>{
-    const x = padding.left + (i/(records.length-1||1))*pw;
-    const y = padding.top + ((maxW - r.weight)/range)*ph;
-    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-  });
-  ctx.stroke();
-
-  // dots
-  records.forEach((r,i)=>{
-    const x = padding.left + (i/(records.length-1||1))*pw;
-    const y = padding.top + ((maxW - r.weight)/range)*ph;
-    ctx.fillStyle = '#ff85a2'; ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.fill();
-  });
-
-  // date labels
-  ctx.fillStyle = '#999'; ctx.textAlign = 'center'; ctx.font = '9px sans-serif';
-  const step = Math.max(1, Math.floor(records.length/6));
-  records.forEach((r,i)=>{ if(i%step===0 || i===records.length-1){ ctx.fillText(r.date.slice(5), padding.left+(i/(records.length-1||1))*pw, 200-6); } });
+  drawOne('myWeightChart', 'weight', 'kg', '#ff85a2');
+  drawOne('myHeightChart', 'height', 'cm', '#9b7fd4');
 }
 
 function renderMyBodyList(){
@@ -1539,11 +1538,11 @@ function renderMyBodyList(){
   records.forEach((r,i)=>{
     const row = document.createElement('div');
     row.className = 'record-row';
-    row.innerHTML = `<span>${r.date}</span> <b>${r.weight}kg</b><span class="del" data-idx="${i}">×</span>`;
+    row.innerHTML = `<span>${r.date}</span> <b>${r.height||'--'}cm</b> <b>${r.weight||'--'}kg</b><span class="del" data-idx="${i}">×</span>`;
     row.querySelector('.del').addEventListener('click',()=>{
       const all = loadMyBody();
-      const target = all.findIndex(x=>x.date===r.date&&Math.abs(x.weight-r.weight)<0.01);
-      if(target>=0){ all.splice(target,1); saveMyBody(all); renderMyBodyChart(); renderMyBodyList(); }
+      const target = all.findIndex(x=>x.date===r.date);
+      if(target>=0){ all.splice(target,1); saveMyBody(all); renderMyBodyCharts(); renderMyBodyList(); }
     });
     el.appendChild(row);
   });
@@ -1551,13 +1550,15 @@ function renderMyBodyList(){
 
 document.getElementById('saveMyBody')?.addEventListener('click', ()=>{
   const date = document.getElementById('myRecordDate').value;
-  const weight = parseFloat(document.getElementById('myWeight').value);
-  if(!date || isNaN(weight)) return alert('请填写日期和体重');
+  const height = parseFloat(document.getElementById('myHeight').value) || null;
+  const weight = parseFloat(document.getElementById('myWeight').value) || null;
+  if(!date || (!height && !weight)) return alert('请填写日期和至少一项数据');
   const records = loadMyBody();
-  records.push({date, weight});
+  records.push({date, height, weight});
   saveMyBody(records);
+  document.getElementById('myHeight').value = '';
   document.getElementById('myWeight').value = '';
-  renderMyBodyChart();
+  renderMyBodyCharts();
   renderMyBodyList();
 });
 
@@ -1652,7 +1653,7 @@ document.getElementById('saveBabyData')?.addEventListener('click', ()=>{
 });
 
 // 初始化时渲染曲线
-renderMyBodyChart();
+renderMyBodyCharts();
 renderMyBodyList();
 renderBabyCharts();
 renderBabyDataList();
