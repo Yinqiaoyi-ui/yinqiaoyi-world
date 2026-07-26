@@ -158,16 +158,24 @@
   .ov-card.month::before{background:var(--yellow-deep)}
   .ov-card.month .ov-badge{background:var(--yellow-light);color:#b8933a}
 
-  /* ---------- 六模块横向滑动chip ---------- */
-  .mod-scroll-wrap{margin:14px 0}
-  .mod-scroll{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:4px 2px 8px;scrollbar-width:none}
-  .mod-scroll::-webkit-scrollbar{display:none}
-  .mod-chip{flex:0 0 auto;scroll-snap-align:start;background:var(--card);border:2px solid var(--line);border-radius:24px;padding:10px 16px;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer;transition:.2s;white-space:nowrap;box-shadow:0 2px 8px rgba(180,140,120,.06)}
-  .mod-chip:active{transform:scale(.96)}
-  .mod-chip.active{background:var(--pink-deep);color:#fff;border-color:var(--pink-deep)}
-  @media(max-width:640px){
-    .mod-chip{padding:9px 13px;font-size:13px}
-  }
+  /* ---------- 左侧抽屉导航 ---------- */
+  .menu-btn{position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.35);border:none;border-radius:12px;width:38px;height:38px;font-size:20px;color:#fff;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;transition:.2s}
+  .menu-btn:active{background:rgba(255,255,255,.55)}
+  header h1{padding-left:44px}
+  .drawer{position:fixed;left:0;top:0;width:280px;height:100%;background:linear-gradient(180deg,#fff8fb 0%,#fff 100%);box-shadow:8px 0 40px rgba(120,80,90,.15);z-index:200;transform:translateX(-110%);transition:transform .35s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+  .drawer.open{transform:translateX(0)}
+  .drawer-header{padding:50px 22px 18px;background:linear-gradient(135deg,#ffb3c6,#ff85a2);color:#fff}
+  .drawer-title{font-size:18px;font-weight:800}
+  .drawer-sub{font-size:12px;opacity:.9;margin-top:3px}
+  .drawer-items{flex:1;overflow-y:auto;padding:12px 14px}
+  .drawer-item{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:14px;margin-bottom:6px;cursor:pointer;transition:.2s;font-size:15px;font-weight:700;color:var(--ink)}
+  .drawer-item:hover{background:var(--pink-light)}
+  .drawer-item.active{background:var(--pink-deep);color:#fff}
+  .drawer-item .di-icon{font-size:20px;width:30px;text-align:center}
+  .drawer-footer{padding:14px;font-size:11px;color:#bbb;text-align:center}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.28);backdrop-filter:blur(2px);z-index:150;opacity:0;pointer-events:none;transition:opacity .3s}
+  .overlay.open{opacity:1;pointer-events:auto}
+  body.drawer-open{overflow:hidden}
   @media(max-width:640px){
     .overview-row{grid-template-columns:repeat(3,1fr);gap:6px}
     .ov-card{padding:12px 6px}
@@ -218,6 +226,7 @@
 
   <!-- ============ HEADER ============ -->
   <header>
+    <button class="menu-btn" id="menuBtn">☰</button>
     <h1>音乔伊的小世界</h1>
     <div class="sub">财商 · 健康 · 心理 · 理财 · 育儿 · AI轻资产创业 —— 温柔而坚定地，成为更好的自己</div>
     <div class="birth-row">
@@ -252,18 +261,24 @@
     </div>
   </div>
 
-  <!-- ============ 六模块横向滑动 ============ -->
-  <div class="mod-scroll-wrap">
-    <div class="mod-scroll" id="modScroll">
-      <div class="mod-chip active" data-mod="today">📋 今日</div>
-      <div class="mod-chip" data-mod="money">💰 财商</div>
-      <div class="mod-chip" data-mod="health">💪 健康</div>
-      <div class="mod-chip" data-mod="mind">🧘 心理</div>
-      <div class="mod-chip" data-mod="invest">📈 理财</div>
-      <div class="mod-chip" data-mod="baby">👶 育儿</div>
-      <div class="mod-chip" data-mod="ai">🤖 AI</div>
+  <!-- ============ 左侧抽屉导航 ============ -->
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">音乔伊的小世界</div>
+      <div class="drawer-sub">我的小模块们</div>
     </div>
+    <div class="drawer-items">
+      <div class="drawer-item active" data-mod="today"><span class="di-icon">📋</span><span>今日概览</span></div>
+      <div class="drawer-item" data-mod="money"><span class="di-icon">💰</span><span>财商成长</span></div>
+      <div class="drawer-item" data-mod="health"><span class="di-icon">💪</span><span>健康恢复</span></div>
+      <div class="drawer-item" data-mod="mind"><span class="di-icon">🧘</span><span>心理疗愈</span></div>
+      <div class="drawer-item" data-mod="invest"><span class="di-icon">📈</span><span>理财投资</span></div>
+      <div class="drawer-item" data-mod="baby"><span class="di-icon">👶</span><span>小可乐育儿</span></div>
+      <div class="drawer-item" data-mod="ai"><span class="di-icon">🤖</span><span>AI创业</span></div>
+    </div>
+    <div class="drawer-footer">向左滑动收起菜单</div>
   </div>
+  <div class="overlay" id="overlay"></div>
 
   <!-- ============ 详情区域（点击模块卡片展开） ============ -->
   <div class="grid" id="detailArea">
@@ -1293,34 +1308,33 @@ function showMod(mod){
   allSecs.forEach(s=>{ s.style.display = 'none'; s.classList.remove('active'); });
   const target = document.getElementById('mod-'+mod);
   if(target){ target.style.display = 'block'; target.classList.add('active'); }
-  // 高亮对应chip
-  document.querySelectorAll('.mod-chip').forEach(c=>c.classList.remove('active'));
-  const chip = document.querySelector('.mod-chip[data-mod="'+mod+'"]');
-  if(chip) chip.classList.add('active');
+  // 高亮对应抽屉项
+  document.querySelectorAll('.drawer-item').forEach(c=>c.classList.remove('active'));
+  const dItem = document.querySelector('.drawer-item[data-mod="'+mod+'"]');
+  if(dItem) dItem.classList.add('active');
   // 概览卡取消高亮
   document.querySelectorAll('.ov-card').forEach(c=>c.style.borderColor='var(--line)');
   detailArea.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// 横向滑动chip点击
-document.querySelectorAll('.mod-chip').forEach(chip=>{
-  chip.addEventListener('click', ()=>{
-    document.querySelectorAll('.mod-chip').forEach(c=>c.classList.remove('active'));
-    chip.classList.add('active');
-    showMod(chip.dataset.mod);
+// 抽屉菜单控制
+const drawer = document.getElementById('drawer');
+const overlay = document.getElementById('overlay');
+const menuBtn = document.getElementById('menuBtn');
+function openDrawer(){ drawer.classList.add('open'); overlay.classList.add('open'); document.body.classList.add('drawer-open'); }
+function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.classList.remove('drawer-open'); }
+menuBtn.addEventListener('click', openDrawer);
+overlay.addEventListener('click', closeDrawer);
+
+// 抽屉项点击
+document.querySelectorAll('.drawer-item').forEach(item=>{
+  item.addEventListener('click', ()=>{
+    document.querySelectorAll('.drawer-item').forEach(c=>c.classList.remove('active'));
+    item.classList.add('active');
+    showMod(item.dataset.mod);
+    closeDrawer();
   });
 });
-// 滑动chip时同步高亮（滚动监听）
-(function(){
-  const scrollEl = document.getElementById('modScroll');
-  if(!scrollEl) return;
-  // 点击chip时滚动到可见位置
-  document.querySelectorAll('.mod-chip').forEach(chip=>{
-    chip.addEventListener('click', ()=>{
-      chip.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
-    });
-  });
-})();
 
 // 三个概览卡点击
 document.getElementById('ovToday').addEventListener('click', ()=>{
@@ -1653,6 +1667,28 @@ document.getElementById('saveBabyData')?.addEventListener('click', ()=>{
 });
 
 // 初始化时渲染曲线
+
+// 左侧边缘右滑打开抽屉 / 抽屉内向左滑关闭
+(function(){
+  let startX=0, startY=0, startTime=0;
+  document.addEventListener('touchstart', e=>{
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    startTime = Date.now();
+  }, {passive:true});
+  document.addEventListener('touchend', e=>{
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const dx = endX - startX;
+    const dy = endY - startY;
+    const dt = Date.now() - startTime;
+    if(Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)*1.5 || dt > 400) return;
+    const drawerOpen = drawer.classList.contains('open');
+    if(!drawerOpen && startX < 35 && dx > 0) openDrawer();
+    if(drawerOpen && startX < 280 && dx < 0) closeDrawer();
+  }, {passive:true});
+})();
+
 renderMyBodyCharts();
 renderMyBodyList();
 renderBabyCharts();
