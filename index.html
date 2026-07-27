@@ -151,7 +151,7 @@
   }
   .today-hero-bg{
     position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;
-    border-radius:var(--radius-sm);opacity:.85;
+    border-radius:var(--radius-sm);opacity:1;
   }
   .today-hero h2,.today-hero .meta,.today-hero .progress-bar{position:relative;z-index:1}
   .today-hero .meta{font-size:13px;color:rgba(58,50,40,.75)}
@@ -1968,16 +1968,16 @@ renderMonthOverview();
 
     // ── 海底水色背景 ──
     const bgGrd = ctx.createLinearGradient(0, 0, 0, h);
-    bgGrd.addColorStop(0, '#d4eaf6');
-    bgGrd.addColorStop(.35, '#c8e4f0');
-    bgGrd.addColorStop(.6, '#b8dcea');
-    bgGrd.addColorStop(1, '#a8d0dd');
+    bgGrd.addColorStop(0, '#9fdcf5');
+    bgGrd.addColorStop(.35, '#a8e0ef');
+    bgGrd.addColorStop(.6, '#b8e6ec');
+    bgGrd.addColorStop(1, '#c8dce8');
     ctx.fillStyle = bgGrd;
     ctx.fillRect(0, 0, w, h);
 
     // ── 光线束（上帝光） ──
-    for(let i=0;i<5;i++){
-      const lx = w * (.1 + i * .2);
+    for(let i=0;i<6;i++){
+      const lx = w * (.08 + i * .18);
       const grd = ctx.createLinearGradient(lx, 0, lx - 40, h);
       grd.addColorStop(0, 'rgba(255,255,240,.25)');
       grd.addColorStop(.5, 'rgba(255,255,240,.08)');
@@ -2041,11 +2041,13 @@ renderMonthOverview();
       ctx.save();
       ctx.globalAlpha = alpha;
       ctx.strokeStyle = color;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 2.5;
       ctx.lineCap = 'round';
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 6;
       for(let b=0;b<branches;b++){
         const angle = -Math.PI/2 + (b - branches/2) * .35 + Math.random() * .2;
-        const len = 25 + Math.random() * 35;
+        const len = 28 + Math.random() * 40;
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         let x = cx, y = cy, a = angle;
@@ -2068,27 +2070,28 @@ renderMonthOverview();
         // 顶端小球
         ctx.fillStyle = color;
         ctx.beginPath();
-        ctx.arc(x, y, 3.5, 0, Math.PI*2);
+        ctx.arc(x, y, 4, 0, Math.PI*2);
         ctx.fill();
       }
+      ctx.shadowBlur = 0;
       ctx.restore();
     }
 
     // 左边珊瑚群
-    drawCoral(w * .08, h - 24, 8, '#f0a8b8', .9);
-    drawCoral(w * .15, h - 22, 6, '#f5c0a0', .85);
-    drawCoral(w * .05, h - 26, 5, '#e898a8', .8);
+    drawCoral(w * .08, h - 24, 8, '#ff8fab', .95);
+    drawCoral(w * .15, h - 22, 6, '#ffb7a5', .9);
+    drawCoral(w * .05, h - 26, 5, '#ff9eb3', .85);
 
     // 右边珊瑚群
-    drawCoral(w * .85, h - 24, 7, '#f0a8b8', .9);
-    drawCoral(w * .93, h - 22, 5, '#f5c0a0', .85);
-    drawCoral(w * .78, h - 28, 6, '#e8a0b0', .8);
+    drawCoral(w * .85, h - 24, 7, '#ff8fab', .95);
+    drawCoral(w * .93, h - 22, 5, '#ffb7a5', .9);
+    drawCoral(w * .78, h - 28, 6, '#ff9eb3', .85);
 
     // ── 珊瑚邮筒（中心偏左） ──
     const postX = w * .42;
     const postY = h - 60;
     // 邮筒主体
-    ctx.fillStyle = '#f0a8b8';
+    ctx.fillStyle = '#ff8fab';
     ctx.beginPath();
     // roundRect 兼容替代
     const rr = (x,y,w,h,r) => {
@@ -2104,12 +2107,12 @@ renderMonthOverview();
     };
     rr(postX - 16, postY - 35, 32, 48, 10);
     ctx.fill();
-    ctx.strokeStyle = '#d08898';
+    ctx.strokeStyle = '#d06680';
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
     // 珊瑚纹理
-    ctx.fillStyle = 'rgba(255,255,255,.2)';
+    ctx.fillStyle = 'rgba(255,255,255,.35)';
     for(let i=0;i<8;i++){
       ctx.beginPath();
       ctx.arc(postX - 8 + Math.random()*16, postY - 25 + Math.random()*30, 2 + Math.random()*3, 0, Math.PI*2);
@@ -2117,62 +2120,64 @@ renderMonthOverview();
     }
 
     // 投信口
-    ctx.fillStyle = '#5a3038';
+    ctx.fillStyle = '#8a4048';
     ctx.fillRect(postX - 10, postY - 16, 20, 5);
-    ctx.strokeStyle = '#d08898';
+    ctx.strokeStyle = '#d06680';
     ctx.strokeRect(postX - 10, postY - 16, 20, 5);
 
     // 邮筒顶盖
-    ctx.fillStyle = '#e898a8';
+    ctx.fillStyle = '#ff7d9a';
     ctx.beginPath();
     ctx.ellipse(postX, postY - 35, 20, 8, 0, Math.PI, 0);
     ctx.fill();
-    ctx.strokeStyle = '#d08898';
+    ctx.strokeStyle = '#d06680';
     ctx.stroke();
 
-    // "POST" 字样
     ctx.fillStyle = '#fff';
-    ctx.font = 'bold 8px sans-serif';
+    ctx.font = 'bold 9px sans-serif';
     ctx.textAlign = 'center';
+    ctx.shadowColor = 'rgba(120,40,60,.3)';
+    ctx.shadowBlur = 2;
     ctx.fillText('POST', postX, postY + 5);
+    ctx.shadowBlur = 0;
 
     // ── 贝壳信箱（右侧） ──
-    const shellX = w * .7;
-    const shellY = h - 50;
+    const shellX = w * .72;
+    const shellY = h - 48;
     // 扇贝外形
-    ctx.fillStyle = '#fce8e0';
+    ctx.fillStyle = '#fff0e8';
     ctx.beginPath();
-    ctx.moveTo(shellX - 18, shellY);
+    ctx.moveTo(shellX - 20, shellY);
     for(let i=0;i<=10;i++){
       const t = i/10;
-      const sx = shellX - 18 + t * 36;
-      const sy = shellY - Math.sin(t * Math.PI) * 22;
+      const sx = shellX - 20 + t * 40;
+      const sy = shellY - Math.sin(t * Math.PI) * 26;
       ctx.lineTo(sx, sy);
     }
-    ctx.lineTo(shellX + 18, shellY);
+    ctx.lineTo(shellX + 20, shellY);
     ctx.fill();
-    ctx.strokeStyle = '#e0c0b0';
+    ctx.strokeStyle = '#e8b8a8';
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
     // 贝壳放射纹
-    ctx.strokeStyle = 'rgba(210,170,150,.4)';
+    ctx.strokeStyle = 'rgba(232,160,140,.45)';
     ctx.lineWidth = .8;
     for(let i=1;i<10;i++){
       ctx.beginPath();
-      ctx.moveTo(shellX, shellY - 22);
-      ctx.lineTo(shellX - 18 + i * 3.6, shellY);
+      ctx.moveTo(shellX, shellY - 26);
+      ctx.lineTo(shellX - 20 + i * 4, shellY);
       ctx.stroke();
     }
 
     // 珍珠光泽高光
-    const pearlGrd = ctx.createRadialGradient(shellX - 2, shellY - 14, 2, shellX, shellY - 10, 18);
-    pearlGrd.addColorStop(0, 'rgba(255,255,255,.7)');
-    pearlGrd.addColorStop(.5, 'rgba(255,240,240,.2)');
-    pearlGrd.addColorStop(1, 'rgba(255,240,240,0)');
+    const pearlGrd = ctx.createRadialGradient(shellX - 2, shellY - 16, 2, shellX, shellY - 12, 20);
+    pearlGrd.addColorStop(0, 'rgba(255,255,255,.85)');
+    pearlGrd.addColorStop(.5, 'rgba(255,240,245,.4)');
+    pearlGrd.addColorStop(1, 'rgba(255,240,245,0)');
     ctx.fillStyle = pearlGrd;
     ctx.beginPath();
-    ctx.ellipse(shellX, shellY - 12, 16, 12, 0, 0, Math.PI*2);
+    ctx.ellipse(shellX, shellY - 14, 18, 14, 0, 0, Math.PI*2);
     ctx.fill();
 
     // ── 海草信纸（左下角） ──
@@ -2258,7 +2263,7 @@ renderMonthOverview();
       ctx.restore();
     }
 
-    const fishColors = ['#f5a0b0','#f0c0a0','#e8a8b8','#f8d0c0','#e898a0'];
+    const fishColors = ['#ff8fab','#ffb7a5','#ff9eb3','#ffd0a0','#ffaaa0'];
     for(let i=0;i<7;i++){
       const fx = w * (.1 + Math.random() * .75);
       const fy = h * (.08 + Math.random() * .45);
