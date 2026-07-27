@@ -323,24 +323,6 @@
         <div id="myWeightList" class="record-list"></div>
       </div>
 
-      <!-- ========== 小可乐成长数据 ========== -->
-      <div class="card" style="margin-top:16px">
-        <h3>📈 小可乐成长曲线</h3>
-        <div class="lead">记录小可乐的身高体重，和WHO生长标准对比</div>
-        <div class="body-form">
-          <label>日期 <input type="date" id="babyRecordDate" value=""></label>
-          <label>身高(cm) <input type="number" id="babyHeight" step="0.1" placeholder="如 58.0" style="width:80px"></label>
-          <label>体重(kg) <input type="number" id="babyWeight" step="0.1" placeholder="如 5.2" style="width:80px"></label>
-          <button class="btn-save" id="saveBabyData">💾 保存</button>
-        </div>
-        <div style="margin-top:14px">
-          <canvas id="babyHeightChart" height="200" style="max-width:100%"></canvas>
-        </div>
-        <div style="margin-top:14px">
-          <canvas id="babyWeightChart" height="200" style="max-width:100%"></canvas>
-        </div>
-        <div id="babyDataList" class="record-list"></div>
-      </div>
     </section>
 
     <!-- ============ MONEY ============ -->
@@ -778,185 +760,73 @@
       </div>
     </section>
 
-    <!-- ============ BABY ============ -->
+        <!-- ============ BABY ============ -->
     <section class="module" id="mod-baby">
       <div class="card">
-        <h2><span class="dot" style="background:var(--sky-deep)"></span>育儿月历 · 按月推送</h2>
+        <h2><span class="dot" style="background:var(--sky-deep)"></span>小可乐 · 成长记录</h2>
         <div class="birth-row" style="margin-bottom:16px">
           <label>小可乐生日
             <input type="date" id="babyBirth" max="2030-12-31">
           </label>
-          <span class="badge" id="ageBadge">请填写宝宝生日</span>
-          <span id="phaseBadge" class="badge" style="background:rgba(255,255,255,.9);color:var(--teal-deep)"></span>
+          <span class="badge" id="ageBadge" style="background:rgba(255,255,255,.95);color:var(--sky-deep)">请填写宝宝生日</span>
         </div>
-        <div class="lead">宝宝当前 <b id="babyMonthText">2</b> 个月。下面按月给你该阶段的大运动、疫苗、喂养与注意事项。本卡会随你填写的宝宝生日自动提示当前月龄。</div>
+        <div class="lead">小可乐已经 <b id="babyAgeDetail">--</b> 啦！每个成长的瞬间都值得记录 ✨</div>
 
-        <!-- ===== 给小可乐的妈妈 ===== -->
-        <h3>💌 给小可乐的妈妈</h3>
-        <div style="background:var(--sky-light);border-radius:16px;padding:20px;margin:12px 0;border:2px solid var(--sky);line-height:1.9">
-          <p style="margin-bottom:14px">亲爱的音乔伊，</p>
-          <p style="margin-bottom:14px">你现在可能正经历着人生中最奇妙也最疲惫的一段时光——怀里抱着一个软软的小生命，他的每一次呼吸、每一个表情、每一声啼哭，都牵动着你的全部神经。</p>
-          <p style="margin-bottom:14px"><b>我想先跟你说：你做得很好。</b>真的。不管你今天有没有完成tummy time的目标，不管你是不是因为太累而忘了记录喂养，不管你是不是偶尔怀疑"我是不是一个好妈妈"——你都是。因为一个好妈妈的定义，不是"完美"，而是"在乎"。</p>
-          <p style="margin-bottom:14px"><b>小可乐不需要一个完美的妈妈，他只需要你。</b>你的声音、你的气味、你的体温、你看他的眼神——这些是他认识这个世界的第一扇窗。你喂奶的时候低头看他的样子，你半夜爬起来抱着他哄睡的样子，你对着他笑、对着他说话、对着他唱歌的样子——这些，就是他童年里最温暖的底色。</p>
-          <p style="margin-bottom:14px"><b>别被"科学育儿"绑架。</b>那些育儿书、公众号、短视频告诉你"这个月宝宝应该会翻身了""那个月应该能睡整觉了"——请记住，那只是平均值。你的小可乐有他自己的节奏。他可能比标准快一点，也可能慢一点。那又怎样？他会长大的，会的。他会在某一天突然翻身、突然坐起来、突然迈出第一步——然后你会又惊喜又鼻酸地发现，那个整天躺着的、小小的婴儿，已经变成了一个满地跑的小朋友。</p>
-          <p style="margin-bottom:14px"><b>你不需要什么都懂。</b>宝宝第一次发烧时你会慌，第一次便秘时你会急，第一次从床上滚下去时你会心疼到哭。这些都是正常的。你不是天生就会当妈妈的——你是在一次一次的慌张、学习、试错中，慢慢变成小可乐最信赖的那个人的。</p>
-          <p>这份月历不是用来考核你的。它只是一个温柔的路标，提醒你：这个月宝宝大概在学什么、需要注意什么。完成了当然好，没完成也没关系。因为最重要的那些事——拥抱、注视、陪伴、爱——你每天都在做。</p>
-          <p style="margin-top:10px;text-align:right;color:var(--sky-deep);font-weight:600">—— 陪小可乐一起长大的工作台</p>
+        <!-- ===== 四个子模块Tab ===== -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0">
+          <button class="baby-tab active" data-bt="care" style="padding:8px 14px;border:2px solid var(--sky);background:var(--sky-light);border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--sky-deep);transition:.2s">📅 每月养护</button>
+          <button class="baby-tab" data-bt="growth" style="padding:8px 14px;border:2px solid var(--line);background:#fff;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--ink-soft);transition:.2s">📈 身高体重</button>
+          <button class="baby-tab" data-bt="milestone" style="padding:8px 14px;border:2px solid var(--line);background:#fff;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--ink-soft);transition:.2s">🌟 成长里程碑</button>
+          <button class="baby-tab" data-bt="vaccine" style="padding:8px 14px;border:2px solid var(--line);background:#fff;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--ink-soft);transition:.2s">💉 疫苗提醒</button>
         </div>
 
-        <h3 id="curMonthTitle">第2月 · 本月重点</h3>
-        <div id="curMonthDetail"></div>
+        <!-- 每月养护 -->
+        <div class="baby-panel" id="baby-care">
+          <h3 id="curMonthTitle">第2月 · 本月重点</h3>
+          <div id="curMonthDetail"></div>
+          <h3 style="margin-top:16px">✅ 本月必做清单</h3>
+          <div id="babyMonthChecklist"></div>
+          <details style="margin-top:16px">
+            <summary style="cursor:pointer;font-weight:700;color:var(--sky-deep);font-size:14px">📅 查看逐月养护（2-12月）</summary>
+            <div id="babyAllMonths" style="margin-top:12px"></div>
+          </details>
+        </div>
 
-        <!-- ===== 本月必做清单 ===== -->
-        <h3>✅ 本月必做清单（完成了就打勾，月底给自己一朵小红花）</h3>
-        <div id="babyMonthChecklist"></div>
+        <!-- 身高体重 -->
+        <div class="baby-panel" id="baby-growth" style="display:none">
+          <div class="body-form">
+            <label>日期 <input type="date" id="babyRecordDate" value=""></label>
+            <label>身高(cm) <input type="number" id="babyHeight" step="0.1" placeholder="如 58.0" style="width:80px"></label>
+            <label>体重(kg) <input type="number" id="babyWeight" step="0.1" placeholder="如 5.2" style="width:80px"></label>
+            <button class="btn-save" id="saveBabyData">💾 保存</button>
+          </div>
+          <div style="margin-top:14px">
+            <canvas id="babyHeightChart" height="200" style="max-width:100%"></canvas>
+          </div>
+          <div style="margin-top:14px">
+            <canvas id="babyWeightChart" height="200" style="max-width:100%"></canvas>
+          </div>
+          <div id="babyDataList" class="record-list"></div>
+        </div>
 
-        <!-- ===== 逐月规划（2–12月） ===== -->
-        <h3>📅 逐月规划（2–12个月，每个月都有新惊喜）</h3>
+        <!-- 成长里程碑 -->
+        <div class="baby-panel" id="baby-milestone" style="display:none">
+          <div class="body-form" style="margin-bottom:16px">
+            <label>日期 <input type="date" id="msDate" value=""></label>
+            <label>事件 <input type="text" id="msText" placeholder="如：长了第一颗牙齿" style="width:140px"></label>
+            <button class="btn-save" id="saveMilestone">🌟 记录</button>
+          </div>
+          <div id="milestoneTimeline"></div>
+        </div>
 
-        <h4>🟢 2个月 · 社交微笑的开始</h4>
-        <ul class="plain">
-          <li><b>大运动：</b>俯卧时能抬头45°，竖抱时头较稳。每天累计tummy time 15-20分钟（分多次，每次2-3分钟）。宝宝趴着的时候，你可以趴在他对面，让他能看到你的脸。</li>
-          <li><b>精细动作：</b>双手开始松开（不再紧握拳头），能短暂抓握摇铃。给他一个轻的、安全的小玩具，看看他会不会握住。</li>
-          <li><b>语言：</b>发出"啊""哦"等元音，开始"咿呀学语"。你可以模仿他的声音——这会让宝宝很开心，也是在教他"对话"的基本模式。</li>
-          <li><b>社交：</b>出现社会性微笑——不是吃饱了的无意识笑，而是看到你的脸时真正的、有情感的笑。这是宝宝给你的第一份"礼物"，请好好享受。</li>
-          <li><b>疫苗：</b>按当地接种本，本月通常含脊灰、百白破等第1/2剂（以接种本为准）。接种前后注意体温变化。</li>
-          <li><b>喂养：</b>母乳按需，约8–12次/天。这个月是"二月闹"的高发期——肠胀气、黄昏闹、频繁要吃。不是你奶不够，是宝宝在经历生长发育的猛长期。</li>
-          <li><b>睡眠：</b>每天睡14–17小时，但可能开始出现昼夜颠倒。白天保持光线充足、有声音，晚上保持昏暗安静，帮他建立日夜节律。</li>
-          <li><b>特别注意：</b>肠胀气——飞机抱、顺时针揉肚子、排气操、母乳妈妈减少产气食物（豆类、奶制品、十字花科蔬菜）。如果宝宝哭闹不止且伴随双腿蜷缩、腹部硬鼓，可能是肠绞痛，抱抱他、安抚他，会过去的。</li>
-        </ul>
-
-        <h4>🟢 3个月 · 开始探索世界</h4>
-        <ul class="plain">
-          <li><b>大运动：</b>抬头可达90°，前臂支撑。开始尝试翻身（仰卧→侧卧），可能第一次翻身失败急得大哭。没关系，给他加油，他很快就能做到的。</li>
-          <li><b>精细动作：</b>开始吃手、看手、玩手——这是他在认识自己的身体。给他不同材质的玩具（布书、硅胶玩具）让他摸。</li>
-          <li><b>语言：</b>发出笑声、"咕咕"声，开始用不同的哭声表达不同需求。你能慢慢听出"饿了"和"困了"的哭声是不一样的。</li>
-          <li><b>社交：</b>对熟悉的人笑得多，对陌生人可能会安静观察。开始喜欢看人脸，尤其是眼睛。多跟他对视、做夸张的表情——宝宝会模仿你。</li>
-          <li><b>疫苗：</b>按计划接种；留意接种后24-48小时内的体温和情绪变化。38.5℃以下物理降温，以上咨询医生。</li>
-          <li><b>喂养：</b>逐渐形成约3–4小时一次的规律，但仍按需喂养。这个月可能出现厌奶期——不是不爱喝，是喝奶的效率提高了，喝得快了就以为够了。</li>
-          <li><b>睡眠：</b>可能经历第一次睡眠倒退——之前能睡4小时，现在2小时就醒。这是正常的，宝宝的大脑在快速发育，睡眠模式在重组。熬过去就好。</li>
-          <li><b>特别注意：</b>多趴、多说话、多唱歌。宝宝醒着的时候不要总让他躺着——抱着他在房间里走走，给他讲解"这是灯""这是窗户"。你说话的声音是他最早的语言课。</li>
-        </ul>
-
-        <h4>🟡 4个月 · 翻身小能手</h4>
-        <ul class="plain">
-          <li><b>大运动：</b>翻身（仰→侧→俯），有的宝宝能从俯卧翻回仰卧。从此再也不能把宝宝单独放在沙发或尿布台上——一秒都不行。安全第一！</li>
-          <li><b>精细动作：</b>抓握更稳、能伸手够玩具、把东西往嘴里塞（口欲期正常现象）。给他安全的、可啃咬的玩具，保持玩具清洁。</li>
-          <li><b>语言：</b>咿呀声更丰富，开始模仿音调。你跟他说话时他会"回答"你——虽然听不懂但节奏感十足。</li>
-          <li><b>社交：</b>能区分熟人和生人，开始出现"认生"迹象。这其实是好事——说明宝宝认知能力在发展。被宝宝拒绝的亲友不要难过，给他点时间。</li>
-          <li><b>疫苗：</b>按计划（如百白破后续剂次、脊灰疫苗等）。</li>
-          <li><b>喂养：</b>开始了解添加辅食的知识——通常在6个月开始，但4个月起可以开始准备：买好餐椅、辅食碗勺、了解第一口辅食的原则（米粉→蔬菜泥→果泥→肉泥，每种试3-5天观察过敏）。</li>
-          <li><b>睡眠：</b>可能继续睡眠倒退。建立固定的睡前仪式——洗澡→按摩→喂奶→关灯→放床上。仪式感是帮助宝宝"知道该睡觉了"的信号。</li>
-          <li><b>特别注意：</b>口水多、爱啃手、牙龈痒——可能是出牙前兆。准备牙胶（冷藏后使用更舒服）。流口水多要注意下巴和脖子保持干燥，避免口水疹。</li>
-        </ul>
-
-        <h4>🟡 5个月 · 坐起来看世界</h4>
-        <ul class="plain">
-          <li><b>大运动：</b>靠坐（需要有支撑）、翻身熟练、能在俯卧时用手掌撑起上半身。可以在宝宝背后放一个哺乳枕，让他练习"坐着看世界"的视角。</li>
-          <li><b>精细动作：</b>双手互玩、能换手拿玩具、喜欢拍打和摇晃东西。给他不同形状、不同声音的玩具——摇铃、软积木、触觉球。</li>
-          <li><b>语言：</b>开始发辅音——"ba""da""ma"（虽然还不知道这些声音代表什么，但妈妈听到"ma"的时候还是会心花怒放）。</li>
-          <li><b>社交：</b>喜欢跟人互动，尤其是"躲猫猫"游戏——用双手捂住脸然后"哇"地打开，宝宝会咯咯笑。这个游戏他永远玩不腻。</li>
-          <li><b>疫苗：</b>按计划接种。</li>
-          <li><b>喂养：</b>仍然母乳/配方奶为主。如果宝宝对大人吃饭表现出浓厚兴趣（盯着你的嘴看、伸手抓你的筷子），说明他快准备好接受辅食了。</li>
-          <li><b>睡眠：</b>部分宝宝开始能睡较长觉（5–6小时不醒），但每个宝宝差异巨大。如果他还不能，不是你的问题。</li>
-          <li><b>特别注意：</b>可能出牙——第一颗牙通常在4–7个月冒出来。出牙期宝宝会烦躁、夜醒增多、喜欢咬东西、可能低烧。多抱抱他，冷牙胶会让他舒服很多。亲子阅读可以从这个月开始——布书、纸板书、翻翻书，哪怕他只是在咬书也没关系，重要的是你在跟他一起"看"。</li>
-        </ul>
-
-        <h4>🟠 6个月 · 辅食大冒险</h4>
-        <ul class="plain">
-          <li><b>大运动：</b>独坐萌芽（可能还需要手支撑）、翻身自如、有些宝宝开始匍匐爬行。给他一个安全的活动空间——铺上爬行垫，收走周围的危险物品。</li>
-          <li><b>精细动作：</b>能用整只手抓东西（耙状抓握）、喜欢把东西从一只手换到另一只手。开始练习"捏"的动作——可以放一些小泡芙在餐盘上让他自己尝试。</li>
-          <li><b>语言：</b>对自己的名字有反应，听到叫名字会转头。开始理解简单的词——"不可以""过来""抱抱"。</li>
-          <li><b>社交：</b>认生高峰——见到陌生人会哭或躲到妈妈怀里。不要强迫他"给阿姨抱"，尊重他的节奏。他需要时间观察和适应。</li>
-          <li><b>疫苗：</b>按计划（如乙肝疫苗第3剂、流脑疫苗等）。</li>
-          <li><b>喂养：</b><b>本月重点——添加辅食！</b>第一口选高铁米粉（纯大米、单一成分），用母乳或配方奶调成稀糊状。第1天1勺，逐渐增加到第5天3–4勺。观察5天无过敏后，加下一种（如南瓜泥、胡萝卜泥）。记住原则：<b>一次只加一种新食物，观察3–5天。</b>仍然母乳/配方奶为主，辅食是"补充"不是"替代"。</li>
-          <li><b>睡眠：</b>可能开始有"分离焦虑"——你离开房间就哭。睡前仪式更重要了，给宝宝一个安抚物（小毯子、安抚巾），让他有安全感。</li>
-          <li><b>特别注意：</b>辅食添加的注意事项——①不要加盐、糖、蜂蜜（1岁以下禁蜂蜜！）；②从稀到稠、从细到粗；③观察大便变化（颜色、质地会变，只要不腹泻不便秘就正常）；④宝宝吃饱的信号是——闭嘴转头、推勺子、注意力转移，不要硬喂。</li>
-        </ul>
-
-        <h4>🟠 7个月 · 坐稳了</h4>
-        <ul class="plain">
-          <li><b>大运动：</b>独坐稳定（不需要手支撑）、可能开始匍匐爬或标准爬。有些宝宝会"倒退爬"——先学会后退再学会前进，完全正常。</li>
-          <li><b>精细动作：</b>开始用拇指和食指捏东西（钳状抓握），能自己拿手指食物吃。给他切成小块的软食物（熟胡萝卜、香蕉、牛油果），让他练习自己吃。</li>
-          <li><b>语言：</b>开始模仿简单音节，能发"baba""mama""dada"，虽然可能还分不清谁是谁。多跟他说话、唱歌、念绘本——输入越多，输出越早。</li>
-          <li><b>社交：</b>喜欢照镜子，对镜子里的自己笑、拍打。这是自我认知的开始。可以跟他玩"指五官"的游戏——"宝宝的眼睛在哪里？""妈妈的鼻子在哪里？"</li>
-          <li><b>疫苗：</b>按计划接种。</li>
-          <li><b>喂养：</b>辅食增加到每天2顿，种类逐渐丰富——谷物、蔬菜、水果、肉泥、蛋黄（从1/4开始试）。继续母乳/配方奶，每天约600–800ml。</li>
-          <li><b>睡眠：</b>大部分宝宝开始能睡整觉（连续6–8小时）。如果还不能，别焦虑，睡眠训练不是必须的。选择适合你和宝宝的安抚方式。</li>
-          <li><b>特别注意：</b>宝宝开始到处移动了——检查家中安全隐患！插座盖上保护盖、桌角贴上防撞条、地上的小物件全部收起来（这个阶段的宝宝抓到什么都往嘴里放）。</li>
-        </ul>
-
-        <h4>🔴 8个月 · 探险家上线</h4>
-        <ul class="plain">
-          <li><b>大运动：</b>爬行熟练（标准手膝爬），能从趴着自己坐起来，能扶着东西站一会儿。给他创造安全的爬行环境——不同材质的地面、枕头堆成的"小山"、沙发和茶几之间的"隧道"。</li>
-          <li><b>精细动作：</b>钳状抓握熟练，能捡起小东西（所以地板上的小物件一定要清干净！）。喜欢扔东西、看东西掉到地上——这不是调皮，是他在学"因果关系"。</li>
-          <li><b>语言：</b>理解"不"的意思（虽然不一定听），能用动作表达需求——伸手要抱、推开不想要的。教他简单手势——"再见""飞吻""拍手"。</li>
-          <li><b>社交：</b>分离焦虑高峰期——你一离开就哭。玩"躲猫猫"和"妈妈走了→又回来了"的游戏，帮他理解"看不见不等于消失"。每次离开都跟他说"妈妈去一下厨房，马上回来"，然后真的马上回来——信任是这样建立的。</li>
-          <li><b>疫苗：</b>按计划（如麻腮风疫苗等）。</li>
-          <li><b>喂养：</b>辅食增加到每天2–3顿，可以尝试软的手指食物——蒸软的西兰花、胡萝卜条、小肉丸。让他自己抓着吃，虽然会弄得一团糟，但这是自主进食的宝贵练习。</li>
-          <li><b>睡眠：</b>可能因为大运动发育（爬、站）导致睡眠波动——宝宝半夜醒来练习新技能是正常的。不要开灯、不要玩，安静地帮他重新入睡。</li>
-          <li><b>特别注意：</b>这个月的宝宝好奇心爆棚——抽屉、柜子、垃圾桶、电源线……把危险物品锁好或放到他够不到的地方。可以给他一个"安全抽屉"——放塑料碗、木勺等安全物品，让他自由探索。</li>
-        </ul>
-
-        <h4>🔴 9个月 · 站起来了</h4>
-        <ul class="plain">
-          <li><b>大运动：</b>能扶着家具站得很稳，有些宝宝开始扶着沙发"横着走"（cruising）。给他稳固的、低矮的家具让他扶着练习。不要用学步车——学步车不安全且不利于学走路。</li>
-          <li><b>精细动作：</b>能用食指指东西、能用拇指食指精确捏起小物件。开始喜欢戳洞、按按钮——给他有按钮的玩具、洞洞书。</li>
-          <li><b>语言：</b>开始有意识地叫"妈妈""爸爸"（知道谁是谁了）。理解简单指令——"拍手""再见""亲亲"。这是语言爆发期前的重要准备期，多跟他说完整的句子，不要只说"婴儿语"。</li>
-          <li><b>社交：</b>开始出现"陌生人焦虑"和"分离焦虑"的双重高峰期。尊重他的情绪——不强迫他给别人抱，不偷偷溜走（会增加焦虑），离开时好好告别。</li>
-          <li><b>疫苗：</b>按计划接种。</li>
-          <li><b>喂养：</b>辅食增加到每天3顿，逐渐接近家庭饮食（无盐无糖版）。可以尝试更多种类的肉、鱼、豆制品。开始练习用吸管杯喝水。</li>
-          <li><b>睡眠：</b>白天小睡从3次减少到2次（上午一次、下午一次）。清醒时间变长，需要更多活动和互动来消耗精力。</li>
-          <li><b>特别注意：</b>这个月的宝宝什么都想自己来——自己拿勺子、自己喝水、自己翻书。给他机会尝试，哪怕吃得满脸都是、水洒了一地。自理能力就是这样一点点练出来的。</li>
-        </ul>
-
-        <h4>🔵 10个月 · 小沟通家</h4>
-        <ul class="plain">
-          <li><b>大运动：</b>爬行飞快、扶着走稳、能独立站几秒钟。有些宝宝会开始独走几步。如果他还不会走——完全正常，独立行走的正常范围是10–18个月。</li>
-          <li><b>精细动作：</b>能把东西放进容器再拿出来（反复玩这个游戏）、能翻厚纸板书页、会模仿涂鸦。给他一个安全的抽屉或盒子，里面放各种安全的小物件，他会玩很久。</li>
-          <li><b>语言：</b>能说出1–2个有意义的词（除了"爸爸妈妈"），理解更多词语和指令。开始用"婴语"跟你"聊天"——一连串的咿咿呀呀，音调起伏像在说话。认真"听"他说，然后回应——这对他语言发展至关重要。</li>
-          <li><b>社交：</b>开始有幽默感——会故意做一些动作逗你笑，然后自己也笑。开始出现"模仿行为"——你拍桌子他也拍，你打电话他也拿东西放耳边。</li>
-          <li><b>疫苗：</b>按计划接种。</li>
-          <li><b>喂养：</b>三顿辅食+1–2次加餐（水果、酸奶等），母乳/配方奶每天约500–600ml。可以尝试让宝宝和大人一起上桌吃饭——他坐在自己的餐椅上，和你们吃差不多的时间。</li>
-          <li><b>睡眠：</b>大部分宝宝白天睡两次（上午和下午各1–1.5小时），晚上睡10–12小时。继续保持睡前仪式。</li>
-          <li><b>特别注意：</b>这个阶段是语言发展的关键窗口期。多读绘本（每天至少15分钟）、多唱歌、多跟他说"这是什么""我们在做什么"。不要觉得他听不懂就不说——他每时每刻都在吸收。</li>
-        </ul>
-
-        <h4>🔵 11个月 · 快要会走了</h4>
-        <ul class="plain">
-          <li><b>大运动：</b>独站时间变长、扶着走变成"推着走"（推着凳子或学步推车走）、有些宝宝迈出独立的第一步。光脚比穿鞋更适合学走路——脚底的感觉帮助他掌握平衡。</li>
-          <li><b>精细动作：</b>能用勺子自己吃（虽然一半在嘴里一半在桌上）、能叠2–3块积木、会脱袜子。给他一把小勺子，让他自己来——哪怕吃得慢、吃得乱，这是成长的必经之路。</li>
-          <li><b>语言：</b>词汇量2–5个，能理解50个以上的词。开始用"指+发声"来表达需求——指着奶瓶说"neinei"。多回应他的"指认"——他说了，你回应，他就会更愿意说。</li>
-          <li><b>社交：</b>开始有自己的"意愿"——不喜欢的会摇头或推开，喜欢的会伸手要。开始出现"自我意识"的萌芽——所以可能会有"不"的表示。这不是叛逆，是成长。</li>
-          <li><b>疫苗：</b>按计划接种。</li>
-          <li><b>喂养：</b>三顿辅食+加餐，逐渐向家庭饮食过渡（注意口味清淡，不加盐糖）。鼓励自主进食——给他机会自己用手或勺子吃，虽然收拾战场很累，但这是培养他自主性的重要一步。</li>
-          <li><b>睡眠：</b>可能因为学走路而出现睡眠波动——大脑太兴奋了。保持耐心，睡前多些安静的亲子时光——读书、按摩、轻声聊天。</li>
-          <li><b>特别注意：</b>保护宝宝的安全感——不要在他犯错时吓唬或嘲笑。他打翻杯子、摔倒、弄洒食物时，说"没关系，我们来擦干净"。他需要知道：犯错是安全的，妈妈永远是他的安全基地。</li>
-        </ul>
-
-        <h4>🔵 12个月 · 一周岁生日快乐！🎂</h4>
-        <ul class="plain">
-          <li><b>大运动：</b>大部分宝宝开始独立行走（从几步到几米），少数可能还需要再等1–2个月。不管走不走，爬行期练出的上肢力量和协调性都不会浪费。</li>
-          <li><b>精细动作：</b>能用蜡笔乱涂、能翻书页、能把小东西放进瓶子里。给他安全的涂鸦工具——大蜡笔+大白纸，他会创作出第一幅"作品"。</li>
-          <li><b>语言：</b>词汇量3–8个，能听懂简单指令，开始用"婴语+手势"进行复杂表达。你可能是唯一能"翻译"他在说什么的人——这是你们之间最美的密码。</li>
-          <li><b>社交：</b>会主动引起你的注意——拉你的衣服、拿玩具给你看、发出声音叫你。开始模仿大人行为——"打电话""梳头""擦桌子"。你是他最重要的模仿对象。</li>
-          <li><b>疫苗：</b>按计划（可能含水痘疫苗等）。</li>
-          <li><b>喂养：</b>可以开始喝全脂牛奶（如果母乳不够或已断奶），每天约400–500ml奶制品。三餐+加餐，可以和大人吃一样的饭菜（注意切小、煮软、不加盐糖）。一岁后可以开始用杯子喝奶，逐渐戒掉奶瓶。</li>
-          <li><b>睡眠：</b>大部分宝宝白天睡一次午觉（1.5–2.5小时），晚上睡10–12小时。总睡眠约11–14小时/天。</li>
-          <li><b>特别注意：</b><b>恭喜你！小可乐一岁了！</b>回想过去的一年——从一个只会吃和睡的新生儿，到现在会爬、会站、会叫妈妈、会用小手抓东西吃的小朋友——你和他一起经历了多少第一次。这一年，你辛苦了。你半夜爬起来喂过无数次奶，你在他哭的时候手足无措过，你在医院排队打疫苗时一个人抱着他满头大汗。但你也看到过他的第一个微笑、听到过他的第一声"妈妈"、感受过他的小手第一次攥紧你的手指。这些都值得。接下来的一年，他会走得更稳、说得更多、笑得更大声。而你，也会从一个新手妈妈，变成一个从容的、有经验的、了不起的妈妈。🌸</li>
-        </ul>
-
-        <div class="note" style="background:var(--sky-light);border-left:5px solid var(--sky-deep);color:#3a5a6a">💉 <b>疫苗提醒：</b>疫苗程序以你当地《预防接种证》为准，不同城市剂次时间略有差异。如宝宝有早产、黄疸、发热、过敏等情况，接种前务必咨询社区医生。接种后24–48小时内注意观察体温和精神状态。</div>
-
-        <!-- ===== 妈妈加油站 ===== -->
-        <h3>💪 妈妈加油站 · 你也很重要</h3>
-        <div style="background:var(--sky-light);border-radius:16px;padding:20px;margin:12px 0;border:2px solid var(--sky);line-height:1.9">
-          <p style="margin-bottom:12px;font-weight:700;color:var(--sky-deep);font-size:15px">在照顾小可乐的同时，也请照顾你自己。</p>
-          <p style="margin-bottom:10px"><b>每天做一件"为自己"的事：</b>哪怕只有5分钟——喝一杯热茶不被任何人打扰、洗个热水澡、敷一片面膜、读一页书、听一首喜欢的歌。你不是"妈妈机器"，你是一个有自己需求的人。</p>
-          <p style="margin-bottom:10px"><b>每周给自己放一次"假"：</b>哪怕只有1小时——让老公或家人带娃，你出门走一走、去咖啡馆坐一坐、或者就在家里关上门睡一觉。你不是自私，你是在"充电"。电量耗尽的妈妈，没办法给宝宝最好的陪伴。</p>
-          <p style="margin-bottom:10px"><b>每月做一件"不只是妈妈"的事：</b>可能是和朋友吃顿饭、去看一场电影、写一篇文章、学一个新技能。宝宝需要的是一个快乐的妈妈，不是一个牺牲一切的妈妈。</p>
-          <p style="margin-bottom:10px"><b>当你崩溃的时候：</b>承认"我今天真的很累""我真的撑不住了""我需要帮助"。告诉你的伴侣、你的家人、你的朋友——你不是一个人。产后抑郁不是矫情，如果你持续感到情绪低落、对任何事都提不起兴趣、甚至有伤害自己或宝宝的想法——请立刻寻求专业帮助。</p>
-          <p style="margin-bottom:0"><b>记住：</b>你不是在"牺牲"自己来养孩子。你是在"带着"孩子一起成长。他长大的同时，你也在变成更好的自己——更耐心、更坚韧、更懂得爱。这份成长，是你送给小可乐最好的礼物，也是你送给自己最好的礼物。</p>
+        <!-- 疫苗提醒 -->
+        <div class="baby-panel" id="baby-vaccine" style="display:none">
+          <div class="body-form" style="margin-bottom:16px">
+            <label>日期 <input type="date" id="vacDate" value=""></label>
+            <label>疫苗名称 <input type="text" id="vacText" placeholder="如：五联第2剂" style="width:130px"></label>
+            <button class="btn-save" id="saveVaccine">➕ 添加</button>
+          </div>
+          <div id="vaccineChecklist"></div>
         </div>
       </div>
     </section>
@@ -1141,8 +1011,7 @@
 /* ====================== 宝宝生日与月龄 ====================== */
 const birthInput = document.getElementById('babyBirth');
 const ageBadge = document.getElementById('ageBadge');
-const phaseBadge = document.getElementById('phaseBadge');
-const babyMonthText = document.getElementById('babyMonthText');
+const babyAgeDetail = document.getElementById('babyAgeDetail');
 const curMonthTitle = document.getElementById('curMonthTitle');
 const curMonthDetail = document.getElementById('curMonthDetail');
 const encourageText = document.getElementById('encourageText');
@@ -1154,121 +1023,193 @@ function diffDays(a,b){ return Math.floor((b-a)/86400000); }
 
 function renderAge(){
   const v = birthInput.value;
-  if(!v){ ageBadge.textContent='请填写宝宝生日'; phaseBadge.textContent=''; babyMonthText.textContent='2'; return; }
+  if(!v){ ageBadge.textContent='请填写宝宝生日'; babyAgeDetail.textContent='--'; return; }
   const birth = new Date(v+'T00:00:00');
   const now = new Date();
   let days = diffDays(birth, now);
-  if(days < 0){ ageBadge.textContent='生日晚于今天啦'; return; }
-  const weeks = Math.floor(days/7);
-  const months = Math.floor(days/30.44);
-  ageBadge.textContent = `产后第 ${weeks} 周 · 约 ${months} 个月`;
-  // 恢复阶段提示
-  let ph = months<3 ? '产康黄金期·温和为主' : months<6 ? '恢复进阶期·可加运动' : '巩固期·建立习惯';
-  phaseBadge.textContent = ph;
-  babyMonthText.textContent = Math.max(1,months);
-  renderCurMonth(Math.max(1,months));
-  // 同步育儿卡片月龄
-  const modBabyMonth = document.getElementById('modBabyMonth');
-  if(modBabyMonth) modBabyMonth.textContent = Math.max(1,months)+'个月';
-  // 刷新本周/本月概览
-  renderWeekOverview();
-  renderMonthOverview();
+  if(days < 0){ ageBadge.textContent='生日晚于今天啦'; babyAgeDetail.textContent='--'; return; }
+  const totalMonths = Math.floor(days/30.44);
+  const remainingDays = days - Math.floor(totalMonths*30.44);
+  const months = Math.max(1, totalMonths);
+  const dd = Math.max(0, Math.floor(remainingDays));
+  
+  ageBadge.textContent = months + '个月' + (dd>0 ? dd+'天' : '');
+  babyAgeDetail.textContent = months + '个月' + (dd>0 ? dd+'天' : '');
+  
+  renderCurMonth(months);
 }
 
+// ========== 每月养护数据 ==========
+const monthlyCareData = {
+  1:'第1月 · 新生儿适应期：多吃多睡、黄疸观察、脐带护理、按需喂养，妈妈以休息和恢复为主。',
+  2:'第2月 · 本月重点：俯卧抬头(tummy time)、追视与微笑互动；关注肠胀气/二月闹；按计划接种疫苗；记录喂养睡眠。',
+  3:'第3月 · 抬头更稳、开始吃手探索；睡眠可能倒退；多趴多说话；留意疫苗反应。',
+  4:'第4月 · 翻身萌芽、抓握更稳；开始了解添加辅食知识（通常6月）；口水多正常。',
+  5:'第5月 · 靠坐、翻身熟练；可能出牙不适；亲子阅读与儿歌互动。',
+  6:'第6月 · 独坐萌芽；通常本月开始添辅食(米粉优先)，仍母乳为主；按计划接种。',
+  7:'第7月 · 独坐稳定；可能开始爬行(匍匐或标准爬)；辅食增加到每天2顿；检查家中安全隐患。',
+  8:'第8月 · 爬行熟练、扶着站；分离焦虑高峰期；辅食2-3顿+手指食物；建立安全的探索环境。',
+  9:'第9月 · 扶着走(cruising)；有意识叫爸妈；辅食3顿+吸管杯；尊重陌生人焦虑。',
+  10:'第10月 · 独站几秒；词汇1-2个；三顿辅食+加餐；语言发展关键期，多读绘本。',
+  11:'第11月 · 推着走、可能独走几步；词汇2-5个；鼓励自主进食；保护安全感。',
+  12:'第12月 · 🎂 一周岁！独立行走、词汇爆发；三顿家庭餐+牛奶；回顾这一年，你真的好棒。'
+};
+
+const monthlyChecklists = {
+  2: [
+    {t:'每天tummy time累计15-20分钟',s:'分多次，每次2-3分钟，趴着时你在他对面让他看到你的脸'},
+    {t:'每天跟宝宝说话、唱歌至少15分钟',s:'描述你在做什么、你看到了什么，你的声音是他最早的语言课'},
+    {t:'记录喂养/睡眠/便便',s:'随手记，发现规律和异常。注意肠胀气信号'},
+    {t:'按计划接种疫苗',s:'接种前后注意体温变化，备好退热贴'},
+    {t:'给自己拍一张和宝宝的合照',s:'这个月的你和他，以后回头看会觉得很珍贵'}
+  ],
+  3: [
+    {t:'每天tummy time累计20-30分钟',s:'宝宝抬头更稳了，可以放玩具在前面吸引他'},
+    {t:'给宝宝不同材质的玩具触摸',s:'布书、硅胶玩具、触觉球——他在用双手认识世界'},
+    {t:'观察并记录宝宝的睡眠变化',s:'可能出现睡眠倒退，这是大脑发育的正常现象'}
+  ],
+  4: [
+    {t:'确保安全——绝不让宝宝独自在高处',s:'宝宝会翻身了！一秒钟都不能离开'},
+    {t:'开始了解辅食知识',s:'买好餐椅、辅食碗勺，了解第一口辅食原则'},
+    {t:'每天亲子阅读5-10分钟',s:'布书、纸板书，哪怕他在咬书也没关系'}
+  ],
+  5: [
+    {t:'准备牙胶（冷藏后使用更舒服）',s:'出牙期宝宝会烦躁，冷牙胶是最安全的缓解方式'},
+    {t:'玩"躲猫猫"游戏',s:'用手捂住脸然后"哇"地打开——这个游戏他永远玩不腻'},
+    {t:'开始亲子阅读固定时间',s:'每天一个固定时段读书'}
+  ],
+  6: [
+    {t:'本月重点——开始添加辅食！',s:'第一口选高铁米粉，从1勺开始，观察5天无过敏再加下一种'},
+    {t:'准备辅食工具',s:'米粉、辅食碗勺、围兜、餐椅——全部就位'},
+    {t:'安全升级——宝宝开始移动了',s:'收走地上的小物件，给插座盖上保护盖'}
+  ],
+  7: [
+    {t:'辅食增加到每天2顿',s:'谷物+蔬菜+水果+肉泥，每种新食物观察3-5天'},
+    {t:'检查家中安全隐患',s:'插座保护盖、桌角防撞条、收走小物件'},
+    {t:'给宝宝手指食物练习',s:'熟胡萝卜、香蕉、牛油果，切成小块让他自己抓着吃'}
+  ],
+  8: [
+    {t:'创造安全的爬行环境',s:'不同材质的地面、枕头堆成"小山"'},
+    {t:'玩"妈妈走了又回来"游戏',s:'每次离开都告知并很快回来，帮助宝宝建立信任'},
+    {t:'给宝宝一个"安全抽屉"',s:'放塑料碗、木勺等安全物品，让他自由探索'}
+  ],
+  9: [
+    {t:'不用学步车！',s:'学步车不安全且不利于学走路，让宝宝光脚扶着稳固家具练习'},
+    {t:'辅食增加到每天3顿',s:'逐渐接近家庭饮食（无盐无糖版），开始用吸管杯'},
+    {t:'不强迫宝宝给别人抱',s:'尊重他的陌生人焦虑，给他时间观察和适应'}
+  ],
+  10: [
+    {t:'每天读绘本至少15分钟',s:'语言发展关键窗口期——多输入才能多输出'},
+    {t:'让宝宝和大人一起上桌吃饭',s:'他坐在餐椅上，和你们吃差不多的时间'},
+    {t:'回应宝宝的"指认"',s:'他指什么你就说什么——每一次回应都在帮他建立语言连接'}
+  ],
+  11: [
+    {t:'鼓励自主进食',s:'给他一把小勺子让他自己来，哪怕吃得乱七八糟'},
+    {t:'保护宝宝的安全感',s:'他犯错时不说"你怎么这样"，说"没关系，我们来擦干净"'},
+    {t:'光脚练习走路',s:'光脚比穿鞋更适合学走路，脚底的感觉帮助掌握平衡'}
+  ],
+  12: [
+    {t:'🎂 给小可乐过一岁生日！',s:'一张照片、一段视频、一封写给一年后的小可乐的信'},
+    {t:'开始喝全脂牛奶，逐渐戒掉奶瓶',s:'每天约400-500ml奶制品，用杯子喝奶'},
+    {t:'回顾这一年的成长',s:'翻看手机里的照片——从新生儿到现在，你们一起经历了多少第一次'}
+  ]
+};
+
+const fullMonthlyGuide = {
+  2: `<h4>🟢 2个月 · 社交微笑的开始</h4><ul class="plain">
+<li><b>大运动：</b>俯卧时能抬头45°，竖抱时头较稳。每天累计tummy time 15-20分钟（分多次，每次2-3分钟）。</li>
+<li><b>精细动作：</b>双手开始松开，能短暂抓握摇铃。</li>
+<li><b>语言：</b>发出"啊""哦"等元音，开始"咿呀学语"。</li>
+<li><b>社交：</b>出现社会性微笑——看到你的脸时真正的、有情感的笑。</li>
+<li><b>疫苗：</b>按当地接种本，本月通常含脊灰、百白破等第1/2剂。</li>
+<li><b>喂养：</b>母乳按需，约8–12次/天。注意"二月闹"——肠胀气、黄昏闹。</li>
+<li><b>睡眠：</b>每天睡14–17小时，白天保持光线充足，晚上保持昏暗安静。</li>
+<li><b>特别注意：</b>肠胀气——飞机抱、顺时针揉肚子、排气操。</li></ul>`,
+  3: `<h4>🟢 3个月 · 开始探索世界</h4><ul class="plain">
+<li><b>大运动：</b>抬头可达90°，前臂支撑。开始尝试翻身。</li>
+<li><b>精细动作：</b>开始吃手、看手、玩手——认识自己的身体。</li>
+<li><b>语言：</b>发出笑声、"咕咕"声，开始用不同哭声表达不同需求。</li>
+<li><b>社交：</b>对熟悉的人笑得多，开始喜欢看人脸。</li>
+<li><b>疫苗：</b>按计划接种；留意接种后24-48小时内的体温。</li>
+<li><b>喂养：</b>逐渐形成约3–4小时一次的规律，仍按需喂养。</li>
+<li><b>睡眠：</b>可能经历第一次睡眠倒退——大脑在快速发育。</li></ul>`,
+  4: `<h4>🟡 4个月 · 翻身小能手</h4><ul class="plain">
+<li><b>大运动：</b>翻身（仰→侧→俯），��此再也不能把宝宝单独放在高处。</li>
+<li><b>精细动作：</b>抓握更稳、能伸手够玩具、把东西往嘴里塞。</li>
+<li><b>语言：</b>咿呀声更丰富，开始模仿音调。</li>
+<li><b>社交：</b>能区分熟人和生人，开始出现"认生"迹象。</li>
+<li><b>喂养：</b>开始了解添加辅食的知识——通常在6个月开始。</li>
+<li><b>睡眠：</b>可能继续睡眠倒退。建立固定的睡前仪式。</li></ul>`,
+  5: `<h4>🟡 5个月 · 坐起来看世界</h4><ul class="plain">
+<li><b>大运动：</b>靠坐、翻身熟练、能在俯卧时用手掌撑起上半身。</li>
+<li><b>精细动作：</b>双手互玩、能换手拿玩具、喜欢拍打和摇晃东西。</li>
+<li><b>语言：</b>开始发辅音——"ba""da""ma"。</li>
+<li><b>社交：</b>喜欢跟人互动，尤其是"躲猫猫"游戏。</li>
+<li><b>喂养：</b>仍然母乳/配方奶为主。</li>
+<li><b>特别注意：</b>可能出牙——第一颗牙通常在4–7个月冒出来。</li></ul>`,
+  6: `<h4>🟠 6个月 · 辅食大冒险</h4><ul class="plain">
+<li><b>大运动：</b>独坐萌芽、翻身自如、有些宝宝开始匍匐爬行。</li>
+<li><b>精细动作：</b>能用整只手抓东西、喜欢换手拿玩具。</li>
+<li><b>语言：</b>对自己的名字有反应，开始理解简单的词。</li>
+<li><b>社交：</b>认生高峰——见到陌生人会哭。</li>
+<li><b>喂养：</b>本月重点——添加辅食！第一口选高铁米粉。从1勺开始，观察5天。</li>
+<li><b>特别注意：</b>辅食不加盐、糖、蜂蜜（1岁以下禁蜂蜜！）。</li></ul>`,
+  7: `<h4>🟠 7个月 · 坐稳了</h4><ul class="plain">
+<li><b>大运动：</b>独坐稳定、可能开始匍匐爬或标准爬。</li>
+<li><b>精细动作：</b>开始用拇指和食指捏东西，能自己拿手指食物吃。</li>
+<li><b>语言：</b>开始模仿简单音节，能发"baba""mama"。</li>
+<li><b>社交：</b>喜欢照镜子，对镜子里的自己笑。</li>
+<li><b>喂养：</b>辅食增加到每天2顿，种类逐渐丰富。</li>
+<li><b>特别注意：</b>宝宝开始到处移动了——检查家中安全隐患！</li></ul>`,
+  8: `<h4>🔴 8个月 · 探险家上线</h4><ul class="plain">
+<li><b>大运动：</b>爬行熟练、能从趴着自己坐起来、能扶着东西站。</li>
+<li><b>精细动作：</b>钳状抓握熟练，喜欢扔东西看东西掉地上。</li>
+<li><b>语言：</b>理解"不"的意思，能用动作表达需求。</li>
+<li><b>社交：</b>分离焦虑高峰期。</li>
+<li><b>喂养：</b>辅食增加到每天2–3顿，可以尝试软的手指食物。</li></ul>`,
+  9: `<h4>🔴 9个月 · 站起来了</h4><ul class="plain">
+<li><b>大运动：</b>能扶着家具站得���稳，有些宝宝开始扶着沙发"横着走"。</li>
+<li><b>精细动作：</b>能用食指指东西、精确捏起小物件。</li>
+<li><b>语言：</b>开始有意识地叫"妈妈""爸爸"。</li>
+<li><b>社交：</b>陌生人焦虑+分离焦虑双重高峰。</li>
+<li><b>喂养：</b>辅食增加到每天3顿，开始练习用吸管杯喝水。</li></ul>`,
+  10: `<h4>🔵 10个月 · 小沟通家</h4><ul class="plain">
+<li><b>大运动：</b>爬行飞快、扶着走稳、能独立站几秒钟。</li>
+<li><b>精细动作：</b>能把东西放进容器再拿出来、会翻厚纸板书页。</li>
+<li><b>语言：</b>能说出1–2个有意义的词，理解更多词语。</li>
+<li><b>社交：</b>开始有幽默感——会故意逗你笑。</li>
+<li><b>喂养：</b>三顿辅食+1–2次加餐，母乳/配方奶每天约500–600ml。</li></ul>`,
+  11: `<h4>🔵 11个月 · 快要会走了</h4><ul class="plain">
+<li><b>大运动：</b>独站时间变长、扶着走变成"推着走"、有些宝宝迈出独立第一步。</li>
+<li><b>精细动作：</b>能用勺子自己吃、能叠2–3块积木。</li>
+<li><b>语言：</b>词汇量2–5个，能理解50个以上的词。</li>
+<li><b>社交：</b>开始有自己的"意愿"——不喜欢的会摇头或推开。</li>
+<li><b>喂养：</b>三顿辅食+加餐，鼓励自主进食。</li></ul>`,
+  12: `<h4>🔵 12个月 · 一周岁生日快乐！🎂</h4><ul class="plain">
+<li><b>大运动：</b>大部分宝宝开始独立行走。</li>
+<li><b>精细动作：</b>能用蜡笔乱涂、能翻书页。</li>
+<li><b>语言：</b>词汇量3–8个，能听懂简单指令。</li>
+<li><b>社交：</b>会主动引起你的注意，开始模仿大人行为。</li>
+<li><b>喂养：</b>可以开始喝全脂牛奶，三餐+加餐，和大人吃一样的饭菜。</li></ul>`
+};
+
 function renderCurMonth(m){
-  const data = {
-    1:'第1月 · 新生儿适应期：多吃多睡、黄疸观察、脐带护理、按需喂养，妈妈以休息和恢复为主。',
-    2:'第2月 · 本月重点：俯卧抬头(tummy time)、追视与微笑互动；关注肠胀气/二月闹；按计划接种疫苗；记录喂养睡眠。',
-    3:'第3月 · 抬头更稳、开始吃手探索；睡眠可能倒退；多趴多说话；留意疫苗反应。',
-    4:'第4月 · 翻身萌芽、抓握更稳；开始了解添加辅食知识（通常6月）；口水多正常。',
-    5:'第5月 · 靠坐、翻身熟练；可能出牙不适；亲子阅读与儿歌互动。',
-    6:'第6月 · 独坐萌芽；通常本月开始添辅食(米粉优先)，仍母乳为主；按计划接种。',
-    7:'第7月 · 独坐稳定；可能开始爬行(匍匐或标准爬)；辅食增加到每天2顿；检查家中安全隐患。',
-    8:'第8月 · 爬行熟练、扶着站；分离焦虑高峰期；辅食2-3顿+手指食物；建立安全的探索环境。',
-    9:'第9月 · 扶着走(cruising)；有意识叫爸妈；辅食3顿+吸管杯；尊重陌生人焦虑。',
-    10:'第10月 · 独站几秒；词汇1-2个；三顿辅食+加餐；语言发展关键期，多读绘本。',
-    11:'第11月 · 推着走、可能独走几步；词汇2-5个；鼓励自主进食；保护安全感。',
-    12:'第12月 · 🎂 一周岁！独立行走、词汇爆发；三顿家庭餐+牛奶；回顾这一年，你真的好棒。'
-  };
   const mm = Math.min(12, Math.max(1, m));
-  curMonthTitle.textContent = `第${mm}月 · 本月重点`;
-  curMonthDetail.innerHTML = '<div class="plain"><li>'+ (data[mm]||data[6]) +'</li></div>';
+  curMonthTitle.textContent = '第'+mm+'月 · 本月重点';
+  curMonthDetail.innerHTML = '<div class="plain"><li>'+ (monthlyCareData[mm]||monthlyCareData[2]) +'</li></div>';
 
   // 渲染本月必做清单
   const checklistEl = document.getElementById('babyMonthChecklist');
   if(checklistEl){
-    const checklists = {
-      2: [
-        {t:'每天tummy time累计15-20分钟',s:'分多次，每次2-3分钟，趴着时你在他对面让他看到你的脸'},
-        {t:'每天跟宝宝说话、唱歌至少15分钟',s:'描述你在做什么、你看到了什么，你的声音是他最早的语言课'},
-        {t:'记录喂养/睡眠/便便',s:'随手记，发现规律和异常。注意肠胀气信号——双腿蜷缩、腹部硬鼓'},
-        {t:'按计划接种疫苗',s:'接种前后注意体温变化，备好退热贴'},
-        {t:'给自己拍一张和宝宝的合照',s:'这个月的你和他，以后回头看会觉得很珍贵'}
-      ],
-      3: [
-        {t:'每天tummy time累计20-30分钟',s:'宝宝抬头更稳了，可以放玩具在前面吸引他'},
-        {t:'给宝宝不同材质的玩具触摸',s:'布书、硅胶玩具、触觉球——他在用双手认识世界'},
-        {t:'观察并记录宝宝的睡眠变化',s:'可能出现睡眠倒退，这是大脑发育的正常现象'},
-        {t:'按计划接种疫苗',s:'留意接种后24-48小时体温变化'}
-      ],
-      4: [
-        {t:'确保安全——绝不让宝宝独自在高处',s:'宝宝会翻身了！沙发、尿布台、床——一秒钟都不能离开'},
-        {t:'开始了解辅食知识',s:'买好餐椅、辅食碗勺，了解第一口辅食原则'},
-        {t:'每天亲子阅读5-10分钟',s:'布书、纸板书，哪怕他在咬书也没关系'},
-        {t:'按计划接种疫苗',s:'关注百白破等后续剂次'}
-      ],
-      5: [
-        {t:'准备牙胶（冷藏后使用更舒服）',s:'出牙期宝宝会烦躁，冷牙胶是最安全的缓解方式'},
-        {t:'玩"躲猫猫"游戏',s:'用手捂住脸然后"哇"地打开——这个游戏他永远玩不腻'},
-        {t:'开始亲子阅读固定时间',s:'每天一个固定时段读书，建立"阅读=快乐"的神经链接'}
-      ],
-      6: [
-        {t:'本月重点——开始添加辅食！',s:'第一口选高铁米粉，从1勺开始，观察5天无过敏再加下一种'},
-        {t:'准备辅食工具',s:'米粉、辅食碗勺、围兜、餐椅——全部就位'},
-        {t:'按计划接种疫苗',s:'乙肝第3剂、流脑等'},
-        {t:'安全升级——宝宝开始移动了',s:'收走地上的小物件，给插座盖上保护盖'}
-      ],
-      7: [
-        {t:'辅食增加到每天2顿',s:'谷物+蔬菜+水果+肉泥，每种新食物观察3-5天'},
-        {t:'检查家中安全隐患',s:'插座保护盖、桌角防撞条、收走小物件——宝宝抓到什么都往嘴里放'},
-        {t:'给宝宝手指食物练习',s:'熟胡萝卜、香蕉、牛油果，切成小块让他自己抓着吃'}
-      ],
-      8: [
-        {t:'创造安全的爬行环境',s:'不同材质的地面、枕头堆成"小山"——让爬行变得有趣'},
-        {t:'玩"妈妈走了又回来"游戏',s:'每次离开都告知并很快回来，帮助宝宝建立信任'},
-        {t:'给宝宝一个"安全抽屉"',s:'放塑料碗、木勺等安全物品，让他自由探索'}
-      ],
-      9: [
-        {t:'不用学步车！',s:'学步车不安全且不利于学走路，让宝宝光脚扶着稳固家具练习'},
-        {t:'辅食增加到每天3顿',s:'逐渐接近家庭饮食（无盐无糖版），开始用吸管杯'},
-        {t:'不强迫宝宝给别人抱',s:'尊重他的陌生人焦虑，给他时间观察和适应'}
-      ],
-      10: [
-        {t:'每天读绘本至少15分钟',s:'语言发展关键窗口期——多输入才能多输出'},
-        {t:'让宝宝和大人一起上桌吃饭',s:'他坐在餐椅上，和你们吃差不多的时间'},
-        {t:'回应宝宝的"指认"',s:'他指什么你就说什么——每一次回应都在帮他建立语言连接'}
-      ],
-      11: [
-        {t:'鼓励自主进食',s:'给他一把小勺子让他自己来，哪怕吃得乱七八糟'},
-        {t:'保护宝宝的安全感',s:'他犯错时不说"你怎么这样"，说"没关系，我们来擦干净"'},
-        {t:'光脚练习走路',s:'光脚比穿鞋更适合学走路，脚底的感觉帮助掌握平衡'}
-      ],
-      12: [
-        {t:'🎂 给小可乐过一岁生日！',s:'不需要多隆重，一张照片、一段视频、一封写给一年后的小可乐的信'},
-        {t:'开始喝全脂牛奶，逐渐戒掉奶瓶',s:'每天约400-500ml奶制品，用杯子喝奶'},
-        {t:'回顾这一年的成长',s:'翻看手机里的照片——从一个新生儿到现在，你们一起经历了多少第一次'}
-      ]
-    };
-    const items = checklists[mm] || checklists[2];
+    const items = monthlyChecklists[mm] || monthlyChecklists[2];
     checklistEl.innerHTML = items.map(item => {
       const stored = loadBabyMonthChecks();
-      const done = !!stored[`baby_m${mm}_${item.t}`];
-      return `<div class="check-item${done?' done':''}" data-baby-check="baby_m${mm}_${item.t}">
-        <div class="box">${done?'✓':''}</div>
-        <div class="txt">${item.t}<small>${item.s}</small></div>
-      </div>`;
+      const done = !!stored['baby_m'+mm+'_'+item.t];
+      return '<div class="check-item'+ (done?' done':'') +'" data-baby-check="baby_m'+mm+'_'+item.t+'">'+
+        '<div class="box">'+ (done?'✓':'') +'</div>'+
+        '<div class="txt">'+item.t+'<small>'+item.s+'</small></div>'+
+      '</div>';
     }).join('');
-    // 绑定点击事件
     checklistEl.querySelectorAll('.check-item').forEach(el => {
       el.addEventListener('click', ()=>{
         const key = el.dataset.babyCheck;
@@ -1279,25 +1220,158 @@ function renderCurMonth(m){
       });
     });
   }
+
+  // 渲染逐月养护大全
+  const allMonthsEl = document.getElementById('babyAllMonths');
+  if(allMonthsEl){
+    let html = '';
+    for(let i=2;i<=12;i++){
+      html += fullMonthlyGuide[i] || '';
+    }
+    allMonthsEl.innerHTML = html;
+  }
 }
 
 function loadBabyMonthChecks(){
   try{ return JSON.parse(localStorage.getItem('mama_baby_month_checks'))||{}; }catch(e){ return {}; }
 }
 
+// ========== 四个子模块Tab切换 ==========
+document.querySelectorAll('.baby-tab').forEach(btn => {
+  btn.addEventListener('click', ()=>{
+    const bt = btn.dataset.bt;
+    document.querySelectorAll('.baby-tab').forEach(b => {
+      b.classList.remove('active');
+      b.style.background = '#fff';
+      b.style.borderColor = 'var(--line)';
+      b.style.color = 'var(--ink-soft)';
+    });
+    btn.classList.add('active');
+    btn.style.background = 'var(--sky-light)';
+    btn.style.borderColor = 'var(--sky)';
+    btn.style.color = 'var(--sky-deep)';
+    document.querySelectorAll('.baby-panel').forEach(p => p.style.display = 'none');
+    const panel = document.getElementById('baby-'+bt);
+    if(panel) {
+      panel.style.display = 'block';
+      // Trigger chart render when switching to growth tab
+      if(bt === 'growth') { setTimeout(renderBabyCharts, 300); }
+      if(bt === 'milestone') renderMilestones();
+      if(bt === 'vaccine') renderVaccineList();
+    }
+  });
+});
+
+// ========== 成长里程碑 ==========
+const MILESTONE_KEY = 'baby_milestones';
+function loadMilestones(){ try{ return JSON.parse(localStorage.getItem(MILESTONE_KEY))||[]; }catch(e){ return []; } }
+function saveMilestones(arr){ localStorage.setItem(MILESTONE_KEY, JSON.stringify(arr)); }
+
+function renderMilestones(){
+  const el = document.getElementById('milestoneTimeline');
+  if(!el) return;
+  const records = loadMilestones();
+  records.sort((a,b) => b.date.localeCompare(a.date));
+  if(records.length === 0){
+    el.innerHTML = '<div style="text-align:center;color:#ccc;padding:30px 0">还没有记录，快来记录小可乐的第一次吧 🌟</div>';
+    return;
+  }
+  el.innerHTML = '<div style="position:relative;padding-left:24px;border-left:3px solid var(--sky)">' +
+    records.map((r,i) => 
+      '<div style="position:relative;margin-bottom:18px;padding-left:8px">'+
+        '<div style="position:absolute;left:-33px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--sky);border:3px solid #fff;box-shadow:0 0 0 2px var(--sky)"></div>'+
+        '<div style="font-size:12px;color:var(--ink-soft)">'+r.date+'</div>'+
+        '<div style="font-size:15px;font-weight:600;color:var(--ink)">🌟 '+r.text+'</div>'+
+        '<span class="del" data-mi="'+i+'" style="font-size:12px;color:#e07979;cursor:pointer">删除</span>'+
+      '</div>'
+    ).join('') + '</div>';
+  el.querySelectorAll('.del').forEach(d => {
+    d.addEventListener('click', ()=>{
+      const idx = parseInt(d.dataset.mi);
+      const all = loadMilestones();
+      all.splice(idx, 1);
+      saveMilestones(all);
+      renderMilestones();
+    });
+  });
+}
+
+document.getElementById('saveMilestone')?.addEventListener('click', ()=>{
+  const date = document.getElementById('msDate').value;
+  const text = document.getElementById('msText').value.trim();
+  if(!date || !text) return alert('请填写日期和事件');
+  const records = loadMilestones();
+  records.push({date, text});
+  saveMilestones(records);
+  document.getElementById('msText').value = '';
+  renderMilestones();
+});
+
+// ========== 疫苗提醒 ==========
+const VACCINE_KEY = 'baby_vaccines';
+function loadVaccines(){ try{ return JSON.parse(localStorage.getItem(VACCINE_KEY))||[]; }catch(e){ return []; } }
+function saveVaccines(arr){ localStorage.setItem(VACCINE_KEY, JSON.stringify(arr)); }
+
+function renderVaccineList(){
+  const el = document.getElementById('vaccineChecklist');
+  if(!el) return;
+  const records = loadVaccines();
+  records.sort((a,b) => a.date.localeCompare(b.date));
+  if(records.length === 0){
+    el.innerHTML = '<div style="text-align:center;color:#ccc;padding:30px 0">还没有疫苗提醒，快来添加吧 💉</div>';
+    return;
+  }
+  el.innerHTML = records.map((r,i) => {
+    const done = !!r.done;
+    return '<div class="check-item'+ (done?' done':'') +'" data-vi="'+i+'">'+
+      '<div class="box">'+ (done?'✓':'') +'</div>'+
+      '<div class="txt"><b>'+r.date+'</b> · '+r.name+
+        (r.doneDate ? '<small>✅ 已完成于 '+r.doneDate+'</small>' : '<small>待接种</small>')+
+      '</div>'+
+      '<span class="del" data-vd="'+i+'" style="margin-left:auto;color:#e07979;cursor:pointer;font-size:16px">×</span>'+
+    '</div>';
+  }).join('');
+  
+  // Toggle done
+  el.querySelectorAll('.check-item').forEach(item => {
+    item.addEventListener('click', function(e){
+      if(e.target.classList.contains('del')) return;
+      const idx = parseInt(this.dataset.vi);
+      const all = loadVaccines();
+      all[idx].done = !all[idx].done;
+      all[idx].doneDate = all[idx].done ? todayStr() : null;
+      saveVaccines(all);
+      renderVaccineList();
+    });
+  });
+  
+  // Delete
+  el.querySelectorAll('.del').forEach(d => {
+    d.addEventListener('click', ()=>{
+      const idx = parseInt(d.dataset.vd);
+      const all = loadVaccines();
+      all.splice(idx, 1);
+      saveVaccines(all);
+      renderVaccineList();
+    });
+  });
+}
+
+document.getElementById('saveVaccine')?.addEventListener('click', ()=>{
+  const date = document.getElementById('vacDate').value;
+  const name = document.getElementById('vacText').value.trim();
+  if(!date || !name) return alert('请填写日期和疫苗名称');
+  const records = loadVaccines();
+  records.push({date, name, done: false, doneDate: null});
+  saveVaccines(records);
+  document.getElementById('vacText').value = '';
+  renderVaccineList();
+});
+
+// ========== 初始化 ==========
 birthInput.addEventListener('change', ()=>{
   localStorage.setItem(STORE_BIRTH, birthInput.value);
   renderAge();
-
-// 自动填今天日期
-(function(){
-  const t = new Date().toISOString().slice(0,10);
-  const myD = document.getElementById('myRecordDate');
-  const babyD = document.getElementById('babyRecordDate');
-  if(myD) myD.value = t;
-  if(babyD) babyD.value = t;
-})();
-
 });
 if(localStorage.getItem(STORE_BIRTH)){ birthInput.value = localStorage.getItem(STORE_BIRTH); }
 
@@ -1591,7 +1665,13 @@ function renderBabyCharts(){
     if(!canvas) return;
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
-    const w = canvas.parentElement.clientWidth;
+    // 宽度容错：先从父容器取，为0时尝试 card 内容宽度
+    let w = canvas.parentElement.clientWidth;
+    if(!w){
+      const card = canvas.closest('.card');
+      if(card) w = card.clientWidth - 48; // 减去卡片内边距
+    }
+    if(!w) w = 320; // 最后兜底
     canvas.width = w * dpr; canvas.height = 200 * dpr;
     canvas.style.width = w+'px'; canvas.style.height = '200px';
     ctx.scale(dpr,dpr);
