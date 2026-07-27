@@ -14,41 +14,41 @@
 <title>音乔伊的小世界 · 成长工作台</title>
 <style>
   :root{
-    --bg:#fefcf7;
-    --card:#ffffff;
-    --ink:#5c4a2e;
-    --ink-soft:#9e8c72;
-    --line:#efe6d5;
-    --pink:#f5d5c6;
-    --pink-deep:#d4957a;
-    --pink-light:#fdf5f0;
-    --gold:#f5d5c6;
-    --gold-deep:#d4957a;
-    --gold-light:#fdf5f0;
-    --yellow:#fce8c8;
-    --yellow-deep:#f0c070;
-    --yellow-light:#fffcf5;
-    --mint:#c8e6d8;
-    --mint-deep:#7dba9a;
-    --mint-light:#f0faf5;
-    --lavender:#dcd0f0;
-    --lavender-deep:#a490d0;
+    --bg:#f2f7f0;
+    --card:#fffefb;
+    --ink:#4a3f30;
+    --ink-soft:#8a7c6b;
+    --line:#e5ddcd;
+    --pink:#f0c8c8;
+    --pink-deep:#c4867a;
+    --pink-light:#fdf6f4;
+    --gold:#f0c8c8;
+    --gold-deep:#c4867a;
+    --gold-light:#fdf6f4;
+    --yellow:#f5e6c8;
+    --yellow-deep:#d4b868;
+    --yellow-light:#fefcf5;
+    --mint:#c4e0cc;
+    --mint-deep:#7daa88;
+    --mint-light:#eef8f0;
+    --lavender:#d8ccf0;
+    --lavender-deep:#9a84cc;
     --lavender-light:#f8f5fd;
-    --sky:#c8ddf0;
-    --sky-deep:#7daad0;
-    --sky-light:#f0f6fc;
-    --peach:#fadcc8;
-    --peach-deep:#e8a878;
-    --peach-light:#fff7f0;
-    --shadow:0 6px 24px rgba(160,130,100,.08);
-    --shadow-lg:0 10px 36px rgba(160,130,100,.12);
+    --sky:#c4d8ee;
+    --sky-deep:#6e9ec4;
+    --sky-light:#eef5fb;
+    --peach:#f8d4c4;
+    --peach-deep:#d49870;
+    --peach-light:#fef6f0;
+    --shadow:0 6px 24px rgba(120,100,80,.07);
+    --shadow-lg:0 10px 36px rgba(120,100,80,.10);
     --radius:22px;
     --radius-sm:16px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-    background:linear-gradient(170deg,#fdfaf3 0%,#fef8f2 30%,#fefcf9 60%,#fdfaf5 100%);
+    background:linear-gradient(180deg,#e8f0f8 0%,#eaf2f0 30%,#f2f7ec 55%,#f8f4e8 80%,#faf6ee 100%);
     color:var(--ink);
     line-height:1.7;
     min-height:100vh;
@@ -57,24 +57,26 @@
 
   /* ---------- Header ---------- */
   header{
-    background:linear-gradient(135deg,#f8e8d8,#f0d4b8 45%,#fadcc8);
+    background:linear-gradient(180deg,#c8ddf0 0%,#d8e8f2 30%,#e0ecd8 70%,#eaf0d0 100%);
     border-radius:var(--radius);
     padding:22px 22px;
-    color:#5c4a2e;
+    color:#3a3228;
     box-shadow:var(--shadow);
     position:relative;
     overflow:hidden;
   }
   header::before{
-    content:"🌸✨🌿💕🧸";position:absolute;right:12px;top:8px;font-size:18px;
-    opacity:.85;letter-spacing:2px;filter:drop-shadow(0 1px 1px rgba(140,100,80,.1));
+    content:"";position:absolute;right:10px;top:5px;width:120px;height:50px;
+    background:radial-gradient(ellipse at 30% 60%, rgba(255,255,255,.7) 0%, rgba(255,255,255,.2) 40%, transparent 70%);
+    border-radius:50%;z-index:0;
   }
   header::after{
-    content:"";position:absolute;left:-30px;bottom:-50px;width:160px;height:160px;
-    background:radial-gradient(circle,rgba(255,255,255,.28),transparent 70%);border-radius:50%;
+    content:"";position:absolute;left:40px;top:10px;width:80px;height:35px;
+    background:radial-gradient(ellipse at 50% 50%, rgba(255,255,255,.55) 0%, rgba(255,255,255,.1) 50%, transparent 70%);
+    border-radius:50%;z-index:0;
   }
-  header h1{font-size:24px;letter-spacing:2px;margin-bottom:2px;position:relative;z-index:1;color:#5c4a2e;text-shadow:0 1px 2px rgba(180,150,120,.1)}
-  header .sub{font-size:13px;opacity:.85;position:relative;z-index:1;color:#6b5a40;text-shadow:none}
+  header h1{font-size:24px;letter-spacing:2px;margin-bottom:2px;position:relative;z-index:1;color:#3a3228;text-shadow:0 1px 2px rgba(180,200,220,.2)}
+  header .sub{font-size:13px;opacity:.8;position:relative;z-index:1;color:#5a5040;text-shadow:none}
   .birth-row{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px;position:relative;z-index:1}
   .birth-row label{background:rgba(255,255,255,.35);padding:6px 12px;border-radius:30px;display:flex;align-items:center;gap:6px;font-weight:600}
   .birth-row input{background:#fff;color:var(--ink);border:none;border-radius:10px;padding:4px 8px;font-size:12px;font-family:inherit}
@@ -142,11 +144,11 @@
   .check-item .txt small{display:block;color:var(--ink-soft);font-size:12px;margin-top:2px}
 
   /* ---------- Today overview ---------- */
-  .today-hero{background:linear-gradient(135deg,#f8e8d8,#f0d4b8,#fadcc8);border-radius:var(--radius-sm);padding:20px 18px;margin-bottom:16px;box-shadow:var(--shadow);color:#5c4a2e}
-  .today-hero h2{color:#5c4a2e;font-size:20px;margin-bottom:4px}
-  .today-hero .meta{font-size:13px;color:rgba(92,74,46,.8)}
+  .today-hero{background:linear-gradient(180deg,#d4e8f0 0%,#dce8dc 60%,#eef0d8 100%);border-radius:var(--radius-sm);padding:20px 18px;margin-bottom:16px;box-shadow:var(--shadow);color:#3a3228}
+  .today-hero h2{color:#3a3228;font-size:20px;margin-bottom:4px}
+  .today-hero .meta{font-size:13px;color:rgba(58,50,40,.75)}
   .progress-bar{height:14px;background:rgba(255,255,255,.55);border-radius:30px;overflow:hidden;margin:14px 0 6px}
-  .progress-bar i{display:block;height:100%;background:linear-gradient(90deg,#e8c8a8,#d4957a);width:0;transition:width .4s}
+  .progress-bar i{display:block;height:100%;background:linear-gradient(90deg,#c4d8a0,#8ab86a);width:0;transition:width .4s}
   /* ---------- 三概览卡（卡通泡泡） ---------- */
   .overview-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
   .ov-card{background:var(--card);border-radius:var(--radius-sm);padding:16px 10px;box-shadow:var(--shadow);border:2px solid transparent;text-align:center;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
@@ -1936,7 +1938,7 @@ renderChecklist();
 renderWeekOverview();
 renderMonthOverview();
 
-/* ====================== 手账温馨飘落动画 (Canvas) ====================== */
+/* ====================== 宫崎骏风格动画 (Canvas) ====================== */
 (function(){
   const container = document.getElementById('stars');
   if(!container) return;
@@ -1947,7 +1949,7 @@ renderMonthOverview();
   
   const ctx = canvas.getContext('2d');
   const particles = [];
-  const count = 45;
+  const count = 28;
   
   function resize(){
     canvas.width = window.innerWidth;
@@ -1956,159 +1958,258 @@ renderMonthOverview();
   resize();
   window.addEventListener('resize', resize);
   
-  const types = ['flower','heart','star','dot','leaf'];
+  const types = ['susuwatari','totoroLeaf','cloud','acorn','flower'];
+  
+  function randomBetween(a,b){ return a + Math.random()*(b-a); }
   
   for(let i=0;i<count;i++){
     const type = types[Math.floor(Math.random() * types.length)];
     particles.push({
       type: type,
       x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height - canvas.height * .3,
-      size: type === 'dot' ? Math.random() * 4 + 3 : Math.random() * 8 + 9,
-      speed: Math.random() * 1.0 + 0.3,
-      opacity: Math.random() * .45 + .55,
-      wobble: Math.random() * 1.5 + .8,
+      y: randomBetween(-canvas.height * .15, canvas.height * .9),
+      size: type === 'cloud' ? randomBetween(30, 55) :
+            type === 'totoroLeaf' ? randomBetween(14, 22) :
+            type === 'susuwatari' ? randomBetween(6, 10) :
+            type === 'acorn' ? randomBetween(6, 9) : randomBetween(7, 11),
+      speed: type === 'cloud' ? randomBetween(.1, .25) :
+             type === 'totoroLeaf' ? randomBetween(.25, .45) :
+             randomBetween(.35, .7),
+      opacity: type === 'cloud' ? randomBetween(.18, .28) : randomBetween(.4, .6),
+      wobble: randomBetween(1.2, 2.5),
       wobblePhase: Math.random() * Math.PI * 2,
-      hue: type === 'flower' ? (Math.random() > .5 ? 355 : 35) :
-           type === 'heart' ? 350 :
-           type === 'star' ? 45 :
-           type === 'leaf' ? 100 :
-           30,
+      rotateSpeed: type === 'totoroLeaf' ? randomBetween(-.012, .012) : (Math.random() - .5) * .008,
       rotation: Math.random() * Math.PI * 2,
-      rotateSpeed: (Math.random() - .5) * .02
+      eyeDir: Math.random() > .5 ? 1 : -1
     });
   }
   
-  function drawFlower(cx, cy, size, alpha, hue){
+  // ── 灰尘精灵（小煤炭 / Susuwatari） ──
+  function drawSusuwatari(cx, cy, size, alpha){
     ctx.save();
     ctx.globalAlpha = alpha;
     ctx.translate(cx, cy);
     
-    // 5 petals
-    const petalColor = hue < 30 ? `hsla(${hue}, 60%, 75%, ${alpha})` : `hsla(${hue}, 50%, 78%, ${alpha})`;
-    ctx.fillStyle = petalColor;
+    // 身体——柔软的黑色毛球
+    const bodyGrd = ctx.createRadialGradient(size*.15, -size*.1, size*.1, 0, 0, size);
+    bodyGrd.addColorStop(0, 'rgba(50,50,60,.95)');
+    bodyGrd.addColorStop(.6, 'rgba(30,30,40,.85)');
+    bodyGrd.addColorStop(1, 'rgba(20,20,30,.5)');
+    ctx.fillStyle = bodyGrd;
+    ctx.beginPath();
+    ctx.arc(0, 0, size, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // 毛毛边缘
+    ctx.strokeStyle = 'rgba(40,40,50,.3)';
+    ctx.lineWidth = 1;
+    for(let a=0;a<12;a++){
+      const ang = a * Math.PI * 2 / 12 + Math.random() * .1;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(ang) * size * .9, Math.sin(ang) * size * .9);
+      ctx.lineTo(Math.cos(ang) * (size + randomBetween(2,5)), Math.sin(ang) * (size + randomBetween(2,5)));
+      ctx.stroke();
+    }
+    
+    // 大眼睛
+    const eyeSize = size * .35;
+    const eyeY = -size * .15;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(-eyeSize * .8, eyeY, eyeSize, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(eyeSize * .8, eyeY, eyeSize, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // 瞳孔
+    ctx.fillStyle = '#111';
+    ctx.beginPath();
+    ctx.arc(-eyeSize * .8, eyeY, eyeSize * .45, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(eyeSize * .8, eyeY, eyeSize * .45, 0, Math.PI * 2);
+    ctx.fill();
+    
+    ctx.restore();
+  }
+  
+  // ── 龙猫大叶子 ──
+  function drawTotoroLeaf(cx, cy, size, alpha){
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.translate(cx, cy);
+    
+    // 叶面——大而圆的叶子，像龙猫头上顶的那片
+    ctx.fillStyle = `hsla(85, 55%, 60%, ${alpha})`;
+    ctx.beginPath();
+    ctx.moveTo(0, -size * 1.3);
+    ctx.bezierCurveTo(size * .9, -size * .8, size * .9, size * .6, size * .2, size * .9);
+    ctx.bezierCurveTo(-size * .1, size * 1.1, -size * .1, -size * .5, 0, -size * 1.3);
+    ctx.fill();
+    
+    // 叶脉
+    ctx.strokeStyle = `hsla(95, 40%, 45%, ${alpha * .6})`;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, -size * 1.2);
+    ctx.quadraticCurveTo(size * .3, size * .2, size * .1, size * .8);
+    ctx.stroke();
+    for(let s=-1;s<=1;s+=2){
+      for(let j=1;j<=3;j++){
+        ctx.beginPath();
+        const py = -size * 1.2 + j * size * .45;
+        const midX = s * size * .15;
+        ctx.moveTo(midX, py);
+        ctx.quadraticCurveTo(s * size * .5, py + size * .1, s * size * .35, py + size * .2);
+        ctx.stroke();
+      }
+    }
+    
+    // 叶柄
+    ctx.strokeStyle = `hsla(75, 40%, 40%, ${alpha * .7})`;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(0, size * .8);
+    ctx.lineTo(0, size * 1.4);
+    ctx.stroke();
+    
+    ctx.restore();
+  }
+  
+  // ── 软云朵（吉卜力风格） ──
+  function drawCloud(cx, cy, size, alpha){
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.translate(cx, cy);
+    
+    // 柔和的水彩云朵
+    const cloudColor = `rgba(255,255,255,${alpha})`;
+    const shadowColor = `rgba(210,225,240,${alpha * .5})`;
+    
+    // 主体大团
+    const parts = [
+      {x:0, y:0, r:size * .55},
+      {x:-size * .35, y:size * .05, r:size * .4},
+      {x:size * .35, y:size * .05, r:size * .4},
+      {x:-size * .2, y:-size * .25, r:size * .35},
+      {x:size * .2, y:-size * .25, r:size * .35},
+      {x:0, y:-size * .2, r:size * .3},
+      {x:-size * .5, y:size * .2, r:size * .3},
+      {x:size * .5, y:size * .2, r:size * .3},
+    ];
+    
+    parts.forEach(p => {
+      ctx.fillStyle = cloudColor;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    
+    // 底部阴影
+    const bottomGrd = ctx.createLinearGradient(0, size * .3, 0, size * .8);
+    bottomGrd.addColorStop(0, shadowColor);
+    bottomGrd.addColorStop(1, 'rgba(210,225,240,0)');
+    ctx.fillStyle = bottomGrd;
+    ctx.beginPath();
+    ctx.ellipse(0, size * .5, size * .7, size * .25, 0, 0, Math.PI * 2);
+    ctx.fill();
+    
+    ctx.restore();
+  }
+  
+  // ── 橡果子 ──
+  function drawAcorn(cx, cy, size, alpha){
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.translate(cx, cy);
+    
+    // 坚果身体
+    ctx.fillStyle = `hsla(30, 45%, 45%, ${alpha})`;
+    ctx.beginPath();
+    ctx.ellipse(0, size * .15, size * .4, size * .55, 0, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // 帽子
+    ctx.fillStyle = `hsla(25, 40%, 35%, ${alpha})`;
+    ctx.beginPath();
+    ctx.ellipse(0, -size * .3, size * .45, size * .25, 0, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // 帽子纹理
+    ctx.strokeStyle = `hsla(25, 30%, 25%, ${alpha * .5})`;
+    ctx.lineWidth = .5;
+    for(let i=0;i<3;i++){
+      ctx.beginPath();
+      ctx.moveTo(-size * .35, -size * .3 + i * size * .08);
+      ctx.quadraticCurveTo(0, -size * .2 + i * size * .08, size * .35, -size * .3 + i * size * .08);
+      ctx.stroke();
+    }
+    
+    // 小茎
+    ctx.strokeStyle = `hsla(25, 40%, 30%, ${alpha})`;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, -size * .5);
+    ctx.lineTo(size * .15, -size * .7);
+    ctx.stroke();
+    
+    ctx.restore();
+  }
+  
+  // ── 小花 ──
+  function drawFlower(cx, cy, size, alpha){
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.translate(cx, cy);
+    
+    const petalHue = Math.random() > .5 ? 45 : 340;
+    ctx.fillStyle = `hsla(${petalHue}, 55%, 72%, ${alpha})`;
     for(let i=0;i<5;i++){
       ctx.save();
       ctx.rotate(i * Math.PI * 2 / 5);
       ctx.beginPath();
-      ctx.ellipse(0, -size * .7, size * .3, size * .7, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, -size * .6, size * .25, size * .6, 0, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
     }
-    // center
-    ctx.fillStyle = `hsla(40, 70%, 85%, ${alpha})`;
+    ctx.fillStyle = `hsla(42, 70%, 78%, ${alpha})`;
     ctx.beginPath();
-    ctx.arc(0, 0, size * .25, 0, Math.PI * 2);
+    ctx.arc(0, 0, size * .2, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
   }
   
-  function drawHeart(cx, cy, size, alpha, hue){
-    ctx.save();
-    ctx.globalAlpha = alpha;
-    ctx.fillStyle = `hsla(${hue}, 55%, 75%, ${alpha})`;
-    ctx.translate(cx, cy);
-    ctx.beginPath();
-    const s = size * .7;
-    ctx.moveTo(0, s * .4);
-    ctx.bezierCurveTo(-s, -s * .2, -s * .5, -s, 0, -s * .4);
-    ctx.bezierCurveTo(s * .5, -s, s, -s * .2, 0, s * .4);
-    ctx.fill();
-    ctx.restore();
-  }
-  
-  function drawStar(cx, cy, size, alpha, hue){
-    ctx.save();
-    ctx.globalAlpha = alpha;
-    ctx.translate(cx, cy);
-    
-    // Glow
-    const grd = ctx.createRadialGradient(0, 0, 0, 0, 0, size * 2);
-    grd.addColorStop(0, `hsla(45, 80%, 80%, ${alpha * .8})`);
-    grd.addColorStop(1, 'rgba(255,220,150,0)');
-    ctx.fillStyle = grd;
-    ctx.beginPath();
-    ctx.arc(0, 0, size * 2, 0, Math.PI * 2);
-    ctx.fill();
-    
-    // 4-point sparkle
-    ctx.fillStyle = `hsla(45, 70%, 82%, ${alpha})`;
-    for(let a=0;a<4;a++){
-      ctx.save();
-      ctx.rotate(a * Math.PI / 2);
-      ctx.beginPath();
-      ctx.moveTo(0, -size * 2);
-      ctx.quadraticCurveTo(size * .4, 0, 0, size * .7);
-      ctx.quadraticCurveTo(-size * .4, 0, 0, -size * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-    // center dot
-    ctx.fillStyle = `hsla(50, 80%, 90%, ${alpha})`;
-    ctx.beginPath();
-    ctx.arc(0, 0, size * .4, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
-  
-  function drawLeaf(cx, cy, size, alpha, hue){
-    ctx.save();
-    ctx.globalAlpha = alpha;
-    ctx.fillStyle = `hsla(${hue}, 40%, 72%, ${alpha})`;
-    ctx.translate(cx, cy);
-    ctx.beginPath();
-    ctx.ellipse(0, 0, size * .5, size * 1.1, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.strokeStyle = `hsla(${hue}, 30%, 60%, ${alpha * .5})`;
-    ctx.lineWidth = .5;
-    ctx.beginPath();
-    ctx.moveTo(0, -size * 1.1);
-    ctx.lineTo(0, size * 1.1);
-    ctx.stroke();
-    ctx.restore();
-  }
-  
-  const DURATION = 6000;
+  const DURATION = 7000;
   let startTime = null;
-  
-  function drawParticle(p, alpha){
-    switch(p.type){
-      case 'flower': drawFlower(p.x, p.y, p.size, p.opacity * alpha, p.hue); break;
-      case 'heart': drawHeart(p.x, p.y, p.size, p.opacity * alpha, p.hue); break;
-      case 'star': drawStar(p.x, p.y, p.size, p.opacity * alpha, p.hue); break;
-      case 'leaf': drawLeaf(p.x, p.y, p.size, p.opacity * alpha, p.hue); break;
-      case 'dot':
-        ctx.save();
-        ctx.globalAlpha = p.opacity * alpha;
-        ctx.fillStyle = `hsla(${p.hue}, 60%, 75%, ${p.opacity * alpha})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-        break;
-    }
-  }
   
   function animate(time){
     if(!startTime) startTime = time;
     const elapsed = time - startTime;
     const progress = Math.min(elapsed / DURATION, 1);
     
-    const globalAlpha = progress > 0.82 ? 1 - (progress - 0.82) / 0.18 : 1;
+    const globalAlpha = progress > 0.8 ? 1 - (progress - 0.8) / 0.2 : 1;
     
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     if(progress >= 1) {
-      canvas.style.transition = 'opacity 0.6s';
+      canvas.style.transition = 'opacity 0.8s';
       canvas.style.opacity = '0';
       return;
     }
     
     particles.forEach(p => {
       p.y += p.speed;
-      p.x += Math.sin(time * .0006 * p.wobble + p.wobblePhase) * .25;
+      p.x += Math.sin(time * .0005 * p.wobble + p.wobblePhase) * .3;
       p.rotation += p.rotateSpeed;
-      drawParticle(p, globalAlpha);
+      
+      switch(p.type){
+        case 'susuwatari': drawSusuwatari(p.x, p.y, p.size, p.opacity * globalAlpha); break;
+        case 'totoroLeaf': drawTotoroLeaf(p.x, p.y, p.size, p.opacity * globalAlpha); break;
+        case 'cloud': drawCloud(p.x, p.y, p.size, p.opacity * globalAlpha); break;
+        case 'acorn': drawAcorn(p.x, p.y, p.size, p.opacity * globalAlpha); break;
+        case 'flower': drawFlower(p.x, p.y, p.size, p.opacity * globalAlpha); break;
+      }
     });
     
     requestAnimationFrame(animate);
