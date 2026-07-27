@@ -821,11 +821,6 @@
 
         <!-- 疫苗提醒 -->
         <div class="baby-panel" id="baby-vaccine" style="display:none">
-          <div class="body-form" style="margin-bottom:16px">
-            <label>日期 <input type="date" id="vacDate" value=""></label>
-            <label>疫苗名称 <input type="text" id="vacText" placeholder="如：五联第2剂" style="width:130px"></label>
-            <button class="btn-save" id="saveVaccine">➕ 添加</button>
-          </div>
           <div id="vaccineChecklist"></div>
         </div>
       </div>
@@ -1515,17 +1510,6 @@ function renderVaccineList(){
     });
   });
 }
-
-document.getElementById('saveVaccine')?.addEventListener('click', ()=>{
-  const date = document.getElementById('vacDate').value;
-  const name = document.getElementById('vacText').value.trim();
-  if(!date || !name) return alert('请填写日期和疫苗名称');
-  const records = loadVaccines();
-  records.push({date, name, done: false, doneDate: null});
-  saveVaccines(records);
-  document.getElementById('vacText').value = '';
-  renderVaccineList();
-});
 
 // ========== 初始化 ==========
 birthInput.addEventListener('change', ()=>{
