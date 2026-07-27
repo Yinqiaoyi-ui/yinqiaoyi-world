@@ -1309,7 +1309,86 @@ document.getElementById('saveMilestone')?.addEventListener('click', ()=>{
 
 // ========== 疫苗提醒 ==========
 const VACCINE_KEY = 'baby_vaccines';
-function loadVaccines(){ try{ return JSON.parse(localStorage.getItem(VACCINE_KEY))||[]; }catch(e){ return []; } }
+const VACCINE_INIT_KEY = 'baby_vaccines_initialized';
+
+// 中国国家免疫规划疫苗（免费）+ 常见自费推荐
+function getDefaultVaccines(){
+  const bday = birthInput.value;
+  if(!bday) return [];
+  const birth = new Date(bday+'T00:00:00');
+  const fmtLocal = (d) => { const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}`; };
+  const addMonths = (d, m) => { const r = new Date(d); r.setMonth(r.getMonth()+m); return fmtLocal(r); };
+  const addDays = (d, dy) => { const r = new Date(d); r.setDate(r.getDate()+dy); return fmtLocal(r); };
+  // 出生日期作为基准
+  const d0 = fmtLocal(birth);
+  return [
+    // 出生时
+    {date: d0, name: '卡介苗（BCG）', done: false, doneDate: null, preset: true},
+    {date: d0, name: '乙肝疫苗 第1剂', done: false, doneDate: null, preset: true},
+    // 1月龄
+    {date: addMonths(birth, 1), name: '乙肝疫苗 第2剂', done: false, doneDate: null, preset: true},
+    // 2月龄
+    {date: addMonths(birth, 2), name: '脊灰灭活疫苗（IPV）第1剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 2), name: '💡 五联疫苗 第1剂（自费·推荐）', done: false, doneDate: null, preset: true},
+    // 3月龄
+    {date: addMonths(birth, 3), name: '脊灰灭活疫苗（IPV）第2剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 3), name: '百白破疫苗 第1剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 3), name: '💡 五联疫苗 第2剂（自费·推荐）', done: false, doneDate: null, preset: true},
+    // 4月龄
+    {date: addMonths(birth, 4), name: '脊灰减毒活疫苗（bOPV）第3剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 4), name: '百白破疫苗 第2剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 4), name: '💡 五联疫苗 第3剂（自费·推荐）', done: false, doneDate: null, preset: true},
+    // 5月龄
+    {date: addMonths(birth, 5), name: '百白破疫苗 第3剂', done: false, doneDate: null, preset: true},
+    // 6月龄
+    {date: addMonths(birth, 6), name: '乙肝疫苗 第3剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 6), name: 'A群流脑多糖疫苗 第1剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 6), name: '💡 五联疫苗 第4剂（自费·推荐）', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 6), name: '💡 13价肺炎疫苗 第1剂（自费·推荐）', done: false, doneDate: null, preset: true},
+    // 7月龄
+    {date: addMonths(birth, 7), name: '💡 13价肺炎疫苗 第2剂（自费·推荐）', done: false, doneDate: null, preset: true},
+    // 8月龄
+    {date: addMonths(birth, 8), name: '麻腮风疫苗（MMR）第1剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 8), name: '乙脑减毒活疫苗 第1剂', done: false, doneDate: null, preset: true},
+    // 9月龄
+    {date: addMonths(birth, 9), name: 'A群流脑多糖疫苗 第2剂', done: false, doneDate: null, preset: true},
+    // 10月龄
+    {date: addMonths(birth, 10), name: '💡 13价肺炎疫苗 第3剂（自费·推荐）', done: false, doneDate: null, preset: true},
+    // 12月龄
+    {date: addMonths(birth, 12), name: '💡 水痘疫苗 第1剂（自费·推荐）', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 12), name: '💡 EV71手足口疫苗 第1剂（自费·推荐）', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 12), name: '💡 13价肺炎疫苗 第4剂（自费·推荐）', done: false, doneDate: null, preset: true},
+    // 18月龄（1.5岁）
+    {date: addMonths(birth, 18), name: '百白破疫苗 第4剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 18), name: '麻腮风疫苗（MMR）第2剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 18), name: '甲肝减毒活疫苗 第1剂', done: false, doneDate: null, preset: true},
+    // 2岁
+    {date: addMonths(birth, 24), name: '乙脑减毒活疫苗 第2剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 24), name: '💡 23价肺炎疫苗（自费）', done: false, doneDate: null, preset: true},
+    // 3岁
+    {date: addMonths(birth, 36), name: 'A+C群流脑多糖疫苗 第1剂', done: false, doneDate: null, preset: true},
+    // 4岁
+    {date: addMonths(birth, 48), name: '脊灰减毒活疫苗（bOPV）第4剂', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 48), name: '💡 水痘疫苗 第2剂（自费·推荐）', done: false, doneDate: null, preset: true},
+    // 6岁
+    {date: addMonths(birth, 72), name: '白破疫苗（DT）', done: false, doneDate: null, preset: true},
+    {date: addMonths(birth, 72), name: 'A+C群流脑多糖疫苗 第2剂', done: false, doneDate: null, preset: true},
+  ];
+}
+
+function loadVaccines(){ 
+  try{
+    const stored = JSON.parse(localStorage.getItem(VACCINE_KEY));
+    if(stored && stored.length > 0) return stored;
+  }catch(e){}
+  // 首次加载：用预置清单初始化
+  const defaults = getDefaultVaccines();
+  if(defaults.length > 0){
+    localStorage.setItem(VACCINE_KEY, JSON.stringify(defaults));
+    return defaults;
+  }
+  return [];
+}
 function saveVaccines(arr){ localStorage.setItem(VACCINE_KEY, JSON.stringify(arr)); }
 
 function renderVaccineList(){
@@ -1371,6 +1450,8 @@ document.getElementById('saveVaccine')?.addEventListener('click', ()=>{
 // ========== 初始化 ==========
 birthInput.addEventListener('change', ()=>{
   localStorage.setItem(STORE_BIRTH, birthInput.value);
+  // 生日变更时重置疫苗清单
+  localStorage.removeItem(VACCINE_KEY);
   renderAge();
 });
 if(localStorage.getItem(STORE_BIRTH)){ birthInput.value = localStorage.getItem(STORE_BIRTH); }
