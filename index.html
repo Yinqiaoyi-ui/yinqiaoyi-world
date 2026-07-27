@@ -1958,7 +1958,7 @@ renderMonthOverview();
   resize();
   window.addEventListener('resize', resize);
   
-  const types = ['susuwatari','totoroLeaf','cloud','acorn','flower'];
+  const types = ['totoroLeaf','cloud','acorn','flower','flower','flower','flower'];
   
   function randomBetween(a,b){ return a + Math.random()*(b-a); }
   
@@ -2163,8 +2163,10 @@ renderMonthOverview();
     ctx.globalAlpha = alpha;
     ctx.translate(cx, cy);
     
-    const petalHue = Math.random() > .5 ? 45 : 340;
-    ctx.fillStyle = `hsla(${petalHue}, 55%, 72%, ${alpha})`;
+    // 丰富暖色系：粉、橙、桃、黄、珊瑚
+    const hues = [340, 350, 0, 10, 20, 35, 45, 15, 355];
+    const petalHue = hues[Math.floor(Math.random() * hues.length)];
+    ctx.fillStyle = `hsla(${petalHue}, 60%, 76%, ${alpha})`;
     for(let i=0;i<5;i++){
       ctx.save();
       ctx.rotate(i * Math.PI * 2 / 5);
@@ -2173,7 +2175,7 @@ renderMonthOverview();
       ctx.fill();
       ctx.restore();
     }
-    ctx.fillStyle = `hsla(42, 70%, 78%, ${alpha})`;
+    ctx.fillStyle = `hsla(42, 75%, 82%, ${alpha})`;
     ctx.beginPath();
     ctx.arc(0, 0, size * .2, 0, Math.PI * 2);
     ctx.fill();
