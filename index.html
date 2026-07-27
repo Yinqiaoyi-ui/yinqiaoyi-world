@@ -1377,17 +1377,39 @@ function getDefaultVaccines(){
 }
 
 function loadVaccines(){ 
+  const bday = birthInput.value;
+  // 每次根据生日重新生成疫苗清单，确保日期正确
+  const defaults = getDefaultVaccines();
+  if(defaults.length === 0) return [];
+  // 合并用户已打勾的记录
   try{
     const stored = JSON.parse(localStorage.getItem(VACCINE_KEY));
-    if(stored && stored.length > 0) return stored;
+    if(stored && stored.length > 0){
+      // 用存储的 done 状态覆盖默认清单
+      const storedMap = {};
+      stored.forEach(r => { storedMap[r.date+'|'+r.name] = r; });
+      defaults.forEach(r => {
+        const key = r.date+'|'+r.name;
+        if(storedMap[key] && storedMap[key].done){
+          r.done = true;
+          r.doneDate = storedMap[key].doneDate || null;
+        }
+        // 也保留用户手动添加的非预设疫苗
+        if(!storedMap[key] && !r.preset){
+          // already in defaults
+        }
+      });
+      // 追加用户手动添加的（非预设的）记录
+      stored.forEach(r => {
+        const key = r.date+'|'+r.name;
+        if(!defaults.find(d => (d.date+'|'+d.name) === key)){
+          defaults.push(r);
+        }
+      });
+    }
   }catch(e){}
-  // 首次加载：用预置清单初始化
-  const defaults = getDefaultVaccines();
-  if(defaults.length > 0){
-    localStorage.setItem(VACCINE_KEY, JSON.stringify(defaults));
-    return defaults;
-  }
-  return [];
+  localStorage.setItem(VACCINE_KEY, JSON.stringify(defaults));
+  return defaults;
 }
 function saveVaccines(arr){ localStorage.setItem(VACCINE_KEY, JSON.stringify(arr)); }
 
@@ -1395,43 +1417,101 @@ function renderVaccineList(){
   const el = document.getElementById('vaccineChecklist');
   if(!el) return;
   const records = loadVaccines();
-  records.sort((a,b) => a.date.localeCompare(b.date));
   if(records.length === 0){
-    el.innerHTML = '<div style="text-align:center;color:#ccc;padding:30px 0">还没有疫苗提醒，快来添加吧 💉</div>';
+    el.innerHTML = '<div style="text-align:center;color:#ccc;padding:30px 0">请先填写宝宝生日，疫苗提醒会自动生成 💉</div>';
     return;
   }
-  el.innerHTML = records.map((r,i) => {
-    const done = !!r.done;
-    return '<div class="check-item'+ (done?' done':'') +'" data-vi="'+i+'">'+
-      '<div class="box">'+ (done?'✓':'') +'</div>'+
-      '<div class="txt"><b>'+r.date+'</b> · '+r.name+
-        (r.doneDate ? '<small>✅ 已完成于 '+r.doneDate+'</small>' : '<small>待接种</small>')+
-      '</div>'+
-      '<span class="del" data-vd="'+i+'" style="margin-left:auto;color:#e07979;cursor:pointer;font-size:16px">×</span>'+
-    '</div>';
-  }).join('');
+
+  // 获取宝宝当前月龄
+  const bday = birthInput.value;
+  if(!bday){
+    el.innerHTML = '<div style="text-align:center;color:#ccc;padding:30px 0">请先填写宝宝生日 💉</div>';
+    return;
+  }
+
+  const now = new Date();
+  const birth = new Date(bday+'T00:00:00');
+  const curMonth = Math.max(0, Math.floor((now - birth) / (1000*60*60*24*30.44)));
+  const monthLabel = curMonth < 1 ? '新生儿期' : '第'+curMonth+'个月';
+
+  // 获取本月起止日期
+  const monthStart = new Date(birth);
+  monthStart.setMonth(monthStart.getMonth() + curMonth);
+  const monthEnd = new Date(monthStart);
+  monthEnd.setMonth(monthEnd.getMonth() + 1);
+  monthEnd.setDate(monthEnd.getDate() - 1);
+  const fmt = (d) => d.toISOString().slice(0,10);
+  const startStr = fmt(monthStart);
+  const endStr = fmt(monthEnd);
+
+  // 筛选：只显示本月日期范围内的疫苗
+  const monthVaccines = records.filter(r => r.date >= startStr && r.date <= endStr);
+
+  const pending = monthVaccines.filter(r => !r.done);
+  const doneList = monthVaccines.filter(r => r.done);
+
+  let html = '';
+  html += '<div style="font-size:14px;font-weight:700;color:var(--sky-deep);margin-bottom:8px;padding:4px 0">📅 '+monthLabel+' · 疫苗提醒</div>';
+
+  if(pending.length > 0){
+    html += '<div style="font-size:12px;color:var(--ink-soft);margin-bottom:6px">💉 本月待接种（'+pending.length+'项）</div>';
+    html += pending.map(r => {
+      return '<div class="check-item" data-vdate="'+r.date+'" data-vname="'+r.name.replace(/"/g,'&quot;')+'">'+
+        '<div class="box"></div>'+
+        '<div class="txt"><b>'+r.date+'</b> · '+r.name+'<small>待接种</small></div>'+
+      '</div>';
+    }).join('');
+  }
+
+  if(doneList.length > 0){
+    html += '<div style="font-size:12px;color:var(--ink-soft);margin:12px 0 6px">✅ 本月已完成（'+doneList.length+'项）</div>';
+    html += doneList.map(r => {
+      return '<div class="check-item done" data-vdate="'+r.date+'" data-vname="'+r.name.replace(/"/g,'&quot;')+'">'+
+        '<div class="box">✓</div>'+
+        '<div class="txt"><b>'+r.date+'</b> · '+r.name+
+        '<small>✅ 已完成'+(r.doneDate ? '于 '+r.doneDate : '')+'</small></div>'+
+      '</div>';
+    }).join('');
+  }
+
+  if(pending.length === 0 && doneList.length === 0){
+    html += '<div style="text-align:center;color:var(--sky-deep);padding:20px 0;font-weight:600">✅ 本月无疫苗安排</div>';
+  }
+
+  // 下月预告
+  const nextMonthStart = new Date(monthEnd);
+  nextMonthStart.setDate(nextMonthStart.getDate() + 1);
+  const nextMonthEnd = new Date(nextMonthStart);
+  nextMonthEnd.setMonth(nextMonthEnd.getMonth() + 1);
+  const nextStr = fmt(nextMonthStart);
+  const nextEndStr = fmt(nextMonthEnd);
+  const nextVaccines = records.filter(r => r.date >= nextStr && r.date <= nextEndStr);
   
+  if(nextVaccines.length > 0){
+    html += '<details style="margin-top:14px"><summary style="cursor:pointer;font-weight:600;color:var(--ink-soft);font-size:13px">🔮 下月预告（'+nextVaccines.length+'项）</summary>';
+    html += '<div style="margin-top:8px">';
+    html += nextVaccines.map(r => 
+      '<div style="font-size:13px;padding:4px 0;color:var(--ink-soft)"><b>'+r.date+'</b> · '+r.name+'</div>'
+    ).join('');
+    html += '</div></details>';
+  }
+
+  el.innerHTML = html;
+
   // Toggle done
   el.querySelectorAll('.check-item').forEach(item => {
+    if(item.classList.contains('done')) return;
     item.addEventListener('click', function(e){
-      if(e.target.classList.contains('del')) return;
-      const idx = parseInt(this.dataset.vi);
+      const vdate = this.dataset.vdate;
+      const vname = this.dataset.vname;
       const all = loadVaccines();
-      all[idx].done = !all[idx].done;
-      all[idx].doneDate = all[idx].done ? todayStr() : null;
-      saveVaccines(all);
-      renderVaccineList();
-    });
-  });
-  
-  // Delete
-  el.querySelectorAll('.del').forEach(d => {
-    d.addEventListener('click', ()=>{
-      const idx = parseInt(d.dataset.vd);
-      const all = loadVaccines();
-      all.splice(idx, 1);
-      saveVaccines(all);
-      renderVaccineList();
+      const target = all.find(r => r.date === vdate && r.name === vname);
+      if(target){
+        target.done = true;
+        target.doneDate = todayStr();
+        saveVaccines(all);
+        renderVaccineList();
+      }
     });
   });
 }
