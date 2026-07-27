@@ -2090,7 +2090,19 @@ renderMonthOverview();
     // 邮筒主体
     ctx.fillStyle = '#f0a8b8';
     ctx.beginPath();
-    ctx.roundRect(postX - 16, postY - 35, 32, 48, 10);
+    // roundRect 兼容替代
+    const rr = (x,y,w,h,r) => {
+      ctx.moveTo(x+r, y);
+      ctx.lineTo(x+w-r, y);
+      ctx.arcTo(x+w, y, x+w, y+r, r);
+      ctx.lineTo(x+w, y+h-r);
+      ctx.arcTo(x+w, y+h, x+w-r, y+h, r);
+      ctx.lineTo(x+r, y+h);
+      ctx.arcTo(x, y+h, x, y+h-r, r);
+      ctx.lineTo(x, y+r);
+      ctx.arcTo(x, y, x+r, y, r);
+    };
+    rr(postX - 16, postY - 35, 32, 48, 10);
     ctx.fill();
     ctx.strokeStyle = '#d08898';
     ctx.lineWidth = 1.5;
