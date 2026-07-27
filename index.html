@@ -144,8 +144,16 @@
   .check-item .txt small{display:block;color:var(--ink-soft);font-size:12px;margin-top:2px}
 
   /* ---------- Today overview ---------- */
-  .today-hero{background:linear-gradient(180deg,#d4e8f0 0%,#dce8dc 60%,#eef0d8 100%);border-radius:var(--radius-sm);padding:20px 18px;margin-bottom:16px;box-shadow:var(--shadow);color:#3a3228}
-  .today-hero h2{color:#3a3228;font-size:20px;margin-bottom:4px}
+  .today-hero{
+    background:linear-gradient(180deg,#d4e8f0 0%,#dce8dc 60%,#eef0d8 100%);
+    border-radius:var(--radius-sm);padding:20px 18px;margin-bottom:16px;
+    box-shadow:var(--shadow);color:#3a3228;position:relative;overflow:hidden;
+  }
+  .today-hero-bg{
+    position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;
+    border-radius:var(--radius-sm);opacity:.85;
+  }
+  .today-hero h2,.today-hero .meta,.today-hero .progress-bar{position:relative;z-index:1}
   .today-hero .meta{font-size:13px;color:rgba(58,50,40,.75)}
   .progress-bar{height:14px;background:rgba(255,255,255,.55);border-radius:30px;overflow:hidden;margin:14px 0 6px}
   .progress-bar i{display:block;height:100%;background:linear-gradient(90deg,#c4d8a0,#8ab86a);width:0;transition:width .4s}
@@ -287,7 +295,8 @@
   <!-- ============ 详情区域（点击模块卡片展开） ============ -->
   <div class="grid" id="detailArea">
     <section class="module active" id="mod-today" style="display:block">
-      <div class="today-hero">
+      <div class="today-hero" id="todayHero">
+        <canvas class="today-hero-bg" id="todayHeroBg"></canvas>
         <h2 id="todayTitle">今日行动清单</h2>
         <div class="meta" id="todayMeta"></div>
         <div class="progress-bar"><i id="progFill"></i></div>
@@ -1937,6 +1946,358 @@ renderAge();
 renderChecklist();
 renderWeekOverview();
 renderMonthOverview();
+
+/* ====================== Moebius 海底珊瑚邮局背景 ====================== */
+(function(){
+  const hero = document.getElementById('todayHero');
+  const canvas = document.getElementById('todayHeroBg');
+  if(!hero || !canvas) return;
+
+  function draw(){
+    const dpr = window.devicePixelRatio || 1;
+    const rect = hero.getBoundingClientRect();
+    const w = rect.width;
+    const h = rect.height;
+    if(w <= 0 || h <= 0){ requestAnimationFrame(draw); return; }
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w+'px';
+    canvas.style.height = h+'px';
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    // ── 海底水色背景 ──
+    const bgGrd = ctx.createLinearGradient(0, 0, 0, h);
+    bgGrd.addColorStop(0, '#d4eaf6');
+    bgGrd.addColorStop(.35, '#c8e4f0');
+    bgGrd.addColorStop(.6, '#b8dcea');
+    bgGrd.addColorStop(1, '#a8d0dd');
+    ctx.fillStyle = bgGrd;
+    ctx.fillRect(0, 0, w, h);
+
+    // ── 光线束（上帝光） ──
+    for(let i=0;i<5;i++){
+      const lx = w * (.1 + i * .2);
+      const grd = ctx.createLinearGradient(lx, 0, lx - 40, h);
+      grd.addColorStop(0, 'rgba(255,255,240,.25)');
+      grd.addColorStop(.5, 'rgba(255,255,240,.08)');
+      grd.addColorStop(1, 'rgba(255,255,240,0)');
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.moveTo(lx, 0);
+      ctx.lineTo(lx + 30, 0);
+      ctx.lineTo(lx - 10, h);
+      ctx.lineTo(lx - 20, h);
+      ctx.fill();
+    }
+
+    // ── 气泡 ──
+    for(let i=0;i<12;i++){
+      const bx = w * (.08 + Math.random() * .84);
+      const by = h * (.1 + Math.random() * .7);
+      const br = 4 + Math.random() * 12;
+      ctx.save();
+      ctx.globalAlpha = .2 + Math.random() * .3;
+      ctx.beginPath();
+      ctx.arc(bx, by, br, 0, Math.PI * 2);
+      const bGrd = ctx.createRadialGradient(bx - br*.3, by - br*.3, br*.1, bx, by, br);
+      bGrd.addColorStop(0, 'rgba(255,255,255,.7)');
+      bGrd.addColorStop(.5, 'rgba(220,240,255,.3)');
+      bGrd.addColorStop(1, 'rgba(180,210,230,.05)');
+      ctx.fillStyle = bGrd;
+      ctx.fill();
+      // 高光点
+      ctx.fillStyle = 'rgba(255,255,255,.8)';
+      ctx.beginPath();
+      ctx.arc(bx - br*.25, by - br*.3, br*.18, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // ── 海底沙地 ──
+    ctx.fillStyle = '#f5e6d3';
+    ctx.beginPath();
+    ctx.moveTo(0, h);
+    for(let x=0;x<=w;x+=5){
+      ctx.lineTo(x, h - 18 - Math.sin(x * .03) * 10 - Math.sin(x * .07) * 6);
+    }
+    ctx.lineTo(w, h);
+    ctx.fill();
+
+    // 沙地纹理点
+    ctx.fillStyle = 'rgba(200,170,140,.3)';
+    for(let x=10;x<w-10;x+=12){
+      for(let y=h-28;y<h-5;y+=8){
+        if(Math.random()>.4){
+          ctx.beginPath();
+          ctx.arc(x + Math.random()*8, y + Math.random()*6, 1.2, 0, Math.PI*2);
+          ctx.fill();
+        }
+      }
+    }
+
+    // ── 珊瑚丛（Moebius 线条风格） ──
+    function drawCoral(cx, cy, branches, color, alpha){
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      for(let b=0;b<branches;b++){
+        const angle = -Math.PI/2 + (b - branches/2) * .35 + Math.random() * .2;
+        const len = 25 + Math.random() * 35;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        let x = cx, y = cy, a = angle;
+        for(let seg=0;seg<4;seg++){
+          a += (Math.random()-.5) * .5;
+          const sl = len * (.3 + Math.random() * .3);
+          x += Math.cos(a) * sl;
+          y += Math.sin(a) * sl;
+          ctx.lineTo(x, y);
+          // 小分支
+          if(Math.random()>.55){
+            const bx2 = x + Math.cos(a + .6) * sl * .4;
+            const by2 = y + Math.sin(a + .6) * sl * .4;
+            ctx.moveTo(x, y);
+            ctx.lineTo(bx2, by2);
+            ctx.moveTo(x, y);
+          }
+        }
+        ctx.stroke();
+        // 顶端小球
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(x, y, 3.5, 0, Math.PI*2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    // 左边珊瑚群
+    drawCoral(w * .08, h - 24, 8, '#f0a8b8', .9);
+    drawCoral(w * .15, h - 22, 6, '#f5c0a0', .85);
+    drawCoral(w * .05, h - 26, 5, '#e898a8', .8);
+
+    // 右边珊瑚群
+    drawCoral(w * .85, h - 24, 7, '#f0a8b8', .9);
+    drawCoral(w * .93, h - 22, 5, '#f5c0a0', .85);
+    drawCoral(w * .78, h - 28, 6, '#e8a0b0', .8);
+
+    // ── 珊瑚邮筒（中心偏左） ──
+    const postX = w * .42;
+    const postY = h - 60;
+    // 邮筒主体
+    ctx.fillStyle = '#f0a8b8';
+    ctx.beginPath();
+    ctx.roundRect(postX - 16, postY - 35, 32, 48, 10);
+    ctx.fill();
+    ctx.strokeStyle = '#d08898';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // 珊瑚纹理
+    ctx.fillStyle = 'rgba(255,255,255,.2)';
+    for(let i=0;i<8;i++){
+      ctx.beginPath();
+      ctx.arc(postX - 8 + Math.random()*16, postY - 25 + Math.random()*30, 2 + Math.random()*3, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    // 投信口
+    ctx.fillStyle = '#5a3038';
+    ctx.fillRect(postX - 10, postY - 16, 20, 5);
+    ctx.strokeStyle = '#d08898';
+    ctx.strokeRect(postX - 10, postY - 16, 20, 5);
+
+    // 邮筒顶盖
+    ctx.fillStyle = '#e898a8';
+    ctx.beginPath();
+    ctx.ellipse(postX, postY - 35, 20, 8, 0, Math.PI, 0);
+    ctx.fill();
+    ctx.strokeStyle = '#d08898';
+    ctx.stroke();
+
+    // "POST" 字样
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 8px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('POST', postX, postY + 5);
+
+    // ── 贝壳信箱（右侧） ──
+    const shellX = w * .7;
+    const shellY = h - 50;
+    // 扇贝外形
+    ctx.fillStyle = '#fce8e0';
+    ctx.beginPath();
+    ctx.moveTo(shellX - 18, shellY);
+    for(let i=0;i<=10;i++){
+      const t = i/10;
+      const sx = shellX - 18 + t * 36;
+      const sy = shellY - Math.sin(t * Math.PI) * 22;
+      ctx.lineTo(sx, sy);
+    }
+    ctx.lineTo(shellX + 18, shellY);
+    ctx.fill();
+    ctx.strokeStyle = '#e0c0b0';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // 贝壳放射纹
+    ctx.strokeStyle = 'rgba(210,170,150,.4)';
+    ctx.lineWidth = .8;
+    for(let i=1;i<10;i++){
+      ctx.beginPath();
+      ctx.moveTo(shellX, shellY - 22);
+      ctx.lineTo(shellX - 18 + i * 3.6, shellY);
+      ctx.stroke();
+    }
+
+    // 珍珠光泽高光
+    const pearlGrd = ctx.createRadialGradient(shellX - 2, shellY - 14, 2, shellX, shellY - 10, 18);
+    pearlGrd.addColorStop(0, 'rgba(255,255,255,.7)');
+    pearlGrd.addColorStop(.5, 'rgba(255,240,240,.2)');
+    pearlGrd.addColorStop(1, 'rgba(255,240,240,0)');
+    ctx.fillStyle = pearlGrd;
+    ctx.beginPath();
+    ctx.ellipse(shellX, shellY - 12, 16, 12, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // ── 海草信纸（左下角） ──
+    const paperX = w * .2;
+    const paperY = h - 40;
+    ctx.save();
+    ctx.translate(paperX, paperY);
+    ctx.rotate(-.15);
+    // 信纸
+    ctx.fillStyle = '#e8f5d8';
+    ctx.fillRect(-14, -20, 28, 35);
+    ctx.strokeStyle = '#b8d898';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(-14, -20, 28, 35);
+    // 横线
+    ctx.strokeStyle = 'rgba(150,180,130,.4)';
+    ctx.lineWidth = .6;
+    for(let ly=-12;ly<8;ly+=6){
+      ctx.beginPath();
+      ctx.moveTo(-10, ly);
+      ctx.lineTo(10, ly);
+      ctx.stroke();
+    }
+    // 海草边框装饰
+    ctx.strokeStyle = '#8cb878';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(14, -10);
+    ctx.quadraticCurveTo(18, -5, 16, 0);
+    ctx.quadraticCurveTo(14, 5, 18, 10);
+    ctx.stroke();
+    ctx.restore();
+
+    // ── 珍珠装饰（散布） ──
+    const pearls = [
+      {x: w*.35, y: h-55, r: 5},
+      {x: w*.5, y: h-45, r: 3.5},
+      {x: w*.75, y: h-58, r: 4},
+      {x: w*.88, y: h-42, r: 3},
+      {x: w*.12, y: h-48, r: 4.5},
+    ];
+    pearls.forEach(p => {
+      const pgrd = ctx.createRadialGradient(p.x-p.r*.2, p.y-p.r*.3, p.r*.1, p.x, p.y, p.r);
+      pgrd.addColorStop(0, 'rgba(255,255,255,.9)');
+      pgrd.addColorStop(.4, 'rgba(255,240,245,.6)');
+      pgrd.addColorStop(1, 'rgba(240,210,220,.2)');
+      ctx.fillStyle = pgrd;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fill();
+      // 高光
+      ctx.fillStyle = 'rgba(255,255,255,.9)';
+      ctx.beginPath();
+      ctx.arc(p.x - p.r*.25, p.y - p.r*.3, p.r*.25, 0, Math.PI*2);
+      ctx.fill();
+    });
+
+    // ── 小鱼群（Moebius 线条风） ──
+    function drawFish(fx, fy, fs, fcolor, falpha){
+      ctx.save();
+      ctx.globalAlpha = falpha;
+      ctx.fillStyle = fcolor;
+      ctx.strokeStyle = fcolor;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.ellipse(fx, fy, fs, fs*.45, 0, 0, Math.PI*2);
+      ctx.fill();
+      // 尾巴
+      ctx.beginPath();
+      ctx.moveTo(fx - fs, fy);
+      ctx.lineTo(fx - fs - fs*.5, fy - fs*.3);
+      ctx.lineTo(fx - fs - fs*.5, fy + fs*.3);
+      ctx.fill();
+      // 眼睛
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.arc(fx + fs*.5, fy - fs*.1, fs*.2, 0, Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle = '#333';
+      ctx.beginPath();
+      ctx.arc(fx + fs*.55, fy - fs*.1, fs*.1, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    const fishColors = ['#f5a0b0','#f0c0a0','#e8a8b8','#f8d0c0','#e898a0'];
+    for(let i=0;i<7;i++){
+      const fx = w * (.1 + Math.random() * .75);
+      const fy = h * (.08 + Math.random() * .45);
+      const fs = 5 + Math.random() * 9;
+      drawFish(fx, fy, fs, fishColors[Math.floor(Math.random()*fishColors.length)], .55 + Math.random()*.35);
+    }
+
+    // ── 气泡封印（带小图案的圈圈） ──
+    for(let i=0;i<5;i++){
+      const sx = w * (.15 + Math.random() * .7);
+      const sy = h * (.1 + Math.random() * .5);
+      const sr = 6 + Math.random() * 8;
+      ctx.strokeStyle = 'rgba(255,255,255,.5)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(sx, sy, sr, 0, Math.PI*2);
+      ctx.stroke();
+      // 小图案
+      ctx.fillStyle = 'rgba(255,200,180,.4)';
+      ctx.font = `${sr}px serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(['♥','☆','✿','♡','✦'][i], sx, sy + sr*.35);
+    }
+
+    // ── 顶部漂浮海草 ──
+    ctx.strokeStyle = 'rgba(140,190,140,.35)';
+    ctx.lineWidth = 1.5;
+    for(let i=0;i<4;i++){
+      const gx = w * (.1 + i * .25);
+      ctx.beginPath();
+      ctx.moveTo(gx, 0);
+      let gy = 0, gcx = gx;
+      for(let seg=0;seg<6;seg++){
+        gcx += (Math.sin(seg * 1.2) * 8);
+        gy += 12 + Math.random()*6;
+        ctx.lineTo(gcx, gy);
+      }
+      ctx.stroke();
+      // 小叶
+      ctx.fillStyle = 'rgba(160,210,160,.3)';
+      ctx.beginPath();
+      ctx.ellipse(gcx + 4, gy, 4, 7, .3, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  draw();
+  window.addEventListener('resize', ()=>{
+    requestAnimationFrame(draw);
+  });
+})();
 
 /* ====================== 宫崎骏风格动画 (Canvas) ====================== */
 (function(){
